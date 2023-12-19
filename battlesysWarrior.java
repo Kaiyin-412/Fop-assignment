@@ -136,6 +136,8 @@ public static void war(){
                     
                     // condtion for loop of monster attack
                      boolean y = true;   
+                     
+                    boolean count = true;
                    
                     
                      // declare variable for archetype
@@ -246,6 +248,7 @@ public static void war(){
                                 System.out.println("not enough MP");
                                  // stop the while loop of monster attack
                                 y=false;
+                                count=false;
                             }
                             break;
                             
@@ -269,6 +272,7 @@ public static void war(){
                                 CD=false;
                                  // stop the while loop of monster attack
                                 y=false;
+                                count=false;
                             }
                             else{
                                 System.out.println("You have cast the spell Roaring and cause a damage of "+damage9+" towards"+namE);
@@ -278,6 +282,7 @@ public static void war(){
                                 cd1=3;
                                 // stop the while loop of monster attack 
                                 y=false;
+                                count=false;
                             }
                             break;
                             
@@ -288,6 +293,7 @@ public static void war(){
                               CD=false;
                               CD1=false;
                               CD2=false;
+                              count=false;
                                // stop the while loop of monster attack
                                y=false;
                             }else{
@@ -307,6 +313,7 @@ public static void war(){
                               CD1=false;
                               CD2=false;
                               y=false;
+                              count=false;
                             }else{
                                 System.out.println("You have cast the spell Shield wall.");
                                 
@@ -328,6 +335,7 @@ public static void war(){
                             CD=false;
                             CD1=false;
                             CD2=false;
+                            count=false;
                             break;
                         }
                          else if(choice.length()>=2){
@@ -335,6 +343,7 @@ public static void war(){
                             CD=false;
                             CD1=false;
                             CD2=false;
+                            count=false;
                             break;
                         } 
                         else if(namE=="Witch"){
@@ -447,7 +456,7 @@ public static void war(){
                        }
                     }
                     
-                 while(CD){
+                 while(count){
                     bout++;
                     break;
                     }
@@ -466,7 +475,7 @@ public static void war(){
         }
          
        public static void main(String[] args) {
-           war1("goblin",60,20,14,10,8,8,100,2);
+           war1("goblin",100,20,14,10,8,8,100,2);
           
     }
 }
