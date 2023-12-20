@@ -101,7 +101,7 @@ public static void war(){
              
               System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
               System.out.println("Now you have encounter a monster "+RED +namE+RESET);
-              System.out.println("The battle start!!!");
+              System.out.println("The battle start  !!!");
               
         
               
@@ -114,15 +114,22 @@ public static void war(){
                int cd3 =6;
                Spell SW = new Spell("Shield Wall",cd3);
                
+               // calculate round 
                int  bout =1;
                
                 // conditon for the main while loop
                 boolean z =true;
+                
+                // use for the spell sheild wall
+                int sw =0;
+                // loop condition for the shield wall loop
+                boolean sw1  = true;
                
             while(z){
          
-              //condition for the loop of hero att
-                 boolean hero = true;
+                  //condition for the loop of hero att
+                  boolean hero = true;
+                  
                     // loop for Roaring cd
                     boolean CD=true;
                     
@@ -136,19 +143,18 @@ public static void war(){
                     // condtion for loop of monster attack
                      boolean y = true;   
                      
+                     // condtion for round while loop
                     boolean count = true;
                    
                     
-                     // declare variable for archetype
-                
                      // warior attack phy 
                      int damage1 = (Pa/pD)+8;  
                      
                      // warrior att mag
-                     int damage3 =(Ma/mD);
+                     int damage3 =(Ma/mD)+10;
                      
                      // warrior defend 
-                     int damage4 =pA-(Pd/5);
+                     int damage4 =pA-(Pd/10);
                     
                      // monster att
                      int damage2 =pA-(Pd/8);
@@ -171,6 +177,9 @@ public static void war(){
                      // Furious Strike 
                      int damage10= Pa-(pD*8);
                      
+                     // heal 
+                     int heal=Hp/20;
+                     
                   
                    
                     System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
@@ -183,8 +192,12 @@ public static void war(){
                     System.out.println(namE);
                     System.out.println(GREEN+"HP:"+hP+"/"+ini_hp+RESET);
                     System.out.println(GREEN+"MP:"+mP+"/"+ini_mp+RESET);
-                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");                   
-                    System.out.println("[1]Physical Attack \n[2]Magical Attack (required 20MP) \n[3]Defend \n[4]Heal ( -30MP HP+20 ) \n[5]Escape");
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");                   
+                    System.out.println("[1]Physical Attack ");
+                    System.out.println("[2]Magical Attack  < -20MP > ");
+                    System.out.println("[3]Defend");
+                    System.out.println("[4]Heal            < -30MP , +"+heal+"Hp  >");
+                    System.out.println("[5]Escape");            
                     System.out.println("----------------------------------------------------------------------------");
                     System.out.println("Spell");
                     if(Pl<5){
@@ -202,10 +215,11 @@ public static void war(){
                          System.out.println("<B> Furious Strike   < -30Mp ,"+cd2+"/4 CD, "+"Powerful attack                        >");
                          System.out.println("<C> Shield Wall      < -40Mp ,"+cd3+"/6 CD, "+"reducing incoming damage for 3 rounds  >");       
                     }
-                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
                     System.out.println("Round :"+bout);
                     System.out.print("Now is your turn :");
                     String choice = sc.next().toUpperCase();
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     
                  
                     
@@ -225,8 +239,13 @@ public static void war(){
                             }else{
                                 System.out.println("Not enough MP");
                                 // stop the while loop of monster attack
-                                y=false;
+                               CD=false;
+                               CD1=false;
+                               CD2=false;
+                               count=false;
+                               sw1=false;
                             }
+                            break;
                             
                         case "3" :
                             System.out.println("The "+Name+" has using his shield to defend!!!");
@@ -240,14 +259,24 @@ public static void war(){
                             
                         case "4" :
                             if(Mp>=30){
-                            Hp=Hp+20;
-                            System.out.println(Name+" have succesfully heal !");
-                            Mp=Mp-30;
+                              if((Hp+heal)>=initial_hp){
+                                  System.out.println(Name+" have succesfully heal !");
+                                  Hp=initial_hp;
+                                  Mp=Mp-30;
+                                }else if((Hp+20)<initial_hp){  
+                                  System.out.println(Name+" have succesfully heal !");
+                                  Hp=Hp+heal;
+                                  Mp=Mp-30;
+                            }
                             }else{
                                 System.out.println("not enough MP");
                                  // stop the while loop of monster attack
+                              CD=false;
+                              CD1=false;
+                              CD2=false;
+                              count=false;
+                               sw1=false;
                                 y=false;
-                                count=false;
                             }
                             break;
                             
@@ -272,6 +301,7 @@ public static void war(){
                                  // stop the while loop of monster attack
                                 y=false;
                                 count=false;
+                                sw1=false;
                             }
                             else{
                                 System.out.println("You have cast the spell Roaring and cause a damage of "+damage9+" towards"+namE);
@@ -281,7 +311,8 @@ public static void war(){
                                 cd1=3;
                                 // stop the while loop of monster attack 
                                 y=false;
-                                count=false;
+                                sw1=false;
+                                CD=false;
                             }
                             break;
                             
@@ -293,13 +324,15 @@ public static void war(){
                               CD1=false;
                               CD2=false;
                               count=false;
+                               sw1=false;
                                // stop the while loop of monster attack
                                y=false;
                             }else{
                                 System.out.println("You have cast the spell Furious Strike which result a high damage of "+damage10+" towards"+namE);
                                 hP=hP-damage10;
                                 Mp=Mp-30;
-                                cd2=6;
+                                cd2=4;
+                                CD1=false;
                                 
                             }
                             break;
@@ -313,10 +346,13 @@ public static void war(){
                               CD2=false;
                               y=false;
                               count=false;
+                              sw1=false;
                             }else{
                                 System.out.println("You have cast the spell Shield wall.");
-                                
+                                Mp=Mp-40;
+                                sw=1;
                                 cd3=6;
+                                CD2=false;
                             }
                             break;
                     }
@@ -324,7 +360,20 @@ public static void war(){
                   hero=false;
                    
                 }
-              
+                
+                // loop logic for spell Shield wall
+                while(sw1){
+                 if (sw==1 || sw==2 || sw==3){
+                     System.out.println(Name +" has succesfully defend most of the attack by "+namE+" due to the strongest shield");
+                     System.out.println(namE+" has hit you a damage of 1 !!!");
+                     Hp=Hp-1;
+                     sw++;
+                     y=false;
+                     break;
+                 }
+                 break;
+                }
+                
                 // monster attack 
                  while(y){   
                     if(hP>0){
@@ -364,6 +413,7 @@ public static void war(){
                                       
                               }
                            }
+                                // witch normal attack
                                 else{
                                     System.out.println(namE+" has attacked you causing a damage of :"+RED+damage2+RESET);
                                     Hp=Hp-damage2;
@@ -394,7 +444,7 @@ public static void war(){
                                             break;
                                 
                                      }
-                        
+                                 //Harpy normal attack
                                 }else{
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED+damage2+RESET);
                                 hero=true;
@@ -454,11 +504,13 @@ public static void war(){
                          CD2 = false;
                        }
                     }
-                    
+                 
+                 // count for round
                  while(count){
                     bout++;
                     break;
                     }
+                 
                     // you loss
                     if(Hp<=0){
                         System.out.println("You loss !!!");
@@ -474,7 +526,7 @@ public static void war(){
         }
          
        public static void main(String[] args) {
-           war1("goblin",100,20,14,10,8,8,100,2);
+           war1("goblin",10,20,20,10,8,8,100,2);
           
     }
 }

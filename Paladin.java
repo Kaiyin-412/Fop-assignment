@@ -14,12 +14,12 @@ import java.io.IOException;
  *
  * @author ONG KAI YIN
  */
-public class Mage {
-    // the attributes after level up
+public class Paladin {
+     // the attributes after level up
     // n - level
     // f - exp
     // save the attributes into file
-    public static void levelUpMag(int n, int f){
+    public static void levelUpPal(int n, int f){
           int hp=0;
             int mp=0;
             int pd=0;
@@ -31,7 +31,7 @@ public class Mage {
                  
        try{
            BufferedReader br = new BufferedReader(new FileReader
-           ("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\mage.txt"));
+           ("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\paladin.txt"));
             
                  
             String name1;
@@ -50,20 +50,20 @@ public class Mage {
                 pe+=Integer.parseInt(list[7]);
                 pl+=Integer.parseInt(list[8]);
                 
-         // Magical Attack and Mana Points will experience substantial improvements.
+         // All forms of Attack will become more potent.
                 hp+=(5*(n-pl));
                 ma+=(7*(n-pl));
-                md+=(3*(n-pl));
-                mp+=(7*(n-pl));
-                pa+=(2*(n-pl));
+                md+=(2*(n-pl));
+                mp+=(2*(n-pl));
+                pa+=(8*(n-pl));
                 pd+=(3*(n-pl));
                 pl=n;
                 pe=f;
                 
-                Archetype Mage = new Archetype(name1,hp,mp,pd,md,pa,ma,pe,pl);
+                Archetype Paladin = new Archetype(name1,hp,mp,pd,md,pa,ma,pe,pl);
                 
                 }
-            System.out.println("The latest attributes of Mage");
+            System.out.println("The latest attributes of Paladin");
             System.out.println("Hp :"+hp+"/"+hp);
             System.out.println("Mp :"+mp+"/"+mp);
             System.out.println("Exp :"+pe+"/"+(10*pl));
@@ -75,7 +75,7 @@ public class Mage {
        }
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter
-           ("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\mage.txt"));
+           ("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\paladin.txt"));
             bw.write("Mage"+","+hp+","+mp+","+pd+","+md+","+pa+","+ma+","+pe+","+pl);
             bw.close();
        }catch(IOException e){
@@ -89,7 +89,7 @@ public class Mage {
      public static void gainExp(int exp){
          try{
               // read the file to get the attributes of the character
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\mage.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\paladin.txt"));
            int hp=0;
             int mp=0;
             int pd=0;
@@ -114,10 +114,10 @@ public class Mage {
                pl+=Integer.parseInt(list[8]);
              }
              br.close();
-               Archetype Mage = new Archetype("Mage",hp,mp,pd,md,pa,ma,pe,pl);
+               Archetype Paladin = new Archetype("Paladin",hp,mp,pd,md,pa,ma,pe,pl);
              
-            String name=Mage.name;
-             pl = Mage.playerlevel;
+            String name=Paladin.name;
+             pl = Paladin.playerlevel;
              
          //  the exp of the warrior that earn after defeat monster
              pe+=exp;
@@ -144,7 +144,7 @@ public class Mage {
                                  if(pl>=35){
                                      System.out.println("You have reach level 35");
                                      System.out.println("Max level!!!");
-                                     levelUpMag(35,pe);
+                                     levelUpPal(35,pe);
                                      break;
              }
              
@@ -154,7 +154,7 @@ public class Mage {
              // quit while loop
             if(pl<=35){
             System.out.println(name + " level up to level "+pl);
-            levelUpMag(pl,pe);    
+            levelUpPal(pl,pe);    
             }
             
         //if(warrior.playerlevel<=10){
@@ -166,15 +166,15 @@ public class Mage {
                      
                      
                          if(pl>=35){
-                             System.out.println("You have reach level 35");
+                             System.out.println(name+" have reach level 35");
                               System.out.println("Max level!!!");
-                              levelUpMag(35,pe);
+                              levelUpPal(35,pe);
              }
                  }
                  //quit while loop
                 if(pl<=35){
-                    System.out.println("Warrior" + " level up to level "+pl); 
-                    levelUpMag(pl,pe);
+                    System.out.println(name + " level up to level "+pl); 
+                    levelUpPal(pl,pe);
                 }
                 
      }
@@ -184,3 +184,5 @@ public class Mage {
      }
 }
 }
+
+

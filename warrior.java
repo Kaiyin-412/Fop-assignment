@@ -180,12 +180,7 @@ public class warrior  {
         e.printStackTrace();
      }
      
-     
-   
-     
-    
-   
-   
+
 }
     
 }

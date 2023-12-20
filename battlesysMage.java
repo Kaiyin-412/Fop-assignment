@@ -48,7 +48,7 @@ public class battlesysMage {
            
           try{
               // read the file to get the attributes of the character
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\warrior.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\mage.txt"));
             int hp=0;
             int mp=0;
             int pd=0;
@@ -80,7 +80,7 @@ public class battlesysMage {
            
             // declare the initial value of hp and mp(warrior)
             int initial_hp = mage.healthPoints;
-            int initial_mp=mage.healthPoints;
+            int initial_mp=mage.manaPoints;
             
             // declare the initial value of hp and mp (globin)
             int ini_hp = monster.healthPoints;
@@ -98,57 +98,133 @@ public class battlesysMage {
              
              
              
-              System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+              System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
               System.out.println("Now you have encounter a monster "+RED +namE+RESET);
-              System.out.println("The battle start!!!");
-                 
-              // conditon for the main while loop
-              boolean z =true;
-                while(z){
-                     // declare variable for archetype
+              System.out.println("The battle start  !!!");
+              
+              
+               int cd1 =3;
+               Spell roaring = new Spell("Lighting", cd1);
+               
+               int cd2 =2;
+               Spell FS = new Spell("Fireball",cd2);
+               
+               int cd3 =6;
+               Spell SW = new Spell("Frost Nova",cd3);
+               
+               // calculate round 
+               int  bout =1;
+               
+                // conditon for the main while loop
+                boolean z =true;
                 
+                // use for the spell frost nova
+                int sw =0;
+                // loop condition for the frost nova
+                boolean sw1  = true;
+               
+            while(z){
+         
+                  //condition for the loop of hero att
+                  boolean hero = true;
+                  
+                    // loop for Roaring cd
+                    boolean CD=true;
+                    
+                    // loop for Furious Strike cd
+                    boolean CD1 = true;
+                    
+                    
+                    // loop for Shield wall cd
+                    boolean CD2 = true;
+                    
+                    // condtion for loop of monster attack
+                     boolean y = true;   
+                     
+                     // condtion for round while loop
+                    boolean count = true;
+                   
+                    
                      // warior attack phy 
                      int damage1 = (Pa/pD)+8;  
                      
                      // warrior att mag
-                     int damage3 =(Ma/mD);
+                     int damage3 =(Ma/mD)+10;
                      
                      // warrior defend 
-                     int damage4 =pA-(rd.nextInt(3)+4);
+                     int damage4 =pA-(Pd/10);
                     
-                     // goblin att
-                     int damage2 = pA;
+                     // monster att
+                     int damage2 =pA-(Pd/8);
+                     
+                     // witch mA
+                     int damage5 =(mA*2)-(Md/3);
+                     
+                     // witch fireball
+                     int damage6 =(mA*4)-(Md/2);
+                     
+                     // harpy talon strike
+                     int damage7=(pA*3)-(Pd/5);
+                     
+                     // harpy wind Gust
+                     int damage8=(mA*3)-(Md/10);
+                     
+                     // Lighting
+                     int damage9 =Ma-(mD*2);
+                     
+                     // fireball
+                     int damage10= Ma-md;
+                     
+                     // heal 
+                     int heal=Hp/10;
+                     
+                     // damge for frost nova
+                     int damage11 =Ma/10;
+                     
                   
-                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                   
+                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
                     System.out.println(Name); 
                     System.out.println(BLUE+"HP :"+Hp+"/"+initial_hp+RESET);
                     System.out.println(BLUE+"MP :"+Mp+"/"+initial_mp+RESET);
                     System.out.println(BLUE+"Exp :"+Pe+"/"+(10*Pl)+RESET);
                     System.out.println(BLUE+"level :"+Pl+"/"+35+RESET);
-                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println("----------------------------------------------------------------------------");
                     System.out.println(namE);
                     System.out.println(GREEN+"HP:"+hP+"/"+ini_hp+RESET);
-                    System.out.println(GREEN+"MP:"+mP+"/"+ini_hp+RESET);
-                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");                   
-                    System.out.println("[1]Physical Attack \n[2]Magical Attack (required 20MP) \n[3]Defend \n[4]Heal (Required 30MP HP+20) \n[5]Escape");
-                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println(GREEN+"MP:"+mP+"/"+ini_mp+RESET);
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");                   
+                    System.out.println("[1]Physical Attack ");
+                    System.out.println("[2]Magical Attack  < -20MP > ");
+                    System.out.println("[3]Defend");
+                    System.out.println("[4]Heal            < -30MP , +"+heal+"Hp  >");
+                    System.out.println("[5]Escape");            
+                    System.out.println("----------------------------------------------------------------------------");
                     System.out.println("Spell");
                     if(Pl<5){
-                        System.out.println("<A> Unlocked at level 5 \n<B> Unlocked at level 10 \n<C> Unlocked at level 15");
+                         System.out.println("<A> Unlocked at level 5 \n<B> Unlocked at level 10 \n<C> Unlocked at level 15");
                     }else if(Pl>=5 && Pl<10){
-                         System.out.println("<A> Roaring \n<B> Unlocked at level 10 \n<C> Unlocked at level 15");
+                         System.out.println("<A> Lighting    < -20Mp, "+cd1+"/3 CD, " +" conjured a lighting >");
+                         System.out.println("<B> Unlocked at level 10");
+                         System.out.println("<C> Unlocked at level 30");                           
                     }else if(Pl>=10&& Pl<15){
-                         System.out.println("<A> Roaring \n<B> Furious Strike \n<C> Unlocked at level 15");
+                         System.out.println("<A> Lighting         < -20Mp, "+cd1+"/3 CD, " +" conjured a lighting >");
+                         System.out.println("<B> Fireball         < -30Mp ,"+cd2+"/2 CD,"+" conjured a fireball   >");
+                         System.out.println("<C> Unlocked at level 30");
                     }else{
-                         System.out.println("<A> Roaring \n<B> Furious Strike \n<C> Shield Wall");
+                         System.out.println("<A> Lighting         < -20Mp, "+cd1+"/3 CD, " +" conjured a lighting        >");
+                         System.out.println("<B> Fireball         < -30Mp ,"+cd2+"/2 CD, "+" conjured a fireball         >");
+                         System.out.println("<C> Frost Nova       < -40Mp ,"+cd3+"/6 CD, "+" freezes the enemies 2 round >");       
                     }
-                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                    System.out.println("Round :"+bout);
                     System.out.print("Now is your turn :");
-                    String choice = sc.next();
+                    String choice = sc.next().toUpperCase();
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     
-                   boolean y = true;
+                 
                     
-                    
+                 while(hero){   
                     switch(choice){
                         case "1" :                                              
                             System.out.println("You have hit the "+namE+",causing a damage of "+RED+damage1+RESET+"!");
@@ -164,25 +240,43 @@ public class battlesysMage {
                             }else{
                                 System.out.println("Not enough MP");
                                 // stop the while loop of monster attack
-                                y=false;
+                               CD=false;
+                               CD1=false;
+                               CD2=false;
+                               count=false;
+                               sw1=false;
                             }
+                            break;
                             
                         case "3" :
                             System.out.println("The "+Name+" has using his shield to defend!!!");
-                            System.out.println(Name+" has succesfully defend some of the damage caused by the "+namE+" !!!");
+                            System.out.println(Name+" has succesfully defend most of the damage caused by the "+namE+" !!!");
                             System.out.println(namE+" has attacked you causing a damage of :"+RED+damage4+RESET);
                              // hp of hero
                              Hp=Hp-damage4;
+                              // stop the while loop of monster attack
                              y=false;
                             break;
                             
                         case "4" :
                             if(Mp>=30){
-                            Hp=Hp+20;
-                            System.out.println(Name+" have succesfully heal !");
-                            Mp=Mp-30;
+                              if((Hp+heal)>=initial_hp){
+                                  System.out.println(Name+" have succesfully heal !");
+                                  Hp=initial_hp;
+                                  Mp=Mp-30;
+                                }else if((Hp+20)<initial_hp){  
+                                  System.out.println(Name+" have succesfully heal !");
+                                  Hp=Hp+heal;
+                                  Mp=Mp-30;
+                            }
                             }else{
                                 System.out.println("not enough MP");
+                                 // stop the while loop of monster attack
+                              CD=false;
+                              CD1=false;
+                              CD2=false;
+                              count=false;
+                               sw1=false;
                                 y=false;
                             }
                             break;
@@ -196,61 +290,244 @@ public class battlesysMage {
                                 System.out.println("You have succesfully escape !!!"); 
                                 
                             }
-                            break;   
+                            break;  
+                         
+                            // Spell Lighting   
+                        case "A" :
+                            // not enough level or not enough mana point or nit reach cd
+                            if(Pl<5 || Mp <=20 || cd1!=0){
+                               check spell = new check();
+                                spell.check_spell(Pl,5,Mp,20,cd1);
+                                CD=false;
+                                 // stop the while loop of monster attack
+                                y=false;
+                                count=false;
+                                sw1=false;
+                            }
+                            else{
+                                System.out.println("The Mage has  have conjured lighting and cause a damage of "+damage9+" towards"+namE);
+                                hP=hP-damage9;
+                                Mp=Mp-20;
+                                cd1=3;
+                                sw1=false;
+                                CD=false;
+                            }
+                            break;
+                            
+                        case "B" :
+                            if(Pl<10 || Mp<=30 ||cd2!=0){
+                              check spell = new check();
+                              spell.check_spell(Pl,10,Mp,30,cd2);
+                              CD=false;
+                              CD1=false;
+                              CD2=false;
+                              count=false;
+                               sw1=false;
+                               // stop the while loop of monster attack
+                               y=false;
+                            }else{
+                                System.out.println("The Mage has conjured a fireball which result a high damage of "+damage10+" towards"+namE);
+                                hP=hP-damage10;
+                                Mp=Mp-30;
+                                cd2=2;
+                                CD1=false;
+                                
+                            }
+                            break;
+                            
+                        case "C":
+                            if(Pl<15 || Mp <=40 || cd3!=0 ){
+                              check spell = new check();
+                              spell.check_spell(Pl,30,Mp,40,cd3);
+                              CD=false;
+                              CD1=false;
+                              CD2=false;
+                              y=false;
+                              count=false;
+                              sw1=false;
+                            }else{
+                                System.out.println("The Mage have cast the spell Frost Nova.");
+                                System.out.println("You have hit the "+namE+" causing a damage of "+damage11);
+                                hP=hP-damage11;
+                                Mp=Mp-40;
+                                sw=1;
+                                cd3=6;
+                                CD2=false;
+                            }
+                            break;
                     }
-                    
+                        
+                  hero=false;
+                   
+                }
+                
+                 
+                // loop logic for spell Shield wall
+                while(sw1){
+                 if (sw==1 || sw==2){
+                     System.out.println("The "+namE+" has been freezes and can't attack !!!");               
+                     sw++;
+                     y=false;
+                     break;
+                 }
+                 break;
+                }
+                
+                
+                
+                // monster attack 
                  while(y){   
-                    // monster attack
                     if(hP>0){
                          // abnormal input
-                        if(choice.matches("([^1-5a-bA-B])")){
+                        if(choice.matches("([^1-5a-cA-C])")){
                             System.out.println("Invalid input.");
+                            CD=false;
+                            CD1=false;
+                            CD2=false;
+                            count=false;
                             break;
-                         }
+                        }
                          else if(choice.length()>=2){
                             System.out.println("Invalid input");
+                            CD=false;
+                            CD1=false;
+                            CD2=false;
+                            count=false;
                             break;
-                         }
+                        } 
+                        else if(namE=="Witch"){
+                           if(mP>=20){
+                               // 1/2 to cast spell or use magical attack
+                              int chance = rd.nextInt(2);
+                                switch(chance){
+                                  case 0:
+                                      System.out.println(namE+" has using magical attack which causing a damage of :"+RED+damage5+RESET);
+                                      Hp=Hp-damage5;
+                                      mP=mP-20;
+                                      break;
+                                      
+                                  case 1:
+                                      System.out.println(namE+"  conjured a blazing fireball which cause a high damage of :"+RED+damage6+RESET);
+                                      Hp=Hp-damage6;
+                                      mP=mP-20;
+                                      break;
+                                      
+                              }
+                           }
+                                // witch normal attack
+                                else{
+                                    System.out.println(namE+" has attacked you causing a damage of :"+RED+damage2+RESET);
+                                    Hp=Hp-damage2;
+                                    break;      
+
+                        }
+                           
+                           break;
+                        }
+                        else if(namE=="Harpy"){
+                             // 1/2 to use talon strike or use wind gust
+                            int chance1 = rd.nextInt(2);
+                                if(mP>=10){
+                                    switch(chance1){
+                                        case 0:
+                                            System.out.println(namE+" lunged forward, slashing with razor-sharp talons in a swift and deadly strike which cause a huge damage of :"+RED+damage7+RESET);
+                                            Hp=Hp-damage7;
+                                            mP=mP-10;
+                                            hero=true;
+                                            break;
+                                        case 1:
+                                            System.out.println(namE+" conjured a Wind Gust which cause a high damage of :"+RED+damage8+RESET);
+                                            System.out.println("You can't attack at the next round");
+                                            Hp=Hp-damage8;
+                                            mP=mP-10;
+                                            // stop the loop of hero attack
+                                            hero=false;
+                                            break;
+                                
+                                     }
+                                 //Harpy normal attack
+                                }else{
+                                System.out.println(namE+" has attacked you causing a damage of :"+RED+damage2+RESET);
+                                hero=true;
+                                Hp=Hp-damage2;
+                                break;                        
+                        }
+                                break;
+                        } 
                         else{
                         System.out.println(namE+" has attacked you causing a damage of :"+RED+damage2+RESET);
                         Hp=Hp-damage2;
-                        break;                        
-                    }
+                         break;                      
+                        }
                     }else{
                        System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
-                       Mage magE = new Mage();
-                       magE.gainExp(exP);
+                      Mage Mag = new Mage();
+                      Mag.gainExp(exP);
                        // check level up
                        // put latest attributes into the file
                        z=false;
-                      
-                       //back to map
                        
+                       // back to map
                        
                        break;
                      }
                  }
                  
-         
+                
+                 
+                 // if no reached level and the cd =0 will result a bug
+                  // cooling down spell Roaring 
+                  while(CD){
+                    if(cd1<=3 && cd1>0){
+                         cd1--;
+                         break;
+                    }else{
+                        CD=false;
+                  }
+                  }
+                  
+                // cooling down spell Furious Strike
+                   while(CD1){
+                      if(cd2<=4 && cd2>0){
+                         cd2--;
+                         break;
+                      }else{
+                        CD1=false;
+                      }
+                    }
                    
-                    
+                // cooling down spell Shield wall
+                    while(CD2){
+                       if(cd3<=6 && cd3>0){
+                           cd3--;
+                           break;
+                       }else{
+                         CD2 = false;
+                       }
+                    }
+                 
+                 // count for round
+                 while(count){
+                    bout++;
+                    break;
+                    }
+                 
                     // you loss
                     if(Hp<=0){
                         System.out.println("You loss !!!");
-                        z=false;
                         break;
-                    
-                    }
+                    }       
              }
              
-             
+          }
             
-          }catch(IOException e){
+            
+          catch(IOException e){
               System.out.println(e);
         }
         }
     public static void main(String[] args) {
-        mag1("Goblin",40,0,10,0,5,2,160,1);
+        mag1("Goblin",10,0,10,0,5,2,160,2);
     }
         
         

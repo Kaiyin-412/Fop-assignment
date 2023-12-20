@@ -39,22 +39,6 @@ public class Archetype {
 }
 
 
-   
-    class Rogue extends Archetype{
-     public Rogue(String name, int healthPoints, int manaPoints, int physicalDefense, int magicalDefense, int physicalAttack, int magicalAttack, int playerExp, int playerlevel) {
-        super("Rogue",250,75,60,40,50,40,0,0);
-    }
-        public void levelup(){
-            //Both Physical Attack and Physical Defense will be enhanced.
-     healthPoints+=70;
-     manaPoints+=10;
-     physicalDefense+=30;
-     magicalDefense+=10;
-     physicalAttack+=30;
-     magicalAttack+=10;
-    }
-    }
-
     class Paladin extends Archetype{
 
     public Paladin(String name, int healthPoints, int manaPoints, int physicalDefense, int magicalDefense, int physicalAttack, int magicalAttack, int playerExp, int playerlevel) {
