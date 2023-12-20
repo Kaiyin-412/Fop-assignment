@@ -11,6 +11,7 @@ import java.util.Scanner;
  * @author ONG KAI YIN
  */
 public class choosecharacter {
+  
     
     public static void character(){
       Scanner sc  = new Scanner(System.in);
@@ -23,6 +24,7 @@ public class choosecharacter {
         System.out.println("<3>-Rogue\nCharacteristic-");
         System.out.println("<4>-Paladin\nCharacteristic-");
         System.out.println("<5>-Archer\nCharacteristic-");
+        GameMap Map = new GameMap();
         boolean valid = false;
         while(!valid){
              System.out.print("Please select one of the character(1-5) :");
@@ -30,8 +32,9 @@ public class choosecharacter {
            if(cha==1){
                System.out.println("You have choosen Warrior!!!");
                System.out.println("Let start the adventure!!!");
+               Map.map(1);
                valid = true;
-               Map.map(1);//calling map and battle system for Warrior
+               //calling map and battle system for Warrior
             }else if(cha==2){
                System.out.println("You have choosen Mage !!!");
                System.out.println("Let start the adventure!!!");

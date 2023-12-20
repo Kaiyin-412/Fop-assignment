@@ -12,7 +12,6 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.*;
-import static text.adventure.Map.map;
 public class battlesysWarrior {
     // text color
     public static final String RESET = "\033[0m"; 

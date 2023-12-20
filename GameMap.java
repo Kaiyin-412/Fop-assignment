@@ -7,7 +7,7 @@ package text.adventure;
 
 import java.util.Scanner;
 import java.util.Random;
-public class Map{
+public class GameMap{
    
     // calling the battle system
      public static void calling_battle_sys(int m){   
