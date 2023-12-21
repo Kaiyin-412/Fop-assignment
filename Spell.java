@@ -23,7 +23,6 @@ public class Spell {
 }
 
 
-
 class check{
    public static void check_spell(int current_level, int level_required ,int current_mp,int mana_required,int Cd){
        if(current_level<level_required){

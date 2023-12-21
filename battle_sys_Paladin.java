@@ -11,44 +11,48 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-import static text.adventure.battlesysWarrior.BLUE;
-import static text.adventure.battlesysWarrior.GREEN;
-import static text.adventure.battlesysWarrior.RED;
-import static text.adventure.battlesysWarrior.RESET;
-import static text.adventure.battlesysWarrior.YELLOW;
-
 
 /**
  *
  * @author ONG KAI YIN
  */
-public class battlesysMage {
+public class battle_sys_Paladin {
+     // text color
+    public static final String RESET = "\033[0m"; 
+    public static final String RED = "\033[0;31m"; 
     
-    // Initiallise the initial attributes of the hero
-    // must run it at first fight
-    public static void mag(){
-        try{
-    BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\mage.txt"));
-     bw.write("Mage,200,150,30,100,20,30,0,1");
+    // text bold with color
+    public static final String YELLOW = "\033[1;40m"; 
+    public static final String BLUE = "\033[1;34m"; 
+    public static final String GREEN = "\033[1;32m"; 
+    
+     // initial attributes of warrior
+    // write into a file
+public static void pal(){
+    try{
+    BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\paladin.txt"));
+     bw.write("Paladin,350,100,70,60,80,60,0,1");
      bw.close();
    }catch(Exception ex){
             System.out.println(ex);
    }
 }
-    // round is to check whether is it the first fight , if first fight must run mag();                                                                                     
-    public static void mag1( String namE , int hP ,int mP,int pA,int mA,int pD,int mD,int exP,int round){
-        
-        if(round==1){
-          mag();
-        }
-         
-           Scanner sc = new Scanner(System.in); 
+        // round is to check whether is it the first fight , if first fight must run rog();         
+        public static void pal1(String namE , int hP ,int mP,int pA,int mA,int pD,int mD,int exP,int round){
+            
+            // first round must run it to read the initial attributes of the character
+            if(round==1){
+              pal();
+            }
+            
+            Scanner sc = new Scanner(System.in); 
             Random rd = new Random();
             
            
+           
           try{
               // read the file to get the attributes of the character
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\mage.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\paladin.txt"));
             int hp=0;
             int mp=0;
             int pd=0;
@@ -73,57 +77,60 @@ public class battlesysMage {
                pl+=Integer.parseInt(list[8]);
              }
              br.close();
-              Archetype mage = new Archetype("Mage",hp,mp,pd,md,pa,ma,pe,pl);
+               Archetype paladin = new Archetype("Paladin",hp,mp,pd,md,pa,ma,pe,pl);
               Monster monster =new Monster(namE,hP,mP,pA,mA,pD,mD,exP);
              
               
            
-            // declare the initial value of hp and mp(warrior)
-            int initial_hp = mage.healthPoints;
-            int initial_mp=mage.manaPoints;
+            // declare the initial value of hp and mp char
+            int initial_hp =hp;
+            int initial_mp=mp;
             
-            // declare the initial value of hp and mp (globin)
-            int ini_hp = monster.healthPoints;
-            int ini_mp = monster.manaPoints;
+            // declare the initial value of hp and mp monster
+            int ini_hp =hP;
+            int ini_mp =mP;
             
-            String Name =mage.name;
-             int Hp=mage.healthPoints;
-             int Mp=mage.manaPoints;
-             int Md=mage.magicalDefense;
-             int Pa=mage.physicalAttack;
-             int Pd=mage.physicalDefense;
-             int Ma=mage.magicalAttack;
-             int Pe=mage.playerExp;
-             int Pl=mage.playerlevel;
+            String Name =paladin.name;
+             int Hp=hp;
+             int Mp=mp;
+             int Md=md;
+             int Pa=pa;
+             int Pd=pd;
+             int Ma=ma;
+             int Pe=pe;
+             int Pl=pl;
              
              
+      
              
               System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
               System.out.println("Now you have encounter a monster "+RED +namE+RESET);
               System.out.println("The battle start  !!!");
               
+        
               
+              // cd spell A
                int cd1 =3;
-               Spell roaring = new Spell("Lighting", cd1);
-               
-               int cd2 =2;
-               Spell FS = new Spell("Fireball",cd2);
-               
+              // cd spell B
+               int cd2 =3;
+              // cd spellC
                int cd3 =6;
-               Spell SW = new Spell("Frost Nova",cd3);
+         
+               
                
                // calculate round 
                int  bout =1;
                
                 // conditon for the main while loop
-                boolean z =true;
+                boolean main =true;
                 
-                // use for the spell frost nova
-                int sw =0;
-                // loop condition for the frost nova
-                boolean sw1  = true;
+               // use for spell shield divine
+               int sd=0;
                
-            while(z){
+               // loop for shield divine
+               boolean sd1 =true;
+               
+            while(main){
          
                   //condition for the loop of hero att
                   boolean hero = true;
@@ -139,7 +146,7 @@ public class battlesysMage {
                     boolean CD2 = true;
                     
                     // condtion for loop of monster attack
-                     boolean y = true;   
+                     boolean mon = true;   
                      
                      // condtion for round while loop
                     boolean count = true;
@@ -155,7 +162,7 @@ public class battlesysMage {
                      int damage4 =pA-(Pd/10);
                     
                      // monster att
-                     int damage2 =pA-(Pd/8);
+                     int damage2 =pA-(Pd/8)+10;
                      
                      // witch mA
                      int damage5 =(mA*2)-(Md/3);
@@ -169,17 +176,14 @@ public class battlesysMage {
                      // harpy wind Gust
                      int damage8=(mA*3)-(Md/10);
                      
-                     // Lighting
-                     int damage9 =Ma-(mD*2);
+                     // Roaring spell
+                     int damage9 = (Pa*2)-pD-5;
                      
-                     // fireball
-                     int damage10= Ma-md;
+                     // Furious Strike 
+                     int damage10= (Pa*2)-(pD*5);
                      
                      // heal 
-                     int heal=Hp/10;
-                     
-                     // damge for frost nova
-                     int damage11 =Ma/10;
+                     int heal=Hp/20;
                      
                   
                    
@@ -204,17 +208,17 @@ public class battlesysMage {
                     if(Pl<5){
                          System.out.println("<A> Unlocked at level 5 \n<B> Unlocked at level 10 \n<C> Unlocked at level 15");
                     }else if(Pl>=5 && Pl<10){
-                         System.out.println("<A> Lighting    < -20Mp, "+cd1+"/3 CD, " +" conjured a lighting >");
+                         System.out.println("<A> Wrath Of God    < -20Mp, "+cd1+"/3 CD, " +"High damage >");
                          System.out.println("<B> Unlocked at level 10");
                          System.out.println("<C> Unlocked at level 30");                           
                     }else if(Pl>=10&& Pl<15){
-                         System.out.println("<A> Lighting         < -20Mp, "+cd1+"/3 CD, " +" conjured a lighting >");
-                         System.out.println("<B> Fireball         < -30Mp ,"+cd2+"/2 CD,"+" conjured a fireball   >");
+                         System.out.println("<A> Wrath Of God     < -20Mp, "+cd1+"/3 CD, " +"High damage   >");
+                         System.out.println("<B> Holy Smite       <-30Mp ,"+cd2+"/3 CD,"+" Damage and heal >");
                          System.out.println("<C> Unlocked at level 30");
                     }else{
-                         System.out.println("<A> Lighting         < -20Mp, "+cd1+"/3 CD, " +" conjured a lighting        >");
-                         System.out.println("<B> Fireball         < -30Mp ,"+cd2+"/2 CD, "+" conjured a fireball         >");
-                         System.out.println("<C> Frost Nova       < -40Mp ,"+cd3+"/6 CD, "+" freezes the enemies 2 round >");       
+                         System.out.println("<A> Wrath Of God   < -20Mp, "+cd1+"/3 CD, "+"High damage                         >");
+                         System.out.println("<B> Holy Smite     < -30Mp ,"+cd2+"/3 CD, "+"Damage and heal                      >");
+                         System.out.println("<C>Divine shield   < -40Mp ,"+cd3+"/6 CD, "+"immune to damage of enemies 2 rounds >");       
                     }
                     System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
                     System.out.println("Round :"+bout);
@@ -244,7 +248,8 @@ public class battlesysMage {
                                CD1=false;
                                CD2=false;
                                count=false;
-                               sw1=false;
+                               sd1=false;
+                               mon=false;
                             }
                             break;
                             
@@ -255,7 +260,7 @@ public class battlesysMage {
                              // hp of hero
                              Hp=Hp-damage4;
                               // stop the while loop of monster attack
-                             y=false;
+                             mon=false;
                             break;
                             
                         case "4" :
@@ -276,8 +281,8 @@ public class battlesysMage {
                               CD1=false;
                               CD2=false;
                               count=false;
-                               sw1=false;
-                                y=false;
+                              mon=false;
+                              sd1=false;  
                             }
                             break;
                             
@@ -292,24 +297,25 @@ public class battlesysMage {
                             }
                             break;  
                          
-                            // Spell Lighting   
+                            // Spell Roaring
                         case "A" :
-                            // not enough level or not enough mana point or nit reach cd
+                            // not enough level or not enough mana point
                             if(Pl<5 || Mp <=20 || cd1!=0){
                                check spell = new check();
                                 spell.check_spell(Pl,5,Mp,20,cd1);
-                                CD=false;
-                                 // stop the while loop of monster attack
-                                y=false;
+                                 CD=false;
+                                CD1=false;
+                                 CD2=false;
                                 count=false;
-                                sw1=false;
+                                 mon=false;
+                                 sd1=false;
+                            
                             }
                             else{
-                                System.out.println("The Mage has  have conjured lighting and cause a damage of "+damage9+" towards"+namE);
+                                System.out.println(namE+" have cast the spell wrath of god and cause a damage of "+damage9+" towards"+namE);
                                 hP=hP-damage9;
                                 Mp=Mp-20;
                                 cd1=3;
-                                sw1=false;
                                 CD=false;
                             }
                             break;
@@ -322,16 +328,17 @@ public class battlesysMage {
                               CD1=false;
                               CD2=false;
                               count=false;
-                               sw1=false;
-                               // stop the while loop of monster attack
-                               y=false;
+                          
+                              // stop the while loop of monster attack
+                               mon=false;
                             }else{
-                                System.out.println("The Mage has conjured a fireball which result a high damage of "+damage10+" towards"+namE);
+                                System.out.println(Name+" have use the holy smite which result a high damage of "+damage10+" towards"+namE + "\nand heal "+(damage10/5)+"HP.");
+                                Hp=Hp+(damage10/5);
                                 hP=hP-damage10;
                                 Mp=Mp-30;
-                                cd2=2;
+                                cd2=3;
                                 CD1=false;
-                                
+                              
                             }
                             break;
                             
@@ -342,17 +349,17 @@ public class battlesysMage {
                               CD=false;
                               CD1=false;
                               CD2=false;
-                              y=false;
+                              mon=false;
                               count=false;
-                              sw1=false;
+                              sd1=false;
+                             
                             }else{
-                                System.out.println("The Mage have cast the spell Frost Nova.");
-                                System.out.println("You have hit the "+namE+" causing a damage of "+damage11);
-                                hP=hP-damage11;
+                                System.out.println(Name +"has use the Divine Shield which immune the attack of "+namE+"!!!");
+                                sd=1;
                                 Mp=Mp-40;
-                                sw=1;
                                 cd3=6;
                                 CD2=false;
+                                mon=false;
                             }
                             break;
                     }
@@ -360,23 +367,18 @@ public class battlesysMage {
                   hero=false;
                    
                 }
-                
-                 
-                // loop logic for spell Shield wall
-                while(sw1){
-                 if (sw==1 || sw==2){
-                     System.out.println("The "+namE+" has been freezes and can't attack !!!");               
-                     sw++;
-                     y=false;
-                     break;
-                 }
-                 break;
+                while(sd1){
+                  if(sd==1||sd==2){
+                      System.out.println(namE+" has hit"+Name+" 0 damage!!!");
+                      mon=false;
+                      sd++;
+                  }
+                  break;
                 }
-                
-                
+               
                 
                 // monster attack 
-                 while(y){   
+                 while(mon){   
                     if(hP>0){
                          // abnormal input
                         if(choice.matches("([^1-5a-cA-C])")){
@@ -461,14 +463,12 @@ public class battlesysMage {
                         }
                     }else{
                        System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
-                      Mage Mag = new Mage();
-                      Mag.gainExp(exP);
                        // check level up
                        // put latest attributes into the file
-                       z=false;
-                       
+                       Paladin pal = new Paladin();
+                       pal.gainExp(exP);
                        // back to map
-                       
+                       main=false;
                        break;
                      }
                  }
@@ -520,15 +520,13 @@ public class battlesysMage {
              }
              
           }
+            
           catch(IOException e){
               System.out.println(e);
         }
         }
-    public static void main(String[] args) {
-        mag1("Goblin",10,0,10,0,5,2,160,2);
+         
+       public static void main(String[] args) {
+                pal1("Goblin",10,0,10,0,5,2,160,1);
     }
-        
-        
-    }
-   
-
+}

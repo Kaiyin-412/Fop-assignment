@@ -4,51 +4,51 @@
  */
 package text.adventure;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Random;
+import java.util.Scanner;
+import static text.adventure.battle_sys_Warrior.BLUE;
+import static text.adventure.battle_sys_Warrior.GREEN;
+import static text.adventure.battle_sys_Warrior.RED;
+import static text.adventure.battle_sys_Warrior.RESET;
+import static text.adventure.battle_sys_Warrior.YELLOW;
+
+
 /**
  *
  * @author ONG KAI YIN
  */
-import java.io.*;
-import java.util.Scanner;
-import java.util.Random;
-import java.util.*;
-public class battlesysWarrior {
-    // text color
-    public static final String RESET = "\033[0m"; 
-    public static final String RED = "\033[0;31m"; 
+public class battle_sys_Mage {
     
-    // text bold with color
-    public static final String YELLOW = "\033[1;40m"; 
-    public static final String BLUE = "\033[1;34m"; 
-    public static final String GREEN = "\033[1;32m"; 
-    
-     // initial attributes of warrior
-    // write into a file
-public static void war(){
-    try{
-    BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\warrior.txt"));
-     bw.write("Warrior,300,50,80,20,70,50,0,1");
+    // Initiallise the initial attributes of the hero
+    // must run it at first fight
+    public static void mag(){
+        try{
+    BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\mage.txt"));
+     bw.write("Mage,200,150,30,100,20,30,0,1");
      bw.close();
    }catch(Exception ex){
             System.out.println(ex);
    }
 }
-        // round is to check whether is it the first fight , if first fight must run war();         
-        public static void war1(String namE , int hP ,int mP,int pA,int mA,int pD,int mD,int exP,int round){
-            
-            // first round must run it to read the initial attributes of the character
-            if(round==1){
-              war();
-            }
-            
-            Scanner sc = new Scanner(System.in); 
+    // round is to check whether is it the first fight , if first fight must run mag();                                                                                     
+    public static void mag1( String namE , int hP ,int mP,int pA,int mA,int pD,int mD,int exP,int round){
+        
+        if(round==1){
+          mag();
+        }
+         
+           Scanner sc = new Scanner(System.in); 
             Random rd = new Random();
             
            
-           
           try{
               // read the file to get the attributes of the character
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\warrior.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\mage.txt"));
             int hp=0;
             int mp=0;
             int pd=0;
@@ -73,46 +73,44 @@ public static void war(){
                pl+=Integer.parseInt(list[8]);
              }
              br.close();
-               Archetype warrior = new Archetype("Warrior",hp,mp,pd,md,pa,ma,pe,pl);
+              Archetype mage = new Archetype("Mage",hp,mp,pd,md,pa,ma,pe,pl);
               Monster monster =new Monster(namE,hP,mP,pA,mA,pD,mD,exP);
              
               
            
             // declare the initial value of hp and mp(warrior)
-            int initial_hp = warrior.healthPoints;
-            int initial_mp=warrior.manaPoints;
+            int initial_hp = mage.healthPoints;
+            int initial_mp=mage.manaPoints;
             
             // declare the initial value of hp and mp (globin)
             int ini_hp = monster.healthPoints;
             int ini_mp = monster.manaPoints;
             
-            String Name =warrior.name;
-             int Hp=warrior.healthPoints;
-             int Mp=warrior.manaPoints;
-             int Md=warrior.magicalDefense;
-             int Pa=warrior.physicalAttack;
-             int Pd=warrior.physicalDefense;
-             int Ma=warrior.magicalAttack;
-             int Pe=warrior.playerExp;
-             int Pl=warrior.playerlevel;
+            String Name =mage.name;
+             int Hp=mage.healthPoints;
+             int Mp=mage.manaPoints;
+             int Md=mage.magicalDefense;
+             int Pa=mage.physicalAttack;
+             int Pd=mage.physicalDefense;
+             int Ma=mage.magicalAttack;
+             int Pe=mage.playerExp;
+             int Pl=mage.playerlevel;
              
              
-      
              
               System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
               System.out.println("Now you have encounter a monster "+RED +namE+RESET);
               System.out.println("The battle start  !!!");
               
-        
               
                int cd1 =3;
-               Spell roaring = new Spell("Roaring", cd1);
+               Spell roaring = new Spell("Lighting", cd1);
                
-               int cd2 =4;
-               Spell FS = new Spell("Furious Strike",cd2);
+               int cd2 =2;
+               Spell FS = new Spell("Fireball",cd2);
                
                int cd3 =6;
-               Spell SW = new Spell("Shield Wall",cd3);
+               Spell SW = new Spell("Frost Nova",cd3);
                
                // calculate round 
                int  bout =1;
@@ -120,10 +118,9 @@ public static void war(){
                 // conditon for the main while loop
                 boolean z =true;
                 
-                // use for the spell sheild wall
+                // use for the spell frost nova
                 int sw =0;
-                
-                // loop condition for the shield wall loop
+                // loop condition for the frost nova
                 boolean sw1  = true;
                
             while(z){
@@ -172,14 +169,17 @@ public static void war(){
                      // harpy wind Gust
                      int damage8=(mA*3)-(Md/10);
                      
-                     // Roaring spell
-                     int damage9 = (Pa*2)-pD;
+                     // Lighting
+                     int damage9 =Ma-(mD*2);
                      
-                     // Furious Strike 
-                     int damage10= Pa-(pD*8);
+                     // fireball
+                     int damage10= Ma-md;
                      
                      // heal 
-                     int heal=Hp/20;
+                     int heal=Hp/10;
+                     
+                     // damge for frost nova
+                     int damage11 =Ma/10;
                      
                   
                    
@@ -204,17 +204,17 @@ public static void war(){
                     if(Pl<5){
                          System.out.println("<A> Unlocked at level 5 \n<B> Unlocked at level 10 \n<C> Unlocked at level 15");
                     }else if(Pl>=5 && Pl<10){
-                         System.out.println("<A> Roaring     < -20Mp, "+cd1+"/3 CD, " +"cast Silence >");
+                         System.out.println("<A> Lighting    < -20Mp, "+cd1+"/3 CD, " +" conjured a lighting >");
                          System.out.println("<B> Unlocked at level 10");
                          System.out.println("<C> Unlocked at level 30");                           
                     }else if(Pl>=10&& Pl<15){
-                         System.out.println("<A> Roaring          < -20Mp, "+cd1+"/3 CD, " +"Cast Silence  >");
-                         System.out.println("<B> Furious Strike   <-30Mp ,"+cd2+"/4 CD,"+"Powerful attack  >");
+                         System.out.println("<A> Lighting         < -20Mp, "+cd1+"/3 CD, " +" conjured a lighting >");
+                         System.out.println("<B> Fireball         < -30Mp ,"+cd2+"/2 CD,"+" conjured a fireball   >");
                          System.out.println("<C> Unlocked at level 30");
                     }else{
-                         System.out.println("<A> Roaring          < -20Mp, "+cd1+"/3 CD, " +"Cast Silence                          >");
-                         System.out.println("<B> Furious Strike   < -30Mp ,"+cd2+"/4 CD, "+"Powerful attack                        >");
-                         System.out.println("<C> Shield Wall      < -40Mp ,"+cd3+"/6 CD, "+"reducing incoming damage for 3 rounds  >");       
+                         System.out.println("<A> Lighting         < -20Mp, "+cd1+"/3 CD, " +" conjured a lighting        >");
+                         System.out.println("<B> Fireball         < -30Mp ,"+cd2+"/2 CD, "+" conjured a fireball         >");
+                         System.out.println("<C> Frost Nova       < -40Mp ,"+cd3+"/6 CD, "+" freezes the enemies 2 round >");       
                     }
                     System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
                     System.out.println("Round :"+bout);
@@ -292,9 +292,9 @@ public static void war(){
                             }
                             break;  
                          
-                            // Spell Roaring
+                            // Spell Lighting   
                         case "A" :
-                            // not enough level or not enough mana point
+                            // not enough level or not enough mana point or nit reach cd
                             if(Pl<5 || Mp <=20 || cd1!=0){
                                check spell = new check();
                                 spell.check_spell(Pl,5,Mp,20,cd1);
@@ -305,13 +305,10 @@ public static void war(){
                                 sw1=false;
                             }
                             else{
-                                System.out.println("You have cast the spell Roaring and cause a damage of "+damage9+" towards"+namE);
-                                System.out.println("The "+monster.name+" has hit you 0 damage due to the effect of silence !!!");
+                                System.out.println("The Mage has  have conjured lighting and cause a damage of "+damage9+" towards"+namE);
                                 hP=hP-damage9;
                                 Mp=Mp-20;
                                 cd1=3;
-                                // stop the while loop of monster attack 
-                                y=false;
                                 sw1=false;
                                 CD=false;
                             }
@@ -329,10 +326,10 @@ public static void war(){
                                // stop the while loop of monster attack
                                y=false;
                             }else{
-                                System.out.println("You have cast the spell Furious Strike which result a high damage of "+damage10+" towards"+namE);
+                                System.out.println("The Mage has conjured a fireball which result a high damage of "+damage10+" towards"+namE);
                                 hP=hP-damage10;
                                 Mp=Mp-30;
-                                cd2=4;
+                                cd2=2;
                                 CD1=false;
                                 
                             }
@@ -349,7 +346,9 @@ public static void war(){
                               count=false;
                               sw1=false;
                             }else{
-                                System.out.println("You have cast the spell Shield wall.");
+                                System.out.println("The Mage have cast the spell Frost Nova.");
+                                System.out.println("You have hit the "+namE+" causing a damage of "+damage11);
+                                hP=hP-damage11;
                                 Mp=Mp-40;
                                 sw=1;
                                 cd3=6;
@@ -362,18 +361,19 @@ public static void war(){
                    
                 }
                 
+                 
                 // loop logic for spell Shield wall
                 while(sw1){
-                 if (sw==1 || sw==2 || sw==3){
-                     System.out.println(Name +" has succesfully defend most of the attack by "+namE+" due to the strongest shield");
-                     System.out.println(namE+" has hit you a damage of 1 !!!");
-                     Hp=Hp-1;
+                 if (sw==1 || sw==2){
+                     System.out.println("The "+namE+" has been freezes and can't attack !!!");               
                      sw++;
                      y=false;
                      break;
                  }
                  break;
                 }
+                
+                
                 
                 // monster attack 
                  while(y){   
@@ -461,8 +461,8 @@ public static void war(){
                         }
                     }else{
                        System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
-                       warrior war = new warrior();
-                       war.gainExp(exP);  
+                      Mage Mag = new Mage();
+                      Mag.gainExp(exP);
                        // check level up
                        // put latest attributes into the file
                        z=false;
@@ -520,15 +520,15 @@ public static void war(){
              }
              
           }
-            
           catch(IOException e){
               System.out.println(e);
         }
         }
-         
-       public static void main(String[] args) {
-           war1("goblin",10,20,20,10,8,8,100,2);
-          
+    public static void main(String[] args) {
+        mag1("Goblin",10,0,10,0,5,2,160,2);
     }
-}
+        
+        
+    }
+   
 

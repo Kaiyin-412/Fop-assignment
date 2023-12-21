@@ -16,8 +16,8 @@ import java.util.Scanner;
  *
  * @author ONG KAI YIN
  */
-public class battlesysRogue {
-      // text color
+public class battle_sys_Archer {
+    // text color
     public static final String RESET = "\033[0m"; 
     public static final String RED = "\033[0;31m"; 
     
@@ -28,21 +28,21 @@ public class battlesysRogue {
     
      // initial attributes of warrior
     // write into a file
-public static void rog(){
+public static void arc(){
     try{
-    BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\rogue.txt"));
-     bw.write("Rogue,250,75,60,40,50,40,0,1");
+    BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\archer.txt"));
+     bw.write("Archer,240,60,65,50,45,30,0,1");
      bw.close();
    }catch(Exception ex){
             System.out.println(ex);
    }
 }
         // round is to check whether is it the first fight , if first fight must run rog();         
-        public static void rog1(String namE , int hP ,int mP,int pA,int mA,int pD,int mD,int exP,int round){
+        public static void arc1(String namE , int hP ,int mP,int pA,int mA,int pD,int mD,int exP,int round){
             
             // first round must run it to read the initial attributes of the character
             if(round==1){
-              rog();
+              arc();
             }
             
             Scanner sc = new Scanner(System.in); 
@@ -52,7 +52,7 @@ public static void rog(){
            
           try{
               // read the file to get the attributes of the character
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\rogue.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\archer.txt"));
             int hp=0;
             int mp=0;
             int pd=0;
@@ -77,28 +77,28 @@ public static void rog(){
                pl+=Integer.parseInt(list[8]);
              }
              br.close();
-               Archetype rogue = new Archetype("Rogue",hp,mp,pd,md,pa,ma,pe,pl);
+              Archetype archer = new Archetype("Archer",hp,mp,pd,md,pa,ma,pe,pl);
               Monster monster =new Monster(namE,hP,mP,pA,mA,pD,mD,exP);
              
               
            
             // declare the initial value of hp and mp char
-            int initial_hp =rogue.healthPoints;
-            int initial_mp=rogue.manaPoints;
+            int initial_hp =hp;
+            int initial_mp=mp;
             
             // declare the initial value of hp and mp monster
             int ini_hp = monster.healthPoints;
             int ini_mp = monster.manaPoints;
             
-            String Name =rogue.name;
-             int Hp=rogue.healthPoints;
-             int Mp=rogue.manaPoints;
-             int Md=rogue.magicalDefense;
-             int Pa=rogue.physicalAttack;
-             int Pd=rogue.physicalDefense;
-             int Ma=rogue.magicalAttack;
-             int Pe=rogue.playerExp;
-             int Pl=rogue.playerlevel;
+            String Name =archer.name;
+             int Hp=hp;
+             int Mp=mp;
+             int Md=md;
+             int Pa=pa;
+             int Pd=pd;
+             int Ma=ma;
+             int Pe=pe;
+             int Pl=pl;
              
              
       
@@ -109,24 +109,20 @@ public static void rog(){
               
         
               
-              // spell 
+              // spell cd 
                int cd1 =3;
-               Spell roaring = new Spell("Posion trap", cd1);
-               
-               int cd2 =3;
-               Spell FS = new Spell("backstab",cd2);
-               
+               int cd2 =2;
                int cd3 =6;
-               Spell SW = new Spell("shadowstep",cd3);
+            
                
                // calculate round 
                int  bout =1;
                
                 // conditon for the main while loop
-                boolean z =true;
+                boolean main =true;
                 
                
-            while(z){
+            while(main){
          
                   //condition for the loop of hero att
                   boolean hero = true;
@@ -142,7 +138,7 @@ public static void rog(){
                     boolean CD2 = true;
                     
                     // condtion for loop of monster attack
-                     boolean y = true;   
+                     boolean mon = true;   
                      
                      // condtion for round while loop
                     boolean count = true;
@@ -158,7 +154,7 @@ public static void rog(){
                      int damage4 =pA-(Pd/10);
                     
                      // monster att
-                     int damage2 =pA-(Pd/8);
+                     int damage2 =pA-(Pd/8)+15;
                      
                      // witch mA
                      int damage5 =(mA*2)-(Md/3);
@@ -180,6 +176,9 @@ public static void rog(){
                      
                      // heal 
                      int heal=Hp/20;
+                     
+                     //trick shot
+                     int damage11=(Pa*3)-pd;
                      
                   
                    
@@ -204,17 +203,17 @@ public static void rog(){
                     if(Pl<5){
                          System.out.println("<A> Unlocked at level 5 \n<B> Unlocked at level 10 \n<C> Unlocked at level 15");
                     }else if(Pl>=5 && Pl<10){
-                         System.out.println("<A> Posion trap    < -20Mp, "+cd1+"/3 CD, " +"posion the enemies >");
+                         System.out.println("<A> Double shot    < -20Mp, "+cd1+"/3 CD, " +"Double arrows >");
                          System.out.println("<B> Unlocked at level 10");
                          System.out.println("<C> Unlocked at level 30");                           
                     }else if(Pl>=10&& Pl<15){
-                         System.out.println("<A> Posion trap      < -20Mp, "+cd1+"/3 CD, " +"posion the enemy            >");
-                         System.out.println("<B> Backstab         <-30Mp ,"+cd2+"/3 CD,"+" Damage and stun enemy 1 round >");
+                         System.out.println("<A> Double shot      < -20Mp, "+cd1+"/3 CD, " +"Double arrows  >");
+                         System.out.println("<B> Rapid Shot        <-30Mp ,"+cd2+"/2 CD,"+" Fires a flurry of arrows   >");
                          System.out.println("<C> Unlocked at level 30");
                     }else{
-                         System.out.println("<A> Posion trap    < -20Mp, "+cd1+"/3 CD, " +"posion the enemies             >");
-                         System.out.println("<B> backstab       < -30Mp ,"+cd2+"/3 CD, "+"Damage and stun enemy 1 round   >");
-                         System.out.println("<C> Shadowstep     < -40Mp ,"+cd3+"/6 CD, "+"Evade attack ad spell of enemy  >");       
+                         System.out.println("<A> Double shot     < -20Mp, "+cd1+"/3 CD, " +"Double arrows            >");
+                         System.out.println("<B> Rapid Shot      < -30Mp ,"+cd2+"/2 CD, "+"Fires a flurry of arrows >");
+                         System.out.println("<C> Trick Shot      < -40Mp ,"+cd3+"/6 CD, "+"A precise shot            >");       
                     }
                     System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
                     System.out.println("Round :"+bout);
@@ -239,11 +238,12 @@ public static void rog(){
                             break;
                             }else{
                                 System.out.println("Not enough MP");
-                                // stop the while loop of monster attack
+                                
                                CD=false;
                                CD1=false;
                                CD2=false;
                                count=false;
+                               mon=false;
                                
                             }
                             break;
@@ -255,7 +255,7 @@ public static void rog(){
                              // hp of hero
                              Hp=Hp-damage4;
                               // stop the while loop of monster attack
-                             y=false;
+                             mon=false;
                             break;
                             
                         case "4" :
@@ -276,7 +276,7 @@ public static void rog(){
                               CD1=false;
                               CD2=false;
                               count=false;
-                              y=false;
+                              mon=false;
                                 
                             }
                             break;
@@ -302,11 +302,11 @@ public static void rog(){
                                 CD1=false;
                                  CD2=false;
                                 count=false;
-                                 y=false;
+                                 mon=false;
                             
                             }
                             else{
-                                System.out.println(namE+" have cast the spell posion trap and cause a damage of "+damage9+" towards"+namE);
+                                System.out.println(namE+" have use double shot and cause a damage of "+damage9+" towards"+namE);
                                 hP=hP-damage9;
                                 Mp=Mp-20;
                                 cd1=3;
@@ -322,18 +322,14 @@ public static void rog(){
                               CD1=false;
                               CD2=false;
                               count=false;
-                          
-                               // stop the while loop of monster attack
-                               y=false;
+                              mon=false;
+
                             }else{
-                                System.out.println(Name+" have use the backstab which result a high damage of "+damage10+" towards"+namE + "\nand stunning "+namE+"for 1 round !!!");
-                                System.out.println(namE+" can't attack !!!");
+                                System.out.println(Name+" have use rapid shit  which result a high damage of "+damage10+" towards"+namE +"!!!");
                                 hP=hP-damage10;
                                 Mp=Mp-30;
                                 cd2=4;
                                 CD1=false;
-                               // break the loop of monster attack bcs being stun
-                                y=false;
                             }
                             break;
                             
@@ -344,16 +340,16 @@ public static void rog(){
                               CD=false;
                               CD1=false;
                               CD2=false;
-                              y=false;
+                              mon=false;
                               count=false;
                              
                             }else{
-                                System.out.println(Name +"has use the shadowstep to evade the spell and attack from enemy !!!");
-                                System.out.println(namE +" hits a zero damage !!!");
+                                System.out.println(Name +"has executes a precise shoot towards "+namE+" , and cause a high damage of "+damage11+"!!!");
+                                hP=hP-damage11;
                                 Mp=Mp-40;
                                 cd3=6;
                                 CD2=false;
-                                y=false;
+                               
                             }
                             break;
                     }
@@ -365,7 +361,7 @@ public static void rog(){
                
                 
                 // monster attack 
-                 while(y){   
+                 while(mon){   
                     if(hP>0){
                          // abnormal input
                         if(choice.matches("([^1-5a-cA-C])")){
@@ -450,11 +446,11 @@ public static void rog(){
                         }
                     }else{
                        System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
-                      Rogue rog = new Rogue();
-                      rog.gainExp(exP);
+                      Archer arc = new Archer();
+                      arc.gainExp(exP);
                        // check level up
                        // put latest attributes into the file
-                       z=false;
+                       main=false;
                        
                        // back to map
                        
@@ -516,6 +512,6 @@ public static void rog(){
         }
          
        public static void main(String[] args) {
-                 rog1("goblin",100,20,20,10,8,8,100,1);
+                arc1("Goblin",10,0,10,0,5,2,160,1);
     }
 }

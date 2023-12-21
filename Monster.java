@@ -35,7 +35,7 @@ public class Monster {
   class goblin extends Monster{
 
     public goblin(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense) {
-        super("Goblin",40,0,10,0,5,2,30);
+        super("Goblin",40,0,10,0,5,2,50);
     }
    
  }
@@ -43,31 +43,46 @@ public class Monster {
    class skeleton extends Monster{
 
     public skeleton(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense) {
-        super("Skeleton",60,0,12,0,7,3,50);
+        super("Skeleton",60,0,12,0,7,3,70);
     }
        
    }
 
+
 // ability fireball
   class witch extends Monster{
     public witch(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense) {
-        super("Witch",50,80,8,20,6,12,70);
+        super("Witch",50,80,8,20,6,12,100);
     }     
   }
 
 class orc extends Monster{
 
     public orc(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense) {
-        super("Orc",70,0,15,0,9,4,90);
+        super("Orc",70,0,15,0,9,4,200);
     }
     
 }
 
-
 // They possess two abilities: "Talon Strike," a physical attack, and "Wind Gust," a magical attack that can disrupt opponents.
 class harpy extends Monster{
     public harpy(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense) {
-        super("Harpy",60,20,14,10,8,8,100);
+        super("Harpy",60,20,14,10,8,8,2000);
+    }
+    
+}
+ class Godzilla extends Monster{
+
+    public Godzilla(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense, int exP) {
+        super("Godzilla",500,0,70,0,30,30,2000);
+    }
+     
+   }
+
+// big boss
+class Medusa extends Monster{
+    public Medusa(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense, int exP) {
+        super("Medusa",1000,0,150,0,100,100,0);
     }
     
 }
