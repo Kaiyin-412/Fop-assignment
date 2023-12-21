@@ -264,7 +264,7 @@ public class battlesysMage {
                                   System.out.println(Name+" have succesfully heal !");
                                   Hp=initial_hp;
                                   Mp=Mp-30;
-                                }else if((Hp+20)<initial_hp){  
+                                }else if((Hp+heal)<initial_hp){  
                                   System.out.println(Name+" have succesfully heal !");
                                   Hp=Hp+heal;
                                   Mp=Mp-30;
@@ -520,8 +520,6 @@ public class battlesysMage {
              }
              
           }
-            
-            
           catch(IOException e){
               System.out.println(e);
         }

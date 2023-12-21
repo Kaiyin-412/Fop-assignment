@@ -50,7 +50,7 @@ public class Archer {
                 pe+=Integer.parseInt(list[7]);
                 pl+=Integer.parseInt(list[8]);
                 
-         //Both Physical Attack and Physical Defense will be enhanced.
+        // Physical Attack will be substantially strengthened.
                 hp+=(5*(n-pl));
                 ma+=(1*(n-pl));
                 md+=(3*(n-pl));

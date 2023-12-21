@@ -122,6 +122,7 @@ public static void war(){
                 
                 // use for the spell sheild wall
                 int sw =0;
+                
                 // loop condition for the shield wall loop
                 boolean sw1  = true;
                
@@ -263,7 +264,7 @@ public static void war(){
                                   System.out.println(Name+" have succesfully heal !");
                                   Hp=initial_hp;
                                   Mp=Mp-30;
-                                }else if((Hp+20)<initial_hp){  
+                                }else if((Hp+heal)<initial_hp){  
                                   System.out.println(Name+" have succesfully heal !");
                                   Hp=Hp+heal;
                                   Mp=Mp-30;

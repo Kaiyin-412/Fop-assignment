@@ -77,28 +77,28 @@ public static void pal(){
                pl+=Integer.parseInt(list[8]);
              }
              br.close();
-               Archetype rogue = new Archetype("Rogue",hp,mp,pd,md,pa,ma,pe,pl);
+               Archetype paladin = new Archetype("Paladin",hp,mp,pd,md,pa,ma,pe,pl);
               Monster monster =new Monster(namE,hP,mP,pA,mA,pD,mD,exP);
              
               
            
             // declare the initial value of hp and mp char
-            int initial_hp =rogue.healthPoints;
-            int initial_mp=rogue.manaPoints;
+            int initial_hp =hp;
+            int initial_mp=mp;
             
             // declare the initial value of hp and mp monster
-            int ini_hp = monster.healthPoints;
-            int ini_mp = monster.manaPoints;
+            int ini_hp =hP;
+            int ini_mp =mP;
             
-            String Name =rogue.name;
-             int Hp=rogue.healthPoints;
-             int Mp=rogue.manaPoints;
-             int Md=rogue.magicalDefense;
-             int Pa=rogue.physicalAttack;
-             int Pd=rogue.physicalDefense;
-             int Ma=rogue.magicalAttack;
-             int Pe=rogue.playerExp;
-             int Pl=rogue.playerlevel;
+            String Name =paladin.name;
+             int Hp=hp;
+             int Mp=mp;
+             int Md=md;
+             int Pa=pa;
+             int Pd=pd;
+             int Ma=ma;
+             int Pe=pe;
+             int Pl=pl;
              
              
       
@@ -109,24 +109,28 @@ public static void pal(){
               
         
               
-              // spell 
+              // cd spell A
                int cd1 =3;
-               Spell roaring = new Spell("Posion trap", cd1);
-               
+              // cd spell B
                int cd2 =3;
-               Spell FS = new Spell("backstab",cd2);
-               
+              // cd spellC
                int cd3 =6;
-               Spell SW = new Spell("shadowstep",cd3);
+         
+               
                
                // calculate round 
                int  bout =1;
                
                 // conditon for the main while loop
-                boolean z =true;
+                boolean main =true;
                 
+               // use for spell shield divine
+               int sd=0;
                
-            while(z){
+               // loop for shield divine
+               boolean sd1 =true;
+               
+            while(main){
          
                   //condition for the loop of hero att
                   boolean hero = true;
@@ -142,7 +146,7 @@ public static void pal(){
                     boolean CD2 = true;
                     
                     // condtion for loop of monster attack
-                     boolean y = true;   
+                     boolean mon = true;   
                      
                      // condtion for round while loop
                     boolean count = true;
@@ -158,7 +162,7 @@ public static void pal(){
                      int damage4 =pA-(Pd/10);
                     
                      // monster att
-                     int damage2 =pA-(Pd/8);
+                     int damage2 =pA-(Pd/8)+10;
                      
                      // witch mA
                      int damage5 =(mA*2)-(Md/3);
@@ -204,17 +208,17 @@ public static void pal(){
                     if(Pl<5){
                          System.out.println("<A> Unlocked at level 5 \n<B> Unlocked at level 10 \n<C> Unlocked at level 15");
                     }else if(Pl>=5 && Pl<10){
-                         System.out.println("<A> Posion trap    < -20Mp, "+cd1+"/3 CD, " +"posion the enemies >");
+                         System.out.println("<A> Wrath Of God    < -20Mp, "+cd1+"/3 CD, " +"High damage >");
                          System.out.println("<B> Unlocked at level 10");
                          System.out.println("<C> Unlocked at level 30");                           
                     }else if(Pl>=10&& Pl<15){
-                         System.out.println("<A> Posion trap      < -20Mp, "+cd1+"/3 CD, " +"posion the enemy            >");
-                         System.out.println("<B> Backstab         <-30Mp ,"+cd2+"/3 CD,"+" Damage and stun enemy 1 round >");
+                         System.out.println("<A> Wrath Of God     < -20Mp, "+cd1+"/3 CD, " +"High damage   >");
+                         System.out.println("<B> Holy Smite       <-30Mp ,"+cd2+"/3 CD,"+" Damage and heal >");
                          System.out.println("<C> Unlocked at level 30");
                     }else{
-                         System.out.println("<A> Posion trap    < -20Mp, "+cd1+"/3 CD, " +"posion the enemies             >");
-                         System.out.println("<B> backstab       < -30Mp ,"+cd2+"/3 CD, "+"Damage and stun enemy 1 round   >");
-                         System.out.println("<C> Shadowstep     < -40Mp ,"+cd3+"/6 CD, "+"Evade attack ad spell of enemy  >");       
+                         System.out.println("<A> Wrath Of God   < -20Mp, "+cd1+"/3 CD, "+"High damage                         >");
+                         System.out.println("<B> Holy Smite     < -30Mp ,"+cd2+"/3 CD, "+"Damage and heal                      >");
+                         System.out.println("<C>Divine shield   < -40Mp ,"+cd3+"/6 CD, "+"immune to damage of enemies 2 rounds >");       
                     }
                     System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
                     System.out.println("Round :"+bout);
@@ -244,7 +248,8 @@ public static void pal(){
                                CD1=false;
                                CD2=false;
                                count=false;
-                               
+                               sd1=false;
+                               mon=false;
                             }
                             break;
                             
@@ -255,7 +260,7 @@ public static void pal(){
                              // hp of hero
                              Hp=Hp-damage4;
                               // stop the while loop of monster attack
-                             y=false;
+                             mon=false;
                             break;
                             
                         case "4" :
@@ -264,7 +269,7 @@ public static void pal(){
                                   System.out.println(Name+" have succesfully heal !");
                                   Hp=initial_hp;
                                   Mp=Mp-30;
-                                }else if((Hp+20)<initial_hp){  
+                                }else if((Hp+heal)<initial_hp){  
                                   System.out.println(Name+" have succesfully heal !");
                                   Hp=Hp+heal;
                                   Mp=Mp-30;
@@ -276,8 +281,8 @@ public static void pal(){
                               CD1=false;
                               CD2=false;
                               count=false;
-                              y=false;
-                                
+                              mon=false;
+                              sd1=false;  
                             }
                             break;
                             
@@ -302,11 +307,12 @@ public static void pal(){
                                 CD1=false;
                                  CD2=false;
                                 count=false;
-                                 y=false;
+                                 mon=false;
+                                 sd1=false;
                             
                             }
                             else{
-                                System.out.println(namE+" have cast the spell posion trap and cause a damage of "+damage9+" towards"+namE);
+                                System.out.println(namE+" have cast the spell wrath of god and cause a damage of "+damage9+" towards"+namE);
                                 hP=hP-damage9;
                                 Mp=Mp-20;
                                 cd1=3;
@@ -323,17 +329,16 @@ public static void pal(){
                               CD2=false;
                               count=false;
                           
-                               // stop the while loop of monster attack
-                               y=false;
+                              // stop the while loop of monster attack
+                               mon=false;
                             }else{
-                                System.out.println(Name+" have use the backstab which result a high damage of "+damage10+" towards"+namE + "\nand stunning "+namE+"for 1 round !!!");
-                                System.out.println(namE+" can't attack !!!");
+                                System.out.println(Name+" have use the holy smite which result a high damage of "+damage10+" towards"+namE + "\nand heal "+(damage10/5)+"HP.");
+                                Hp=Hp+(damage10/5);
                                 hP=hP-damage10;
                                 Mp=Mp-30;
-                                cd2=4;
+                                cd2=3;
                                 CD1=false;
-                               // break the loop of monster attack bcs being stun
-                                y=false;
+                              
                             }
                             break;
                             
@@ -344,16 +349,17 @@ public static void pal(){
                               CD=false;
                               CD1=false;
                               CD2=false;
-                              y=false;
+                              mon=false;
                               count=false;
+                              sd1=false;
                              
                             }else{
-                                System.out.println(Name +"has use the shadowstep to evade the spell and attack from enemy !!!");
-                                System.out.println(namE +" hits a zero damage !!!");
+                                System.out.println(Name +"has use the Divine Shield which immune the attack of "+namE+"!!!");
+                                sd=1;
                                 Mp=Mp-40;
                                 cd3=6;
                                 CD2=false;
-                                y=false;
+                                mon=false;
                             }
                             break;
                     }
@@ -361,11 +367,18 @@ public static void pal(){
                   hero=false;
                    
                 }
-                
+                while(sd1){
+                  if(sd==1||sd==2){
+                      System.out.println(namE+" has hit"+Name+" 0 damage!!!");
+                      mon=false;
+                      sd++;
+                  }
+                  break;
+                }
                
                 
                 // monster attack 
-                 while(y){   
+                 while(mon){   
                     if(hP>0){
                          // abnormal input
                         if(choice.matches("([^1-5a-cA-C])")){
@@ -450,14 +463,12 @@ public static void pal(){
                         }
                     }else{
                        System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
-                       Paladin pal = new Paladin();
-                       pal.gainExp(exP);
                        // check level up
                        // put latest attributes into the file
-                       z=false;
-                       
+                       Paladin pal = new Paladin();
+                       pal.gainExp(exP);
                        // back to map
-                       
+                       main=false;
                        break;
                      }
                  }
@@ -516,6 +527,6 @@ public static void pal(){
         }
          
        public static void main(String[] args) {
-                pal();
+                pal1("Goblin",10,0,10,0,5,2,160,1);
     }
 }
