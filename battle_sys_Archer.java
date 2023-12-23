@@ -20,14 +20,20 @@ public class battle_sys_Archer {
     // text color
     public static final String RESET = "\033[0m"; 
     public static final String RED = "\033[0;31m"; 
-    
+    public static final String PURPLE = "\033[0;35m";  
+    public static final String CYAN = "\033[0;36m";   
+     
     // text bold with color
-    public static final String YELLOW = "\033[1;40m"; 
+    public static final String GREY = "\033[1;39m"; 
     public static final String BLUE = "\033[1;34m"; 
     public static final String GREEN = "\033[1;32m"; 
+    public static final String RED_BOLD = "\033[1;31m";   
+      public static final String PURPLE_BOLD = "\033[1;35m"; 
     
-     // initial attributes of warrior
-    // write into a file
+      
+       public static final String CYAN_BACKGROUND = "\033[46m"; 
+// initial attributes of warrior
+// write into a file
 public static void arc(){
     try{
     BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\archer.txt"));
@@ -90,6 +96,7 @@ public static void arc(){
             int ini_hp = monster.healthPoints;
             int ini_mp = monster.manaPoints;
             
+            // declare the variable for the attributes
             String Name =archer.name;
              int Hp=hp;
              int Mp=mp;
@@ -103,8 +110,9 @@ public static void arc(){
              
       
              
-              System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-              System.out.println("Now you have encounter a monster "+RED +namE+RESET);
+              System.out.println(PURPLE_BOLD+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+RESET);
+              System.out.println(RED_BOLD+"WARNING !!!"+RESET);
+              System.out.println("Now you have encounter a monster "+RED_BOLD+namE+RESET+" !!!");
               System.out.println("The battle start  !!!");
               
         
@@ -127,20 +135,20 @@ public static void arc(){
                   //condition for the loop of hero att
                   boolean hero = true;
                   
-                    // loop for Roaring cd
+                    // loop for spell A cd
                     boolean CD=true;
                     
-                    // loop for Furious Strike cd
+                    // loop for spell b cd
                     boolean CD1 = true;
                     
                     
-                    // loop for Shield wall cd
+                    // loop for spell c cd
                     boolean CD2 = true;
                     
                     // condtion for loop of monster attack
                      boolean mon = true;   
                      
-                     // condtion for round while loop
+                     // condtion for loop of  round 
                     boolean count = true;
                    
                     
@@ -168,77 +176,83 @@ public static void arc(){
                      // harpy wind Gust
                      int damage8=(mA*3)-(Md/10);
                      
-                     // Roaring spell
+                     // spell a
                      int damage9 = (Pa*2)-pD-5;
                      
-                     // Furious Strike 
+                     // spell b
                      int damage10= (Pa*2)-(pD*5);
                      
                      // heal 
                      int heal=Hp/20;
                      
-                     //trick shot
+                     // spell c
                      int damage11=(Pa*3)-pd;
                      
                   
                    
-                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                    System.out.println(Name); 
-                    System.out.println(BLUE+"HP :"+Hp+"/"+initial_hp+RESET);
-                    System.out.println(BLUE+"MP :"+Mp+"/"+initial_mp+RESET);
-                    System.out.println(BLUE+"Exp :"+Pe+"/"+(10*Pl)+RESET);
-                    System.out.println(BLUE+"level :"+Pl+"/"+35+RESET);
-                    System.out.println("----------------------------------------------------------------------------");
-                    System.out.println(namE);
-                    System.out.println(GREEN+"HP:"+hP+"/"+ini_hp+RESET);
-                    System.out.println(GREEN+"MP:"+mP+"/"+ini_mp+RESET);
-                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");                   
-                    System.out.println("[1]Physical Attack ");
-                    System.out.println("[2]Magical Attack  < -20MP > ");
-                    System.out.println("[3]Defend");
-                    System.out.println("[4]Heal            < -30MP , +"+heal+"Hp  >");
-                    System.out.println("[5]Escape");            
-                    System.out.println("----------------------------------------------------------------------------");
-                    System.out.println("Spell");
-                    if(Pl<5){
-                         System.out.println("<A> Unlocked at level 5 \n<B> Unlocked at level 10 \n<C> Unlocked at level 15");
-                    }else if(Pl>=5 && Pl<10){
-                         System.out.println("<A> Double shot    < -20Mp, "+cd1+"/3 CD, " +"Double arrows >");
-                         System.out.println("<B> Unlocked at level 10");
-                         System.out.println("<C> Unlocked at level 30");                           
-                    }else if(Pl>=10&& Pl<15){
-                         System.out.println("<A> Double shot      < -20Mp, "+cd1+"/3 CD, " +"Double arrows  >");
-                         System.out.println("<B> Rapid Shot        <-30Mp ,"+cd2+"/2 CD,"+" Fires a flurry of arrows   >");
-                         System.out.println("<C> Unlocked at level 30");
+                    System.out.println(PURPLE_BOLD+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+RESET);
+                    System.out.println(CYAN_BACKGROUND+Name+RESET); 
+                    System.out.println("HP    : "+RED_BOLD+Hp+"/"+initial_hp+RESET);
+                    System.out.println("MP    : "+RED_BOLD+Mp+"/"+initial_mp+RESET);
+                    if(pl<10){
+                    System.out.println("Exp   : "+RED_BOLD+pe+"/"+(10*pl)+RESET);
                     }else{
-                         System.out.println("<A> Double shot     < -20Mp, "+cd1+"/3 CD, " +"Double arrows            >");
-                         System.out.println("<B> Rapid Shot      < -30Mp ,"+cd2+"/2 CD, "+"Fires a flurry of arrows >");
-                         System.out.println("<C> Trick Shot      < -40Mp ,"+cd3+"/6 CD, "+"A precise shot            >");       
+                    System.out.println("Exp   : "+RED_BOLD+pe+"/"+((10*pl)+50)+RESET);
                     }
-                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                    System.out.println("Level : "+RED_BOLD+Pl+"/"+35+RESET);
+                    System.out.println("------------------------------------------------------------------------------------");
+                    System.out.println(CYAN_BACKGROUND+namE+RESET);
+                    System.out.println("HP : "+RED_BOLD+hP+"/"+ini_hp+RESET);
+                    System.out.println("MP : "+RED_BOLD+mP+"/"+ini_mp+RESET);
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"); 
+                    System.out.println(CYAN_BACKGROUND+"Starter"+RESET);
+                    System.out.println("[1]Physical Attack ");
+                    System.out.println("[2]Magical Attack  "+RED_BOLD+"< -20MP , "+damage3+"AP  > "+RESET);
+                    System.out.println("[3]Defend");
+                    System.out.println("[4]Heal            "+RED_BOLD+"< -30MP , +"+heal+"HP >"+RESET);
+                    System.out.println("[5]Escape");            
+                    System.out.println("-------------------------------------------------------------------------------------");
+                    System.out.println(CYAN_BACKGROUND+"Spell"+RESET);
+                    if(Pl<5){
+                         System.out.println("<A>"+RED_BOLD+" Unlocked at level 5 "+RESET+"\n<B>"+RED_BOLD+" Unlocked at level 10 "+RESET+"\n<C>"+RED_BOLD+" Unlocked at level 15"+RESET);
+                    }else if(Pl>=5 && Pl<10){
+                         System.out.println("<A> Double shot    "+RED_BOLD+"< -20Mp , "+cd1+"/3 CD , " +"Double arrows >"+RESET);
+                         System.out.println("<B>"+RED_BOLD+" Unlocked at level 10"+RESET);
+                         System.out.println("<C>"+RED_BOLD+" Unlocked at level 30"+RESET);                           
+                    }else if(Pl>=10&& Pl<15){
+                         System.out.println("<A> Double shot      "+RED_BOLD+"   < -20Mp , "+cd1+"/3 CD , " +"Double arrows          >"+RESET);
+                         System.out.println("<B> Rapid Shot       "+RED_BOLD+"   < -30Mp , "+cd2+"/2 CD ,"+" Fires a flurry of arrows >"+RESET);
+                         System.out.println("<C> "+RED_BOLD+"Unlocked at level 30"+RESET);
+                    }else{
+                         System.out.println("<A> Double shot     "+RED_BOLD+"< -20Mp ,"+cd1+"/3 CD , " +"Double arrows           >"+RESET);
+                         System.out.println("<B> Rapid Shot      "+RED_BOLD+"< -30Mp ,"+cd2+"/2 CD , "+"Fires a flurry of arrows >"+RESET);
+                         System.out.println("<C> Trick Shot      "+RED_BOLD+"< -40Mp ,"+cd3+"/6 CD , "+"A precise shot           >"+RESET);       
+                    }
+                    System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
                     System.out.println("Round :"+bout);
                     System.out.print("Now is your turn :");
                     String choice = sc.next().toUpperCase();
-                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    System.out.println(PURPLE_BOLD+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+RESET);
                     
                  
                     
                  while(hero){   
                     switch(choice){
                         case "1" :                                              
-                            System.out.println("You have hit the "+namE+",causing a damage of "+RED+damage1+RESET+"!");
+                            System.out.println(Name+" have hit the "+namE+",causing a damage of "+RED+damage1+RESET+"!");
                             hP=hP-damage1;
                             break;
                             
                         case "2" :
                             if(Mp>=20){
-                            System.out.println("You have using magical attack to hit the "+namE+" ,cause a high damage of "+RED+damage3+RESET+"!");
+                            System.out.println(Name+" have using magical attack to hit the "+namE+" ,cause a high damage of "+RED+damage3+RESET+"!");
                             hP=hP-damage3;
                             Mp=Mp-20;
                             break;
                             }else{
-                                System.out.println("Not enough MP");
-                                
+                                System.out.println(RED_BOLD+"Not enough MP"+RESET);
+                               // stop all the loop bcs got error
+                               mon=false;
                                CD=false;
                                CD1=false;
                                CD2=false;
@@ -249,12 +263,14 @@ public static void arc(){
                             break;
                             
                         case "3" :
-                            System.out.println("The "+Name+" has using his shield to defend!!!");
+                            System.out.println("The "+Name+" has using his"+RED_BOLD+" shield to defend !!!"+RESET);
                             System.out.println(Name+" has succesfully defend most of the damage caused by the "+namE+" !!!");
-                            System.out.println(namE+" has attacked you causing a damage of :"+RED+damage4+RESET);
+                            System.out.println(namE+" has attacked you causing a damage of "+RED+damage4+RESET);
+                            
                              // hp of hero
                              Hp=Hp-damage4;
-                              // stop the while loop of monster attack
+                             
+                             // stop the while loop of monster attack
                              mon=false;
                             break;
                             
@@ -270,8 +286,8 @@ public static void arc(){
                                   Mp=Mp-30;
                             }
                             }else{
-                                System.out.println("not enough MP");
-                                 // stop the while loop of monster attack
+                                System.out.println(RED_BOLD+"not enough MP"+RESET);
+                              // stop all the  loop bcs got error
                               CD=false;
                               CD1=false;
                               CD2=false;
@@ -287,37 +303,42 @@ public static void arc(){
                             if(n==0){
                                 System.out.println("Unfortunately you"+RED+ " failed "+RESET + "to escape !!!");
                             }else{
-                                System.out.println("You have succesfully escape !!!"); 
-                                
+                                System.out.println(RED_BOLD+"You have succesfully escape !!!"+RESET); 
+                                 GameMap map =new GameMap();
+                                 map.map(5);
                             }
                             break;  
                          
-                            // Spell Roaring
+                           
                         case "A" :
-                            // not enough level or not enough mana point
+                           // check  level ,mp and cd to cast spell
                             if(Pl<5 || Mp <=20 || cd1!=0){
                                check spell = new check();
                                 spell.check_spell(Pl,5,Mp,20,cd1);
+                                // stop all the loop bcs got error
                                  CD=false;
-                                CD1=false;
+                                 CD1=false;
                                  CD2=false;
-                                count=false;
+                                 count=false;
                                  mon=false;
                             
                             }
                             else{
-                                System.out.println(namE+" have use double shot and cause a damage of "+damage9+" towards"+namE);
+                                System.out.println(namE+" have use"+RED_BOLD+" double shot and cause a damage of "+RED_BOLD+damage9+RESET+" towards"+namE);
                                 hP=hP-damage9;
                                 Mp=Mp-20;
+                                // Reset the cd
                                 cd1=3;
                                 CD=false;
                             }
                             break;
                             
                         case "B" :
+                            // check  level ,mp and cd to cast spell
                             if(Pl<10 || Mp<=30 ||cd2!=0){
                               check spell = new check();
                               spell.check_spell(Pl,10,Mp,30,cd2);
+                               // stop all the loop bcs got error
                               CD=false;
                               CD1=false;
                               CD2=false;
@@ -325,18 +346,21 @@ public static void arc(){
                               mon=false;
 
                             }else{
-                                System.out.println(Name+" have use rapid shit  which result a high damage of "+damage10+" towards"+namE +"!!!");
+                                System.out.println(Name+" have use "+RED_BOLD+"rapid hit"+RESET+" which result a high damage of "+RED_BOLD+damage10+RESET+" towards"+namE +"!!!");
                                 hP=hP-damage10;
                                 Mp=Mp-30;
+                                // reset the cd
                                 cd2=4;
                                 CD1=false;
                             }
                             break;
                             
                         case "C":
+                            // check  level ,mp and cd to cast spell
                             if(Pl<15 || Mp <=40 || cd3!=0 ){
                               check spell = new check();
                               spell.check_spell(Pl,30,Mp,40,cd3);
+                              // stop all the loop bcs got error
                               CD=false;
                               CD1=false;
                               CD2=false;
@@ -344,9 +368,11 @@ public static void arc(){
                               count=false;
                              
                             }else{
-                                System.out.println(Name +"has executes a precise shoot towards "+namE+" , and cause a high damage of "+damage11+"!!!");
+                                
+                                System.out.println(Name +"has executes a "+RED_BOLD+"precise shoot"+RESET+" towards "+namE+" , and cause a high damage of "+RED_BOLD+damage11+RESET+"!!!");
                                 hP=hP-damage11;
                                 Mp=Mp-40;
+                                // reset the cd
                                 cd3=6;
                                 CD2=false;
                                
@@ -365,15 +391,18 @@ public static void arc(){
                     if(hP>0){
                          // abnormal input
                         if(choice.matches("([^1-5a-cA-C])")){
-                            System.out.println("Invalid input.");
+                            System.out.println(RED_BOLD+"Invalid input !!!"+RESET);
+                            // stop all the loop
                             CD=false;
                             CD1=false;
                             CD2=false;
                             count=false;
                             break;
                         }
+                        // abnormal input
                          else if(choice.length()>=2){
-                            System.out.println("Invalid input");
+                            System.out.println(RED_BOLD+"Invalid input !!!"+RESET);
+                            // stop al the loop
                             CD=false;
                             CD1=false;
                             CD2=false;
@@ -386,13 +415,13 @@ public static void arc(){
                               int chance = rd.nextInt(2);
                                 switch(chance){
                                   case 0:
-                                      System.out.println(namE+" has using magical attack which causing a damage of :"+RED+damage5+RESET);
+                                      System.out.println(namE+" has using "+RED_BOLD+"magical attack which causing a damage of "+RED_BOLD+damage5+RESET);
                                       Hp=Hp-damage5;
                                       mP=mP-20;
                                       break;
                                       
                                   case 1:
-                                      System.out.println(namE+"  conjured a blazing fireball which cause a high damage of :"+RED+damage6+RESET);
+                                      System.out.println(namE+"  conjured a "+RED_BOLD+"blazing fireball"+RESET+" which cause a high damage of "+RED_BOLD+damage6+RESET);
                                       Hp=Hp-damage6;
                                       mP=mP-20;
                                       break;
@@ -401,7 +430,7 @@ public static void arc(){
                            }
                                 // witch normal attack
                                 else{
-                                    System.out.println(namE+" has attacked you causing a damage of :"+RED+damage2+RESET);
+                                    System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
                                     Hp=Hp-damage2;
                                     break;      
 
@@ -415,14 +444,14 @@ public static void arc(){
                                 if(mP>=10){
                                     switch(chance1){
                                         case 0:
-                                            System.out.println(namE+" lunged forward, slashing with razor-sharp talons in a swift and deadly strike which cause a huge damage of :"+RED+damage7+RESET);
+                                            System.out.println(namE+RED_BOLD+" lunged forward, slashing with razor-sharp talons in a swift and deadly strike"+RESET+" which cause a huge damage of :"+RED_BOLD+damage7+RESET);
                                             Hp=Hp-damage7;
                                             mP=mP-10;
                                             hero=true;
                                             break;
                                         case 1:
-                                            System.out.println(namE+" conjured a Wind Gust which cause a high damage of :"+RED+damage8+RESET);
-                                            System.out.println("You can't attack at the next round");
+                                            System.out.println(namE+" conjured a "+RED_BOLD+"Wind Gust"+RESET+" which cause a high damage of "+RED+damage8+RESET);
+                                            System.out.println(RED_BOLD+Name+" can't attack at the next round"+RESET);
                                             Hp=Hp-damage8;
                                             mP=mP-10;
                                             // stop the loop of hero attack
@@ -432,7 +461,7 @@ public static void arc(){
                                      }
                                  //Harpy normal attack
                                 }else{
-                                System.out.println(namE+" has attacked you causing a damage of :"+RED+damage2+RESET);
+                                System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -440,28 +469,39 @@ public static void arc(){
                                 break;
                         } 
                         else{
-                        System.out.println(namE+" has attacked you causing a damage of :"+RED+damage2+RESET);
+                        System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
                         Hp=Hp-damage2;
                          break;                      
                         }
                     }else{
-                       System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
+                       System.out.println("Congratulations you have"+RED_BOLD+" defeat the "+namE+" !!!"+RESET);
+                       
+                        // check level up
+                       // put latest attributes into the file
                       Archer arc = new Archer();
                       arc.gainExp(exP);
-                       // check level up
-                       // put latest attributes into the file
-                       main=false;
-                       
-                       // back to map
-                       
-                       break;
+                      
+                       // check whether is the last monster
+                       if(namE=="Medusa"){
+                           System.out.println(RED_BOLD+"Victory !!!"+RESET);
+                           System.out.println("Congrats you have"+RED_BOLD+" defeat all the monster"+RESET+" and "+RED_BOLD+"successfully save your country !!!"+RESET);
+                             // stop the main loop
+                              main=false;
+                        }else{
+                        // back to map
+                       GameMap map =new GameMap();
+                       map.map(5);
+                             // stop the main loop
+                             main=false;
+                             break;
                      }
+                 }
                  }
                  
                 
                  
-                 // if no reached level and the cd =0 will result a bug
-                  // cooling down spell Roaring 
+                 
+                  // cooling down spell A
                   while(CD){
                     if(cd1<=3 && cd1>0){
                          cd1--;
@@ -471,9 +511,9 @@ public static void arc(){
                   }
                   }
                   
-                // cooling down spell Furious Strike
+                // cooling down spell B
                    while(CD1){
-                      if(cd2<=4 && cd2>0){
+                      if(cd2<=2 && cd2>0){
                          cd2--;
                          break;
                       }else{
@@ -481,7 +521,7 @@ public static void arc(){
                       }
                     }
                    
-                // cooling down spell Shield wall
+                // cooling down spell C
                     while(CD2){
                        if(cd3<=6 && cd3>0){
                            cd3--;
@@ -499,7 +539,8 @@ public static void arc(){
                  
                     // you loss
                     if(Hp<=0){
-                        System.out.println("You loss !!!");
+                        System.out.println(RED_BOLD+"You loss the game !!!"+RESET);
+                        System.out.println("Please come again when you are ready !!!");
                         break;
                     }       
              }
@@ -512,6 +553,6 @@ public static void arc(){
         }
          
        public static void main(String[] args) {
-                arc1("Goblin",10,0,10,0,5,2,600,1);
+                arc1("Goblin",10,0,10,0,5,2,60,2);
     }
 }

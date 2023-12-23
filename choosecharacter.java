@@ -5,6 +5,8 @@
 package text.adventure;
 
 import java.util.Scanner;
+import static text.adventure.Mage.RED_BOLD;
+import static text.adventure.Mage.RESET;
 
 /**
  *
@@ -15,15 +17,25 @@ public class choosecharacter {
     
     public static void character(){
       Scanner sc  = new Scanner(System.in);
-        System.out.println(" ----------------------------------");
-        System.out.println("|            Character             |");
-        System.out.println(" ----------------------------------");
-        System.out.println("Now you need to choose one of the character");
-        System.out.println("<1>-Warrior\nCharacteristic-");
-        System.out.println("<2>-Mage\nCharacteristic-");
-        System.out.println("<3>-Rogue\nCharacteristic-");
-        System.out.println("<4>-Paladin\nCharacteristic-");
-        System.out.println("<5>-Archer\nCharacteristic-");
+        System.out.println(" -------------------------------------------");
+        System.out.println("|               Character                   |");
+        System.out.println(" -------------------------------------------");
+        System.out.println("|Now you need to "+RED_BOLD+"choose one"+RESET+" of the character|");
+        System.out.println("|<1>-Warrior                                |");
+        System.out.println("|Characteristic - "+RED_BOLD+"High HP and def"+RESET+"           |");
+        System.out.println("|                                           |");
+        System.out.println("|<2>-Mage                                   |");
+        System.out.println("|Characteristic - "+RED_BOLD+"High AP and MP"+RESET+"            |");
+        System.out.println("|                                           |");
+        System.out.println("|<3>-Rogue                                  |");
+        System.out.println("|Characteristic - "+RED_BOLD+"High AP and def"+RESET+"           |");
+        System.out.println("|                                           |");
+        System.out.println("|<4>-Paladin                                |");
+        System.out.println("|Characteristic - "+RED_BOLD+"High AP and AD"+RESET+"            |");
+        System.out.println("|                                           |");
+        System.out.println("|<5>-Archer                                 |");
+        System.out.println("|Characteristic - "+RED_BOLD+"Extremely high AD"+RESET+"         |");
+        System.out.println(" -------------------------------------------");
         saveposition sav = new saveposition();
         GameMap Map = new GameMap();
         boolean valid = false;
@@ -66,12 +78,12 @@ public class choosecharacter {
             }else if(cha==5){
                System.out.println("You have choosen Archer!!!");
                System.out.println("Let start the adventure!!!");    
-               // initial position and the number of monster
+              // initial position and the number of monster
               sav.write(20,20,7);
               Map.map(5);
                valid = true;
             }else{
-               System.out.println("invalid input");
+               System.out.println(RED_BOLD+"Invalid input"+RESET);
         }
         }
 }

@@ -58,15 +58,17 @@ public class warrior  {
                 
                 }
             br.close();
+            System.out.println("_________________________________________________________________________________");
             System.out.println("The latest attributes of warrior");
-            System.out.println("Hp :"+RED_BOLD+hp+"/"+hp+RESET);
-            System.out.println("Mp :"+RED_BOLD+mp+"/"+mp+RESET);
-            if(pl<=10){
-            System.out.println("Exp :"+RED_BOLD+pe+"/"+(10*pl)+RESET);
+            System.out.println("Hp    : "+RED_BOLD+hp+"/"+hp+RESET);
+            System.out.println("Mp    : "+RED_BOLD+mp+"/"+mp+RESET);
+            if(pl<10){
+            System.out.println("Exp   : "+RED_BOLD+pe+"/"+(10*pl)+RESET);
             }else{
-             System.out.println("Exp :"+RED_BOLD+pe+"/"+((10*pl)+50)+RESET);
+            System.out.println("Exp   : "+RED_BOLD+pe+"/"+((10*pl)+50)+RESET);
             }
-            System.out.println("level :"+RED_BOLD+pl+"/"+"35"+RESET);
+            System.out.println("Level : "+RED_BOLD+pl+"/"+"35"+RESET);
+            System.out.println("_________________________________________________________________________________");
             
               
        }catch(IOException e){
@@ -126,18 +128,21 @@ public class warrior  {
             int required_exp =10;
          
          // before level 10 required less exp to level up
-         if(pl<=10){
+         if(pl<=9){
              
              //algorithm of level up before level 10
              while(pe>=required_exp*pl){
                  pe=pe-required_exp*pl;
                  pl++;
                
-                 // when reach level 10 proceed to the algorithm of the level up between level 11 and 35
+                 // when reach level 10 proceed to the algorithm of the level up between level 10 and 35
                  if(pl==10){       
                         // after level 10 level up algorithm
                          while(pe>=((required_exp*pl)+50)){
+                             pe=pe-((required_exp*pl)+50);
                              pl++;
+                             
+                                 // max level
                                  if(pl>=35){
                                      System.out.println(RED_BOLD+name+" have reach level 35"+RESET);
                                      System.out.println(RED_BOLD+"Max level!!!"+RESET);
@@ -149,30 +154,31 @@ public class warrior  {
         }
              }
              }
-             // quit while loop
-            
-            if(pl<=35){
-            System.out.println("Warrior" + " level up to level "+pl);
+          
+            // print current level
+            if(pl<35){
+            System.out.println(name+ " level up to level "+RED_BOLD+pl+RESET);
             levelUp(pl,pe);    
             }
             
-        //if(warrior.playerlevel<=10){
-        }else if(pl>10&& pl<=35){
+        // level up algorithm when level>=10 && level <=35
+        }else if(pl>=10&& pl<=35){
                  while(pe>=(required_exp*pl)+50){
                      pe=pe-(required_exp*pl)+50;
-                    pl++;
-                    
-                     
-                     
+                     pl++;
+                        
+                        // max level
                          if(pl>=35){
-                             System.out.println("You have reach level 35");
-                              System.out.println("Max level!!!");
+                             System.out.println(RED_BOLD+name+" have reach level 35"+RESET);
+                              System.out.println(RED_BOLD+"Max level!!!"+RESET);
                               levelUp(35,pe);
+                              break;
              }
                  }
-                 //quit while loop
-                if(pl<=35){
-                    System.out.println("Warrior" + " level up to level "+pl); 
+                 
+                 // print current level
+                if(pl<35){
+                    System.out.println(name+ " level up to level "+RED_BOLD+pl+RESET); 
                     levelUp(pl,pe);
                 }
                 

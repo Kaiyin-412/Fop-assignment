@@ -57,26 +57,27 @@ public class Paladin {
          // All forms of Attack will become more potent.
          // (n-pl)-(latest level - current level) check whether got level up 
                 hp+=(5*(n-pl));
-                ma+=(7*(n-pl));
+                ma+=(6*(n-pl));
                 md+=(2*(n-pl));
                 mp+=(2*(n-pl));
-                pa+=(8*(n-pl));
+                pa+=(6*(n-pl));
                 pd+=(3*(n-pl));
                 pl=n;
                 pe=f;
                 }
         
             br.close();
+            System.out.println("_________________________________________________________________________________");
             System.out.println("The latest attributes of Paladin");
-            System.out.println("Hp :"+hp+"/"+hp);
-            System.out.println("Mp :"+mp+"/"+mp);
-            if(pl<=10){
-            System.out.println("Exp :"+RED_BOLD+pe+"/"+(10*pl)+RESET);
+            System.out.println("Hp    : "+RED_BOLD+hp+"/"+hp+RESET);
+            System.out.println("Mp    : "+RED_BOLD+mp+"/"+mp+RESET);
+            if(pl<10){
+            System.out.println("Exp   : "+RED_BOLD+pe+"/"+(10*pl)+RESET);
             }else{
-             System.out.println("Exp :"+RED_BOLD+pe+"/"+((10*pl)+50)+RESET);
+            System.out.println("Exp   : "+RED_BOLD+pe+"/"+((10*pl)+50)+RESET);
             }
-            System.out.println("level :"+pl+"/"+"35");
-           
+            System.out.println("Level : "+RED_BOLD+pl+"/"+"35"+RESET);
+            System.out.println("_________________________________________________________________________________");
               
        }catch(IOException e){
             e.printStackTrace();
@@ -143,7 +144,7 @@ public class Paladin {
                  pe=pe-required_exp*pl;
                  pl++;
                
-                 // when reach level 10 proceed to the algorithm of the level up between level 11 and 35
+                 // when reach level 10 proceed to the algorithm of the level up between level 10 and 35
                  if(pl==10){
     
                         // after level 10 level up algorithm
@@ -169,7 +170,7 @@ public class Paladin {
             levelUpPal(pl,pe);    
             }
             
-        // level up algorithm when level>10 && level <=35
+        // level up algorithm when level>=10 && level <=35
         }else if(pl>=10&& pl<=35){
                  while(pe>=((required_exp*pl)+50)){
                      pe=pe-((required_exp*pl)+50);
@@ -180,6 +181,7 @@ public class Paladin {
                              System.out.println(RED_BOLD+name+" have reach level 35"+RESET);
                               System.out.println(RED_BOLD+"Max level!!!"+RESET);
                               levelUpPal(35,pe);
+                              break;
                             }
                     }  
                  

@@ -4,6 +4,9 @@
  */
 package text.adventure;
 
+import static text.adventure.Mage.RED_BOLD;
+import static text.adventure.Mage.RESET;
+
 /**
  *
  * @author ONG KAI YIN
@@ -26,11 +29,11 @@ public class Spell {
 class check{
    public static void check_spell(int current_level, int level_required ,int current_mp,int mana_required,int Cd){
        if(current_level<level_required){
-           System.out.println("You need need to reach"+"level" +level_required+" to unlock the spell!!!");
+           System.out.println("You need need to reach "+RED_BOLD+"level " +level_required+RESET+" to unlock the spell!!!");
        }else if(current_mp<mana_required){
-            System.out.println("You have not enough MP to cast the spell !!!");        
+            System.out.println(RED_BOLD+"Not enough MP to cast the spell !!!"+RESET);        
        } else if(Cd!=0){
-           System.out.println("Still in Cd !!!");
+           System.out.println(RED_BOLD+"Still in Cd !!!"+RESET);
        }
   }
   }

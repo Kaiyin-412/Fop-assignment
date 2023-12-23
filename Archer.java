@@ -66,17 +66,17 @@ public class Archer {
                 pe=f;
                 }
             br.close();
-            
+            System.out.println("_________________________________________________________________________________");
             System.out.println("The latest attributes of Archer");
-            System.out.println("Hp :"+RED_BOLD+hp+"/"+hp+RESET);
-            System.out.println("Mp :"+RED_BOLD+mp+"/"+mp+RESET);
+            System.out.println("Hp    : "+RED_BOLD+hp+"/"+hp+RESET);
+            System.out.println("Mp    : "+RED_BOLD+mp+"/"+mp+RESET);
             if(pl<10){
-            System.out.println("Exp :"+RED_BOLD+pe+"/"+(10*pl)+RESET);
+            System.out.println("Exp   : "+RED_BOLD+pe+"/"+(10*pl)+RESET);
             }else{
-             System.out.println("Exp :"+RED_BOLD+pe+"/"+((10*pl)+50)+RESET);
+             System.out.println("Exp  : "+RED_BOLD+pe+"/"+((10*pl)+50)+RESET);
             }
-            System.out.println("Level :"+RED_BOLD+pl+"/"+"35"+RESET);
-              
+            System.out.println("Level : "+RED_BOLD+pl+"/"+"35"+RESET);
+            System.out.println("_________________________________________________________________________________");
        }catch(IOException e){
             e.printStackTrace();
        }
@@ -163,7 +163,7 @@ public class Archer {
                         levelUpArc(pl,pe);    
                         }
             
-         // level up algorithm when level>10 && level <=35
+         // level up algorithm when level>=10 && level <=35
         }else if(pl>=10&& pl<=35){
                  while(pe>=((required_exp*pl)+50)){
                      pe=pe-((required_exp*pl)+50);
