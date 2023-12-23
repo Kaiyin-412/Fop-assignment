@@ -43,8 +43,8 @@ public class choosecharacter {
                System.out.println("You have choosen Mage !!!");
                System.out.println("Let start the adventure!!!");
                // initial position and the number of monster
-              sav.write(20,20,7);
-              Map.map(2);
+               sav.write(20,20,7);
+               Map.map(2);
                valid = true;
                
             }else if(cha==3){

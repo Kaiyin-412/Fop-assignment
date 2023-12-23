@@ -10,15 +10,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
-    
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst =null;
     
-   
-   
     public Login() {
         initComponents();
         con = database.mycon();

@@ -10,10 +10,12 @@ package text.adventure;
  */
 import java.io.*;
 public class warrior  {
-    // the attributes after level up
+    public static final String RESET = "\033[0m";  // Text Reset
+    public static final String RED_BOLD = "\033[1;31m";    // RED
+     
     // n - level
     // f - exp
-    // save the attributes 
+    // read file if levl up increase the attributes
     public static void levelUp(int n, int f){
           int hp=0;
             int mp=0;
@@ -54,19 +56,24 @@ public class warrior  {
                 pl=n;
                 pe=f;
                 
-                Archetype warrior = new Archetype(name1,hp,mp,pd,md,pa,ma,pe,pl);
-                
                 }
+            br.close();
             System.out.println("The latest attributes of warrior");
-            System.out.println("Hp :"+hp+"/"+hp);
-            System.out.println("Mp :"+mp+"/"+mp);
-            System.out.println("Exp :"+pe+"/"+(10*pl));
-            System.out.println("level :"+pl+"/"+"35");
-             br.close();
+            System.out.println("Hp :"+RED_BOLD+hp+"/"+hp+RESET);
+            System.out.println("Mp :"+RED_BOLD+mp+"/"+mp+RESET);
+            if(pl<=10){
+            System.out.println("Exp :"+RED_BOLD+pe+"/"+(10*pl)+RESET);
+            }else{
+             System.out.println("Exp :"+RED_BOLD+pe+"/"+((10*pl)+50)+RESET);
+            }
+            System.out.println("level :"+RED_BOLD+pl+"/"+"35"+RESET);
+            
               
        }catch(IOException e){
             e.printStackTrace();
        }
+       
+       // put the latest info into file
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter
            ("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\warrior.txt"));
@@ -108,75 +115,71 @@ public class warrior  {
                pl+=Integer.parseInt(list[8]);
                 } 
              br.close();
-     
-               Archetype warrior = new Archetype("Warrior",hp,mp,pd,md,pa,ma,pe,pl);
+             String name ="Warrior";
              
-         
          //  the exp of the warrior that earn after defeat monster
              pe+=exp;
-            System.out.println("Warrior "+ "has gain "+ exp+" exp");
+             
+            System.out.println(name+ " has gain "+RED_BOLD+ exp+" exp"+RESET);
          
          // exp for level up
             int required_exp =10;
          
          // before level 10 required less exp to level up
-         if(warrior.playerlevel<=10){
+         if(pl<=10){
              
              //algorithm of level up before level 10
-             while(pe>=required_exp*warrior.playerlevel){
-                 pe=pe-required_exp*warrior.playerlevel;
-                 warrior.playerlevel++;
+             while(pe>=required_exp*pl){
+                 pe=pe-required_exp*pl;
+                 pl++;
                
                  // when reach level 10 proceed to the algorithm of the level up between level 11 and 35
-                 if(warrior.playerlevel==10){
-                    pe=pe-required_exp*warrior.playerlevel;
-                    
+                 if(pl==10){       
                         // after level 10 level up algorithm
-                         while(pe>=(required_exp*warrior.playerlevel)+50){
-                             warrior.playerlevel++; 
-                                 if(warrior.playerlevel>=35){
-                                     System.out.println("You have reach level 35");
-                                     System.out.println("Max level!!!");
+                         while(pe>=((required_exp*pl)+50)){
+                             pl++;
+                                 if(pl>=35){
+                                     System.out.println(RED_BOLD+name+" have reach level 35"+RESET);
+                                     System.out.println(RED_BOLD+"Max level!!!"+RESET);
+                                     pe=(required_exp*pl)+50;
                                      levelUp(35,pe);
                                      break;
              }
              
         }
              }
-            }
+             }
              // quit while loop
-              if (warrior.playerlevel==pl){
-                System.out.println("Warrior level "+pl);
-                levelUp(warrior.playerlevel,pe);  
-            }else if(warrior.playerlevel<=35){
-            System.out.println("Warrior" + " level up to level "+warrior.playerlevel);
-            levelUp(warrior.playerlevel,pe);    
+            
+            if(pl<=35){
+            System.out.println("Warrior" + " level up to level "+pl);
+            levelUp(pl,pe);    
             }
             
         //if(warrior.playerlevel<=10){
-        }else if(warrior.playerlevel>10&& warrior.playerlevel<=35){
-                 while(pe>=(required_exp*warrior.playerlevel)+50){
-                     pe=pe-(required_exp*warrior.playerlevel)+50;
-                     warrior.playerlevel++;
+        }else if(pl>10&& pl<=35){
+                 while(pe>=(required_exp*pl)+50){
+                     pe=pe-(required_exp*pl)+50;
+                    pl++;
                     
                      
                      
-                         if(warrior.playerlevel>=35){
+                         if(pl>=35){
                              System.out.println("You have reach level 35");
                               System.out.println("Max level!!!");
                               levelUp(35,pe);
              }
                  }
                  //quit while loop
-                if(warrior.playerlevel<=35){
-                    System.out.println("Warrior" + " level up to level "+warrior.playerlevel); 
-                    levelUp(warrior.playerlevel,pe);
+                if(pl<=35){
+                    System.out.println("Warrior" + " level up to level "+pl); 
+                    levelUp(pl,pe);
                 }
                 
      }
-             
+         }      
             
-     }catch(IOException e){
+     catch(IOException e){
         e.printStackTrace();
      }
      

@@ -104,7 +104,7 @@ public class battle_sys_Mage {
               
               
                int cd1 =3;
-               Spell roaring = new Spell("Lighting", cd1);
+              
                
                int cd2 =2;
                Spell FS = new Spell("Fireball",cd2);
@@ -525,7 +525,7 @@ public class battle_sys_Mage {
         }
         }
     public static void main(String[] args) {
-        mag1("Goblin",10,0,10,0,5,2,160,2);
+        mag1("Goblin",10,0,10,0,5,2,160,1);
     }
         
         

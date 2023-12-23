@@ -8,8 +8,6 @@ package text.adventure;
  *
  * @author ONG KAI YIN
  */
-import java.io.*;
-
 public class Archetype {
     String name;
     int healthPoints;
@@ -34,8 +32,6 @@ public class Archetype {
         this.playerExp=playerExp;
         this.playerlevel=playerlevel;
     }
-
-   
 }
 
 

@@ -512,6 +512,6 @@ public static void arc(){
         }
          
        public static void main(String[] args) {
-                arc1("Goblin",10,0,10,0,5,2,160,1);
+                arc1("Goblin",10,0,10,0,5,2,600,1);
     }
 }
