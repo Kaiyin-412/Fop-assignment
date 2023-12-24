@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-import static text.adventure.GameMap.PURPLE_BOLD;
+
 import static text.adventure.Mage.RED_BOLD;
 import static text.adventure.battle_sys_Warrior.BLUE;
 import static text.adventure.battle_sys_Warrior.GREEN;
@@ -26,7 +26,7 @@ import static text.adventure.battle_sys_Warrior.YELLOW;
  */
 public class battle_sys_Mage {
     
-    
+     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
      public static final String CYAN_BACKGROUND = "\033[46m"; 
      
     // Initiallise the initial attributes of the hero
@@ -102,7 +102,9 @@ public class battle_sys_Mage {
              int Pe=pe;
              int Pl=pl;
              
-             
+             // ascii art
+             Asciiart ai = new Asciiart();
+             ai.displaymons(namE);
              
               System.out.println(PURPLE_BOLD+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+RESET);
               System.out.println(RED_BOLD+"WARNING"+RESET);
@@ -177,8 +179,8 @@ public class battle_sys_Mage {
                      // Lighting
                      int damage9 =Ma-(mD*2);
                      
-                     // fireball
-                     int damage10= Ma-md;
+                     // spell fireball
+                     int damage10= (Ma*3)-mD;
                      
                      // heal 
                      int heal=Hp/10;
@@ -294,18 +296,12 @@ public class battle_sys_Mage {
                             break;
                             
                         case "5" :
-                            // 1/2 possibility to escape
-                            int n = rd.nextInt(2);
-                            if(n==0){
-                                System.out.println("Unfortunately you"+RED+ " failed "+RESET + "to escape !!!");
-                            }else{
                                 System.out.println("You have succesfully escape !!!"); 
                                 // back to map
                                 GameMap map =new GameMap();
-                                map.map(2);
-                            
-                            }
-                            break;  
+                                // if escape the num of monster remain same
+                                map.map(2,1);              
+                                break;  
                          
                             // Spell A  
                         case "A" :
@@ -444,6 +440,8 @@ public class battle_sys_Mage {
                                 // witch normal attack
                                 else{
                                     System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                    System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                    mP=mP+10;
                                     Hp=Hp-damage2;
                                     break;      
 
@@ -475,6 +473,8 @@ public class battle_sys_Mage {
                                  //Harpy normal attack
                                 }else{
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                mP=mP+10;
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -487,31 +487,33 @@ public class battle_sys_Mage {
                          break;                      
                         }
                     }else{
-                       System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
-          
-                       // check level up
-                       // put latest attributes into the file
-                       Mage Mag = new Mage();
-                       Mag.gainExp(exP);
-                     
-                     // check whether is the last monster
-                       if(namE=="Medusa"){
-                           System.out.println(RED_BOLD+"Victory !!!"+RESET);
-                           System.out.println("Congrats you have"+RED_BOLD+" defeat all the monster"+RESET+" and "+RED_BOLD+"successfully save your country !!!"+RESET);
-                             // stop the main loop
-                              main=false;
-                            }else{
-                            // back to map
-                            GameMap map =new GameMap();
-                            map.map(2);
-                            
-                             // stop the main loop
-                             main=false;
-                             
-                     }
+                       break;
                      }
                  }
                  
+                  // when defeat monster
+                 if(hP<=0){
+                    System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
+          
+                       // check whether is the last round
+                       if(round<=6){
+                        // check level up
+                       // put latest attributes into the file
+                         Mage mag = new Mage();
+                        mag.gainExp(exP);
+                        // back to map
+                        GameMap map =new GameMap();
+                         map.map(2,0);
+                         // stop the main loop
+                         main=false;
+                         break;
+                       }else{
+                           System.out.println("VICTORY !!!");
+                           System.out.println("You have save your country");
+                           main=false;
+                           break;
+                }
+                }
                 
                  
                
@@ -564,10 +566,7 @@ public class battle_sys_Mage {
               System.out.println(e);
         }
         }
-    public static void main(String[] args) {
-        mag1("Goblin",10,0,10,0,5,2,450,1);
-    }
-        
+   
         
     }
    

@@ -12,7 +12,6 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.*;
-import static text.adventure.GameMap.PURPLE_BOLD;
 import static text.adventure.Mage.RED_BOLD;
 import static text.adventure.battle_sys_Archer.CYAN_BACKGROUND;
 public class battle_sys_Warrior {
@@ -24,7 +23,7 @@ public class battle_sys_Warrior {
     public static final String YELLOW = "\033[1;40m"; 
     public static final String BLUE = "\033[1;34m"; 
     public static final String GREEN = "\033[1;32m"; 
-  
+   public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
      // initial attributes of warrior
     // write into a file
 public static void war(){
@@ -99,8 +98,9 @@ public static void war(){
              int Pe=warrior.playerExp;
              int Pl=warrior.playerlevel;
              
-             
-      
+             // ascii art
+             Asciiart ai = new Asciiart();
+             ai.displaymons(namE);
              
               System.out.println(PURPLE_BOLD+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+RESET);
               System.out.println(RED_BOLD+"WARNING"+RESET);
@@ -124,11 +124,12 @@ public static void war(){
                 // use for the spell sheild wall
                 int sw =0;
                 
-                // loop condition for the shield wall loop
-                boolean sw1  = true;
                
             while(main){
          
+                 // loop condition for the shield wall loop
+                boolean sw1  = true;
+                
                   //condition for the loop of hero att
                   boolean hero = true;
                   
@@ -159,7 +160,7 @@ public static void war(){
                      int damage4 =pA-(Pd/10);
                     
                      // monster att
-                     int damage2 =pA-(Pd/8);
+                     int damage2 =pA-(Pd/5)+8;
                      
                      // witch mA
                      int damage5 =(mA*2)-(Md/3);
@@ -174,10 +175,10 @@ public static void war(){
                      int damage8=(mA*3)-(Md/10);
                      
                      // Roaring spell
-                     int damage9 = (Pa*2)-pD;
+                     int damage9 = (Pa*4)-pD;
                      
                      // Furious Strike 
-                     int damage10= Pa-(pD*8);
+                     int damage10= (Pa*5)-(pD-20);
                      
                      // heal 
                      int heal=Hp/20;
@@ -288,15 +289,13 @@ public static void war(){
                             break;
                             
                         case "5" :
-                            // 1/2 possibility to escape
-                            int n = rd.nextInt(2);
-                            if(n==0){
-                                System.out.println("Unfortunately you"+RED+ " failed "+RESET + "to escape !!!");
-                            }else{
+                           
                                 System.out.println("You have succesfully escape !!!"); 
-                                  GameMap map =new GameMap();
-                                  map.map(1);
-                            }
+                                 GameMap map =new GameMap();
+                                 // if escape, the num of monster remain same
+                                  map.map(1,1);
+                                  main=false;
+                            
                             break;  
                          
                             // Spell Roaring
@@ -430,6 +429,8 @@ public static void war(){
                                 // witch normal attack
                                 else{
                                     System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                    System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                    mP=mP+10;
                                     Hp=Hp-damage2;
                                     break;      
 
@@ -461,6 +462,8 @@ public static void war(){
                                  //Harpy normal attack
                                 }else{
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                mP=mP+10;
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -473,31 +476,35 @@ public static void war(){
                          break;                      
                         }
                     }else{
-                       System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
-          
-                       // check level up
-                       // put latest attributes into the file
-                       warrior war = new warrior();
-                       war.gainExp(exP);
-                     
-                     // check whether is the last monster
-                       if(namE=="Medusa"){
-                           System.out.println(RED_BOLD+"Victory !!!"+RESET);
-                           System.out.println("Congrats you have"+RED_BOLD+" defeat all the monster"+RESET+" and "+RED_BOLD+"successfully save your country !!!"+RESET);
-                             // stop the main loop
-                             main=false;
-                            }else{
-                            // back to map
-                            GameMap map =new GameMap();
-                            map.map(1);
-                            
-                             // stop the main loop
-                             main=false;
-                       }
+                         break;
+                         
                      }
+                   
                  }
                  
-                
+                  // when defeat monster
+                if(hP<=0){
+                    System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
+          
+                       // check whether is the last round
+                       if(round<=6){
+                        // check level up
+                       // put latest attributes into the file
+                        warrior war = new warrior();
+                        war.gainExp(exP);
+                        // back to map
+                         GameMap map =new GameMap();
+                         map.map(1,0);
+                         // stop the main loop
+                         main=false;
+                         break;
+                       }else{
+                           System.out.println("VICTORY !!!");
+                           System.out.println("You have save your country");
+                           main=false;
+                           break;
+                }
+                }
                  
                 
                  
@@ -539,10 +546,11 @@ public static void war(){
                     }
                  
                     // you loss
-                    if(Hp<=0){
-                        System.out.println("You loss !!!");
+                   if(Hp<=0){
+                        System.out.println(RED_BOLD+"You loss the game !!!"+RESET);
+                        System.out.println("Please come again when you are ready !!!");
                         break;
-                    }       
+                    }      
              }
              
           }
@@ -552,9 +560,5 @@ public static void war(){
         }
         }
          
-       public static void main(String[] args) {
-           war1("goblin",10,20,20,10,8,8,100,2);
-          
-    }
 }
 

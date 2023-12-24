@@ -11,9 +11,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-import static text.adventure.GameMap.PURPLE_BOLD;
+
 import static text.adventure.Mage.RED_BOLD;
 import static text.adventure.battle_sys_Archer.CYAN_BACKGROUND;
+import static text.adventure.battle_sys_Warrior.YELLOW;
 
 /**
  *
@@ -21,11 +22,12 @@ import static text.adventure.battle_sys_Archer.CYAN_BACKGROUND;
  */
 public class battle_sys_Paladin {
      // text color
+    
     public static final String RESET = "\033[0m"; 
     public static final String RED = "\033[0;31m"; 
     
     // text bold with color
-    public static final String YELLOW = "\033[1;40m"; 
+     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
     public static final String BLUE = "\033[1;34m"; 
     public static final String GREEN = "\033[1;32m"; 
     
@@ -103,8 +105,9 @@ public static void pal(){
              int Pe=pe;
              int Pl=pl;
              
-             
-      
+             // ascii art
+             Asciiart ai = new Asciiart();
+             ai.displaymons(namE);
              
               System.out.println(PURPLE_BOLD+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+RESET);
               System.out.println(RED_BOLD+"WARNING !!!"+RESET);
@@ -296,16 +299,13 @@ public static void pal(){
                             break;
                             
                         case "5" :
-                            // 1/2 possibility to escape
-                            int n = rd.nextInt(2);
-                            if(n==0){
-                                System.out.println("Unfortunately you"+RED_BOLD+ " failed "+RESET + "to escape !!!");
-                            }else{
+                           
                                 System.out.println("You have succesfully escape !!!"); 
                                  // back to map
                                 GameMap map =new GameMap();
-                                map.map(4);
-                            }
+                                 // if escape the num of monster remain same
+                                map.map(4,1);
+                            
                             break;  
                          
                         // Spell A
@@ -441,6 +441,8 @@ public static void pal(){
                                 // witch normal attack
                                 else{
                                     System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                    System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                    mP=mP+10;
                                     Hp=Hp-damage2;
                                     break;      
 
@@ -472,6 +474,8 @@ public static void pal(){
                                  //Harpy normal attack
                                 }else{
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                mP=mP+10;
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -484,30 +488,33 @@ public static void pal(){
                          break;                      
                         }
                     }else{
-                       System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
-          
-                       // check level up
-                       // put latest attributes into the file
-                       Paladin pal = new Paladin();
-                       pal.gainExp(exP);
-                     
-                     // check whether is the last monster
-                       if(namE=="Medusa"){
-                           System.out.println(RED_BOLD+"Victory !!!"+RESET);
-                           System.out.println("Congrats you have"+RED_BOLD+" defeat all the monster"+RESET+" and "+RED_BOLD+"successfully save your country !!!"+RESET);
-                             // stop the main loop
-                              main=false;
-                            }else{
-                            // back to map
-                            GameMap map =new GameMap();
-                            map.map(4);
-                            
-                             // stop the main loop
-                             main=false;
-                       }
+                       break;
                      }
                  }
                  
+                  // when defeat monster
+                 if(hP<=0){
+                    System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
+          
+                       // check whether is the last round
+                       if(round<=6){
+                        // check level up
+                       // put latest attributes into the file
+                         Paladin pal = new Paladin();
+                        pal.gainExp(exP);
+                        // back to map
+                        GameMap map =new GameMap();
+                         map.map(4,0);
+                         // stop the main loop
+                         main=false;
+                         break;
+                       }else{
+                           System.out.println("VICTORY !!!");
+                           System.out.println("You have save your country");
+                           main=false;
+                           break;
+                }
+                }
  
                   // cooling down spell A 
                   while(CD){
@@ -559,7 +566,5 @@ public static void pal(){
         }
         }
          
-       public static void main(String[] args) {
-                pal1("Goblin",10,0,10,0,5,2,160,1);
-    }
+     
 }

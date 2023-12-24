@@ -11,17 +11,18 @@ package text.adventure;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+
 public class Main {
-     
+    
     public static void main(String[] args) {
-        
+
           //login page
-          Login LoginFrame =new Login();
+         Login LoginFrame =new Login();
           LoginFrame.setVisible(true);
           LoginFrame.pack(); 
           LoginFrame.setLocationRelativeTo(null); 
-          
-}
+    }
+
 }
 
     

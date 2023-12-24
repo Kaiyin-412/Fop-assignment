@@ -11,6 +11,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
+import static text.adventure.battle_sys_Warrior.YELLOW;
+
 
 /**
  *
@@ -18,17 +20,11 @@ import java.util.Scanner;
  */
 public class battle_sys_Archer {
     // text color
-    public static final String RESET = "\033[0m"; 
-    public static final String RED = "\033[0;31m"; 
-    public static final String PURPLE = "\033[0;35m";  
-    public static final String CYAN = "\033[0;36m";   
-     
+    public static final String RESET = "\033[0m";
     // text bold with color
     public static final String GREY = "\033[1;39m"; 
-    public static final String BLUE = "\033[1;34m"; 
-    public static final String GREEN = "\033[1;32m"; 
     public static final String RED_BOLD = "\033[1;31m";   
-      public static final String PURPLE_BOLD = "\033[1;35m"; 
+    public static final String PURPLE_BOLD = "\033[1;35m"; 
     
       
        public static final String CYAN_BACKGROUND = "\033[46m"; 
@@ -107,6 +103,9 @@ public static void arc(){
              int Pe=pe;
              int Pl=pl;
              
+             // ascii art
+             Asciiart ai = new Asciiart();
+             ai.displaymons(namE);
              
       
              
@@ -239,13 +238,13 @@ public static void arc(){
                  while(hero){   
                     switch(choice){
                         case "1" :                                              
-                            System.out.println(Name+" have hit the "+namE+",causing a damage of "+RED+damage1+RESET+"!");
+                            System.out.println(Name+" have hit the "+namE+",causing a damage of "+RED_BOLD+damage1+RESET+"!");
                             hP=hP-damage1;
                             break;
                             
                         case "2" :
                             if(Mp>=20){
-                            System.out.println(Name+" have using magical attack to hit the "+namE+" ,cause a high damage of "+RED+damage3+RESET+"!");
+                            System.out.println(Name+" have using magical attack to hit the "+namE+" ,cause a high damage of "+RED_BOLD+damage3+RESET+"!");
                             hP=hP-damage3;
                             Mp=Mp-20;
                             break;
@@ -265,7 +264,7 @@ public static void arc(){
                         case "3" :
                             System.out.println("The "+Name+" has using his"+RED_BOLD+" shield to defend !!!"+RESET);
                             System.out.println(Name+" has succesfully defend most of the damage caused by the "+namE+" !!!");
-                            System.out.println(namE+" has attacked you causing a damage of "+RED+damage4+RESET);
+                            System.out.println(namE+" has attacked you causing a damage of "+RED_BOLD+damage4+RESET);
                             
                              // hp of hero
                              Hp=Hp-damage4;
@@ -298,16 +297,11 @@ public static void arc(){
                             break;
                             
                         case "5" :
-                            // 1/2 possibility to escape
-                            int n = rd.nextInt(2);
-                            if(n==0){
-                                System.out.println("Unfortunately you"+RED+ " failed "+RESET + "to escape !!!");
-                            }else{
-                                System.out.println(RED_BOLD+"You have succesfully escape !!!"+RESET); 
-                                 GameMap map =new GameMap();
-                                 map.map(5);
-                            }
-                            break;  
+                             System.out.println(RED_BOLD+"You have succesfully escape !!!"+RESET); 
+                             GameMap map =new GameMap();
+                             // if escape the monster num must remain same
+                             map.map(5,1);
+                             break;  
                          
                            
                         case "A" :
@@ -431,7 +425,9 @@ public static void arc(){
                                 // witch normal attack
                                 else{
                                     System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
-                                    Hp=Hp-damage2;
+                                     System.out.println(namE +"has replenish "+RED_BOLD+"10 MP"+RESET+" !!!");
+                                     mP=mP+10;
+                                     Hp=Hp-damage2;
                                     break;      
 
                         }
@@ -450,7 +446,7 @@ public static void arc(){
                                             hero=true;
                                             break;
                                         case 1:
-                                            System.out.println(namE+" conjured a "+RED_BOLD+"Wind Gust"+RESET+" which cause a high damage of "+RED+damage8+RESET);
+                                            System.out.println(namE+" conjured a "+RED_BOLD+"Wind Gust"+RESET+" which cause a high damage of "+RED_BOLD+damage8+RESET);
                                             System.out.println(RED_BOLD+Name+" can't attack at the next round"+RESET);
                                             Hp=Hp-damage8;
                                             mP=mP-10;
@@ -461,7 +457,10 @@ public static void arc(){
                                      }
                                  //Harpy normal attack
                                 }else{
+                                    
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                mP=mP+10;
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -474,30 +473,33 @@ public static void arc(){
                          break;                      
                         }
                     }else{
-                       System.out.println("Congratulations you have"+RED_BOLD+" defeat the "+namE+" !!!"+RESET);
-                       
+                      break;
+                 }
+                 }
+                        
+                 // when defeat monster
+                  if(hP<=0){
+                    System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
+          
+                       // check whether is the last round
+                       if(round<=6){
                         // check level up
                        // put latest attributes into the file
-                      Archer arc = new Archer();
-                      arc.gainExp(exP);
-                      
-                       // check whether is the last monster
-                       if(namE=="Medusa"){
-                           System.out.println(RED_BOLD+"Victory !!!"+RESET);
-                           System.out.println("Congrats you have"+RED_BOLD+" defeat all the monster"+RESET+" and "+RED_BOLD+"successfully save your country !!!"+RESET);
-                             // stop the main loop
-                              main=false;
-                        }else{
+                        Archer arc = new Archer();
+                        arc.gainExp(exP);
                         // back to map
-                       GameMap map =new GameMap();
-                       map.map(5);
-                             // stop the main loop
-                             main=false;
-                             break;
-                     }
-                 }
-                 }
-                 
+                        GameMap map =new GameMap();
+                         map.map(5,0);
+                         // stop the main loop
+                         main=false;
+                         break;
+                        }else{
+                           System.out.println("VICTORY !!!");
+                           System.out.println("You have save your country");
+                           main=false;
+                           break;
+                        }
+                }
                 
                  
                  
@@ -552,7 +554,5 @@ public static void arc(){
         }
         }
          
-       public static void main(String[] args) {
-                arc1("Goblin",10,0,10,0,5,2,60,2);
-    }
+      
 }

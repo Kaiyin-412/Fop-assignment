@@ -38,6 +38,7 @@ public class choosecharacter {
         System.out.println(" -------------------------------------------");
         saveposition sav = new saveposition();
         GameMap Map = new GameMap();
+        Asciiart ai = new Asciiart();
         boolean valid = false;
         while(!valid){
              System.out.print("Please select one of the character(1-5) :");
@@ -45,50 +46,63 @@ public class choosecharacter {
              
            if(cha==1){
                System.out.println("You have choosen Warrior!!!");
-               System.out.println("Let start the adventure!!!");
+               System.out.println("Let start the adventure !!!");
+               // display ascii art
+               ai.warriorAscii();
                // initial position and the number of monster
                sav.write(20,20,7);
-               Map.map(1);
+               // go to map
+               Map.map(1,0);
                valid = true;
                
             }else if(cha==2){
                System.out.println("You have choosen Mage !!!");
-               System.out.println("Let start the adventure!!!");
+               System.out.println("Let start the adventure !!!");
+               // display ascii art
+               ai.mageAscii();
                // initial position and the number of monster
                sav.write(20,20,7);
-               Map.map(2);
+                // go to map
+               Map.map(2,0);
                valid = true;
                
             }else if(cha==3){
                System.out.println("You have choosen Rogue !!");
-               System.out.println("Let start the adventure!!!");   
+               System.out.println("Let start the adventure!!!");  
+               // display ascii art
+               ai.rogueAscii();
                // initial position and the number of monster
                sav.write(20,20,7);
-               Map.map(3);
+                // go to map
+               Map.map(3,0);
                valid = true;
                
             }else if(cha==4){
                System.out.println("You have choosen Paladin!!!");
-               System.out.println("Let start the adventure!!!");     
+               System.out.println("Let start the adventure!!!");  
+               // display ascii art
+               ai.paladinAscii();
                // initial position and the number of monster
                sav.write(20,20,7);
-               Map.map(4);
+                // go to map
+               Map.map(4,0);
                valid = true;
                
             }else if(cha==5){
                System.out.println("You have choosen Archer!!!");
-               System.out.println("Let start the adventure!!!");    
+               System.out.println("Let start the adventure!!!");  
+               // display ascii art
+               ai.archerAscii();
               // initial position and the number of monster
               sav.write(20,20,7);
-              Map.map(5);
+               // go to map
+              Map.map(5,0);
                valid = true;
             }else{
                System.out.println(RED_BOLD+"Invalid input"+RESET);
         }
         }
 }
-    public static void main(String[] args) {
-        character();
-    }
+    
 }
 

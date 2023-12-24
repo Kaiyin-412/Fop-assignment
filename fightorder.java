@@ -9,10 +9,12 @@ package text.adventure;
  * @author ONG KAI YIN
  */
 public class fightorder {
+   
     // link with the map and battle system 
     // no is the number of monster in the map
     // descending order
     public static void warrior_order(int no){
+        Asciiart ai = new Asciiart();
        battle_sys_Warrior bsw = new battle_sys_Warrior();
         switch(no){
             case 7 :

@@ -11,7 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-import static text.adventure.GameMap.PURPLE_BOLD;
 import static text.adventure.Mage.RED_BOLD;
 import static text.adventure.battle_sys_Archer.CYAN_BACKGROUND;
 import static text.adventure.battle_sys_Paladin.RESET;
@@ -29,7 +28,7 @@ public class battle_sys_Rogue {
     public static final String YELLOW = "\033[1;40m"; 
     public static final String BLUE = "\033[1;34m"; 
     public static final String GREEN = "\033[1;32m"; 
-    
+     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
      // initial attributes of warrior
     // write into a file
 public static void rog(){
@@ -104,8 +103,9 @@ public static void rog(){
              int Pe=rogue.playerExp;
              int Pl=rogue.playerlevel;
              
-             
-      
+             // ascii art
+            Asciiart ai = new Asciiart();
+             ai.displaymons(namE);
              
               System.out.println(PURPLE_BOLD+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+RESET);
               System.out.println(RED_BOLD+"WARNING"+RESET);
@@ -290,15 +290,12 @@ public static void rog(){
                             break;
                             
                         case "5" :
-                            // 1/2 possibility to escape
-                            int n = rd.nextInt(2);
-                            if(n==0){
-                                System.out.println("Unfortunately you"+RED+ " failed "+RESET + "to escape !!!");
-                            }else{
+                         
                                 System.out.println("You have succesfully escape !!!"); 
                                  GameMap map =new GameMap();
-                                 map.map(3);
-                            }
+                                  // if escape the num of monster remain same
+                                 map.map(3,1);
+                            
                             break;  
                          
                             // Spell Roaring
@@ -316,7 +313,7 @@ public static void rog(){
                             
                             }
                             else{
-                                System.out.println(namE+" have cast the spell posion trap and cause a damage of "+damage9+" towards"+namE);
+                                System.out.println(namE+" have cast the spell "+RED_BOLD+"posion trap"+RESET+" and cause a damage of "+damage9+" towards"+namE);
                                 hP=hP-damage9;
                                 Mp=Mp-20;
                                 cd1=3;
@@ -337,8 +334,8 @@ public static void rog(){
                               mon=false;
                               
                             }else{
-                                System.out.println(Name+" have use the backstab which result a high damage of "+damage10+" towards"+namE + "\nand stunning "+namE+"for 1 round !!!");
-                                System.out.println(namE+" can't attack !!!");
+                                System.out.println(Name+" have use the "+RED_BOLD+"backstab"+RESET+" which result a high damage of "+damage10+" towards"+namE + "\nand stunning "+namE+"for 1 round !!!");
+                                System.out.println(RED_BOLD+namE+" can't attack !!!"+RESET);
                                 hP=hP-damage10;
                                 Mp=Mp-30;
                                 // reset the cd
@@ -426,6 +423,8 @@ public static void rog(){
                                 // witch normal attack
                                 else{
                                     System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                    System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                    mP=mP+10;
                                     Hp=Hp-damage2;
                                     break;      
 
@@ -457,6 +456,8 @@ public static void rog(){
                                  //Harpy normal attack
                                 }else{
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                mP=mP+10;
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -469,30 +470,33 @@ public static void rog(){
                          break;                      
                         }
                     }else{
-                       System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
-          
-                       // check level up
-                       // put latest attributes into the file
-                       Rogue rog = new Rogue();
-                       rog.gainExp(exP);
-                     
-                     // check whether is the last monster
-                       if(namE=="Medusa"){
-                           System.out.println(RED_BOLD+"Victory !!!"+RESET);
-                           System.out.println("Congrats you have"+RED_BOLD+" defeat all the monster"+RESET+" and "+RED_BOLD+"successfully save your country !!!"+RESET);
-                             // stop the main loop
-                             main=false;
-                            }else{
-                            // back to map
-                            GameMap map =new GameMap();
-                            map.map(3);
-                            
-                             // stop the main loop
-                             main=false;
-                       }
+                       break;
                      }
                  }
-                 
+                   
+                  // when defeat monster
+                if(hP<=0){
+                    System.out.println(YELLOW+"Congratulations you have defeat the "+namE+" !!!"+RESET);
+          
+                       // check whether is the last round
+                       if(round<=6){
+                        // check level up
+                       // put latest attributes into the file
+                         Rogue rog = new Rogue();
+                        rog.gainExp(exP);
+                        // back to map
+                        GameMap map =new GameMap();
+                         map.map(3,0);
+                         // stop the main loop
+                         main=false;
+                         break;
+                       }else{
+                           System.out.println("VICTORY !!!");
+                           System.out.println("You have save your country");
+                           main=false;
+                           break;
+                }
+                }
                 
                  
                 
@@ -534,9 +538,10 @@ public static void rog(){
                  
                     // you loss
                     if(Hp<=0){
-                        System.out.println("You loss !!!");
+                        System.out.println(RED_BOLD+"You loss the game !!!"+RESET);
+                        System.out.println("Please come again when you are ready !!!");
                         break;
-                    }       
+                    }      
              }
              
           }
@@ -546,7 +551,5 @@ public static void rog(){
         }
         }
          
-       public static void main(String[] args) {
-                 rog1("goblin",100,20,20,10,8,8,100,1);
-    }
+       
 }

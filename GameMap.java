@@ -13,17 +13,11 @@ import java.util.Random;
 public class GameMap{
     // text color
     public static final String RESET = "\033[0m"; 
-    public static final String RED = "\033[0;31m"; 
-    
+   
     // text bold with color
-    public static final String YELLOW = "\033[1;40m"; 
-    public static final String BLUE = "\033[1;34m"; 
-    public static final String GREEN = "\033[1;32m"; 
-    public static final String RED_BOLD = "\033[1;3m";   
-    public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
-    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
-    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
-       public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
+   
+    public static final String RED_BOLD = "\033[1;31m";   
+   
    
       
     // calling the battle system
@@ -54,8 +48,8 @@ public class GameMap{
             }                   
      }
     
-     
-    public static void map(int n ){
+     // esc - when the player want to escape form a battle
+    public static void map(int n ,int esc){
         // store position and num of monster
          try{
            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\position.txt"));
@@ -63,14 +57,13 @@ public class GameMap{
            String [] info;
             int x=0;
             int y=0;
-            int num=0;
+            int num=0+esc;
            while((s=br.readLine())!=null){
                info=s.split(",");
                x+=Integer.parseInt(info[0]);
                y+=Integer.parseInt(info[1]);
                num+=Integer.parseInt(info[2]);
            }
-           
            br.close();
            
      
@@ -91,7 +84,7 @@ public class GameMap{
         for (int i = 0; i < numObstacles; i++) {
             int h =rd.nextInt(39)+1;
             int k = rd.nextInt(39)+1;
-            gameMap[h][k] = BLUE+"#"+RESET;
+            gameMap[h][k] = "#";
         }
         
         // create random monster 
@@ -99,7 +92,7 @@ public class GameMap{
          for(int i=1; i<=monster; i++){
              int q = rd.nextInt(39)+1;
              int w =rd.nextInt(39)+1;
-             gameMap[q][w]=RED+"M"+RESET;
+             gameMap[q][w]=RED_BOLD+"M"+RESET;
          }
         // Initial player position
         int  playerX = y;
@@ -114,9 +107,9 @@ public class GameMap{
             for (int i = 0; i < mapSize; i++) {
                 for (int j = 0; j < mapSize; j++) {
                     if (i == playerY && j == playerX) {
-                        System.out.print(PURPLE_BOLD+"[P]"+RESET);
+                        System.out.print(RED_BOLD+"[P]"+RESET);
                     } else {
-                        System.out.print("[" + gameMap[i][j] + "]");
+                        System.out.print("<" + gameMap[i][j] + ">");
                         // design the map
                     }
                 }
@@ -125,7 +118,8 @@ public class GameMap{
 
             Scanner scanner = new Scanner(System.in);
             // Get user input
-            System.out.print("Use W, A, S, D to move (Q to quit): ");
+            System.out.print("Use W(move up), A(move left), S(move down), D(move right) to move ,Q (quit game) and S (quit game and save game): ");
+            
             String move = scanner.nextLine().toUpperCase();
            
             // Clear the player's current position
@@ -136,7 +130,7 @@ public class GameMap{
             if (move.equals("W") && playerY > 0 && gameMap[playerY - 1][playerX] != "#") {
                 playerY--;
                   // encounter monster
-                if(gameMap[playerY][playerX]=="M"){
+                if(gameMap[playerY][playerX]==RED_BOLD+"M"+RESET){
                     num--;
                     save(playerY,playerX,num);
                     calling_battle_sys(n,num+1);
@@ -147,7 +141,7 @@ public class GameMap{
             } else if (move.equals("A") && playerX > 0 && gameMap[playerY][playerX - 1] != "#") {
                 playerX--;
                   // encounter monster
-                 if(gameMap[playerY][playerX]=="M"){  
+                 if(gameMap[playerY][playerX]==RED_BOLD+"M"+RESET){  
                      num--;
                      save(playerY,playerX,num);
                     calling_battle_sys(n,num+1);
@@ -156,8 +150,7 @@ public class GameMap{
             }} else if (move.equals("S") && playerY < mapSize - 1 && gameMap[playerY + 1][playerX] != "#") {
                 playerY++;
                   // encounter monster
-                 if(gameMap[playerY][playerX]=="M"){
-                    
+                 if(gameMap[playerY][playerX]==RED_BOLD+"M"+RESET){
                      num--;
                      save(playerY,playerX,num);
                      calling_battle_sys(n,num+1);
@@ -169,7 +162,7 @@ public class GameMap{
             } else if (move.equals("D") && playerX < mapSize - 1 && gameMap[playerY][playerX + 1] != "#") {
                  playerX++;
                 // encounter monster
-                 if(gameMap[playerY][playerX]=="M"){ 
+                 if(gameMap[playerY][playerX]==RED_BOLD+"M"+RESET){ 
                     num--;
                     save(playerY,playerX,num);
                     calling_battle_sys(n,num+1);
@@ -179,7 +172,12 @@ public class GameMap{
             }
             else if (move.equals("Q")){
                save(playerY,playerX,num);
+                System.out.println("You have quit the game !!!");
                break;
+            }
+            else if(move.equals("S")){
+                save(playerY,playerX,num);
+                break;
             }else{
                 System.out.println("Invalid input");
             }
@@ -200,9 +198,7 @@ public class GameMap{
              saveposition sav = new saveposition();
               sav.write(x,y,num);
     }
-    public static void main(String[] args) {
-        map(1);
-    }
+ 
    
     }
     

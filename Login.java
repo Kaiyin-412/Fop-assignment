@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static text.adventure.Mage.RED_BOLD;
+import static text.adventure.Mage.RESET;
 public class Login extends javax.swing.JFrame {
     Connection con = null;
     ResultSet rs = null;
@@ -208,19 +210,24 @@ public class Login extends javax.swing.JFrame {
               JOptionPane.showMessageDialog(rootPane, "Please enter the username and password "); // prompt user enter password and username
         }
         else if(rs.next()){ // if it is true 
-              JOptionPane.showMessageDialog(rootPane, "Your login sucessful");
+              JOptionPane.showMessageDialog(rootPane, " Login sucessful");
               dispose();
-        System.out.println(" ------------------------------------");
-        System.out.println("|   Welcome to the Savior battle     |");
-        System.out.println(" ------------------------------------");
-       
+        System.out.println(" -------------------------------------------------");
+        System.out.println("|        Welcome to the Savior battle             |");
+        System.out.println(" -------------------------------------------------");
+        System.out.println("| Once upon a time, the land of Java faced a      |");
+        System.out.println("| dire threat as "+RED_BOLD+"marauding monsters"+RESET+" wreaked       |");
+        System.out.println("| havoc, "+RED_BOLD+"demolishing homes "+RESET+"and  "+RED_BOLD+"claiming countless"+RESET+"|");
+        System.out.println("| "+RED_BOLD+"lives"+RESET+". As the chosen  "+RED_BOLD+"hero of Java"+RESET+", the entire  |");
+        System.out.println("| nation looks to you with hopeful anticipation,  |");
+        System.out.println("| relying on your prowess to  "+RED_BOLD+"vanquish these      |");
+        System.out.println("| monsters "+RESET+"and  "+RED_BOLD+"restore the country's harmony"+RESET+".    |");
+        System.out.println("--------------------------------------------------");
         
         
-        
-        
-        System.out.println("Are you ready?");
+        System.out.println("Are you ready to face these challenges ?");
         Scanner sc = new Scanner(System.in);
-        System.out.println("<1>-I am ready!!!");
+        System.out.println("<1>-I am ready !!!");
         System.out.println("<2>-I am not ready yet");
         
        // get user input 
@@ -230,13 +237,13 @@ public class Login extends javax.swing.JFrame {
           System.out.print("Please insert 1 or 2 :");
         int num = sc.nextInt();
           if(num==1){
-              System.out.println("Let us begin our journey!!!");
+              System.out.println("Let us begin our journey !!!");
                valid = true;
         }else if(num==2){
               System.out.println("Nevermind come again when you are ready");
               valid = true;
         }else{
-              System.out.println("invalid input!");
+              System.out.println(RED_BOLD+"Invalid input!"+RESET);
         }
        
     }       

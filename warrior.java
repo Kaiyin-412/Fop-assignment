@@ -169,8 +169,10 @@ public class warrior  {
                         
                         // max level
                          if(pl>=35){
+                            
                              System.out.println(RED_BOLD+name+" have reach level 35"+RESET);
                               System.out.println(RED_BOLD+"Max level!!!"+RESET);
+                               pe=(required_exp*pl)+50;
                               levelUp(35,pe);
                               break;
              }
