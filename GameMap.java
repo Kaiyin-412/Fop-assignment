@@ -48,7 +48,7 @@ public class GameMap{
             }                   
      }
     
-     // esc - when the player want to escape form a battle
+     // esc - when the player want to escape form a battle // n is for the character battle system
     public static void map(int n ,int esc){
         // store position and num of monster
          try{
@@ -58,11 +58,13 @@ public class GameMap{
             int x=0;
             int y=0;
             int num=0+esc;
+            n=0;
            while((s=br.readLine())!=null){
                info=s.split(",");
                x+=Integer.parseInt(info[0]);
                y+=Integer.parseInt(info[1]);
                num+=Integer.parseInt(info[2]);
+               n+=Integer.parseInt(info[3]);
            }
            br.close();
            
@@ -118,7 +120,7 @@ public class GameMap{
 
             Scanner scanner = new Scanner(System.in);
             // Get user input
-            System.out.print("Use W(move up), A(move left), S(move down), D(move right) to move ,Q (quit game) and S (quit game and save game): ");
+            System.out.print("Use W(move up), A(move left), S(move down), D(move right) to move ,Q (quit game) and E(quit game and save game): ");
             
             String move = scanner.nextLine().toUpperCase();
            
@@ -132,7 +134,8 @@ public class GameMap{
                   // encounter monster
                 if(gameMap[playerY][playerX]==RED_BOLD+"M"+RESET){
                     num--;
-                    save(playerY,playerX,num);
+                    //save current position and call battle system
+                    save(playerY,playerX,num,n);
                     calling_battle_sys(n,num+1);
                     break;
                 }
@@ -143,7 +146,8 @@ public class GameMap{
                   // encounter monster
                  if(gameMap[playerY][playerX]==RED_BOLD+"M"+RESET){  
                      num--;
-                     save(playerY,playerX,num);
+                      //save current position and call battle system
+                     save(playerY,playerX,num,n);
                     calling_battle_sys(n,num+1);
                     break;
                  
@@ -152,7 +156,8 @@ public class GameMap{
                   // encounter monster
                  if(gameMap[playerY][playerX]==RED_BOLD+"M"+RESET){
                      num--;
-                     save(playerY,playerX,num);
+                      //save current position and call battle system
+                     save(playerY,playerX,num,n);
                      calling_battle_sys(n,num+1);
                      break;
                    
@@ -164,19 +169,44 @@ public class GameMap{
                 // encounter monster
                  if(gameMap[playerY][playerX]==RED_BOLD+"M"+RESET){ 
                     num--;
-                    save(playerY,playerX,num);
+                     //save current position and call battle system
+                    save(playerY,playerX,num,n);
                     calling_battle_sys(n,num+1);
                     
                      break;
                  }                
             }
             else if (move.equals("Q")){
-               save(playerY,playerX,num);
-                System.out.println("You have quit the game !!!");
-               break;
+               save(playerY,playerX,num,n);
+                System.out.println("Are you sure want to "+RED_BOLD+"quit out the game without saving"+RESET+" ?");
+                System.out.println("<1>-Yes , I am sure !");
+                System.out.println("<2>-No , I want to save !");
+               
+                // abnormal input
+                boolean check=true;
+                while(check){
+                    System.out.print("Please enter 1 or 2 :");
+                    int reply = scanner.nextInt();
+                if(reply==1){
+                     check=false;
+                     break;
+                }else if (reply==2){
+                    // save game 
+                      save(playerY,playerX,num,n);
+                      System.out.println("You have successfully save the current game process !!!");
+                      check=false;
+                      break;
+                }else{
+                     System.out.println(RED_BOLD+"Invalid input"+RESET);
+                }
+                }
+                break;
+               
             }
-            else if(move.equals("S")){
-                save(playerY,playerX,num);
+            else if(move.equals("E")){
+                // save game 
+                save(playerY,playerX,num,n);
+                System.out.println("You have successfully save the current game process !!!");
                 break;
             }else{
                 System.out.println("Invalid input");
@@ -193,10 +223,11 @@ public class GameMap{
          e.printStackTrace();
         }
     }
+    
     // save the position ,and number of monster
-    public static void save(int x ,int y,int num){
+    public static void save(int x ,int y,int num,int n){
              saveposition sav = new saveposition();
-              sav.write(x,y,num);
+              sav.write(x,y,num,n);
     }
  
    

@@ -29,7 +29,7 @@ public class Spell {
 class check{
    public static void check_spell(int current_level, int level_required ,int current_mp,int mana_required,int Cd){
        if(current_level<level_required){
-           System.out.println("You need need to reach "+RED_BOLD+"level " +level_required+RESET+" to unlock the spell!!!");
+           System.out.println("You need to reach "+RED_BOLD+"level " +level_required+RESET+" to unlock the spell!!!");
        }else if(current_mp<mana_required){
             System.out.println(RED_BOLD+"Not enough MP to cast the spell !!!"+RESET);        
        } else if(Cd!=0){

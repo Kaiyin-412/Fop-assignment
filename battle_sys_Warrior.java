@@ -124,14 +124,15 @@ public static void war(){
                 // use for the spell sheild wall
                 int sw =0;
                 
+                //condition for the loop of hero att
+                  boolean hero = true;
                
             while(main){
          
                  // loop condition for the shield wall loop
                 boolean sw1  = true;
                 
-                  //condition for the loop of hero att
-                  boolean hero = true;
+                
                   
                     // loop for Roaring cd
                     boolean CD=true;
@@ -160,7 +161,7 @@ public static void war(){
                      int damage4 =pA-(Pd/10);
                     
                      // monster att
-                     int damage2 =pA-(Pd/5)+8;
+                     int damage2 =pA-(Pd/5)+10;
                      
                      // witch mA
                      int damage5 =(mA*2)-(Md/3);
@@ -294,6 +295,7 @@ public static void war(){
                                  GameMap map =new GameMap();
                                  // if escape, the num of monster remain same
                                   map.map(1,1);
+                                  mon=false;
                                   main=false;
                             
                             break;  
@@ -313,7 +315,7 @@ public static void war(){
                             }
                             else{
                                 System.out.println("You have cast the spell "+RED_BOLD+"Roaring"+RESET+" and cause a damage of "+RED_BOLD+damage9+RESET+" towards"+namE);
-                                System.out.println("The "+monster.name+" has hit you "+RED_BOLD+"0 damage"+RESET+ "due to the "+RED_BOLD+"effect of silence"+RESET+" !!!");
+                                System.out.println("The "+monster.name+" has hit you "+RED_BOLD+"0 damage"+RESET+ " due to the "+RED_BOLD+"effect of silence"+RESET+" !!!");
                                 hP=hP-damage9;
                                 Mp=Mp-20;
                                 //reset the cd
@@ -367,7 +369,7 @@ public static void war(){
                             break;
                     }
                         
-                  hero=false;
+                  break;
                    
                 }
                 
@@ -429,7 +431,7 @@ public static void war(){
                                 // witch normal attack
                                 else{
                                     System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
-                                    System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                    System.out.println(namE +"has replenish "+RED_BOLD+"10 MP"+RESET+" !!!");
                                     mP=mP+10;
                                     Hp=Hp-damage2;
                                     break;      
@@ -463,7 +465,7 @@ public static void war(){
                                 }else{
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
                                 System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
-                                mP=mP+10;
+                                mP=mP+5;
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -500,6 +502,7 @@ public static void war(){
                          break;
                        }else{
                            System.out.println("VICTORY !!!");
+                           System.out.println("You have defeat all the monster !!!");
                            System.out.println("You have save your country");
                            main=false;
                            break;

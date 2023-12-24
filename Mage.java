@@ -136,7 +136,7 @@ public class Mage {
          if(pl<=9){
              
              //algorithm of level up before level 10
-             while(pe>=required_exp*pl){
+             while(pe>=(required_exp*pl)){
                  pe=pe-required_exp*pl;
                  pl++;
                

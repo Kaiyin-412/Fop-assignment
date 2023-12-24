@@ -137,10 +137,12 @@ public static void pal(){
                // loop for shield divine
                boolean sd1 =true;
                
+               //condition for the loop of hero att
+                  boolean hero = true;
+                  
+                  
             while(main){
          
-                  //condition for the loop of hero att
-                  boolean hero = true;
                   
                     // loop for Roaring cd
                     boolean CD=true;
@@ -305,7 +307,8 @@ public static void pal(){
                                 GameMap map =new GameMap();
                                  // if escape the num of monster remain same
                                 map.map(4,1);
-                            
+                                 mon=false;
+                                 main=false;
                             break;  
                          
                         // Spell A
@@ -383,7 +386,7 @@ public static void pal(){
                             break;
                     }
                         
-                  hero=false;
+                  break;
                    
                 }
                 while(sd1){
@@ -441,7 +444,7 @@ public static void pal(){
                                 // witch normal attack
                                 else{
                                     System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
-                                    System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                    System.out.println(namE +"has replenish "+RED_BOLD+"10 MP"+RESET+" !!!");
                                     mP=mP+10;
                                     Hp=Hp-damage2;
                                     break;      
@@ -475,7 +478,7 @@ public static void pal(){
                                 }else{
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
                                 System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
-                                mP=mP+10;
+                                mP=mP+5;
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -510,6 +513,7 @@ public static void pal(){
                          break;
                        }else{
                            System.out.println("VICTORY !!!");
+                            System.out.println("You have defeat all the monster !!!");
                            System.out.println("You have save your country");
                            main=false;
                            break;

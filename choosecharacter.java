@@ -7,15 +7,17 @@ package text.adventure;
 import java.util.Scanner;
 import static text.adventure.Mage.RED_BOLD;
 import static text.adventure.Mage.RESET;
+import java.io.*;
 
 /**
  *
  * @author ONG KAI YIN
  */
 public class choosecharacter {
-  
+    public static final String BLUE_BOLD = "\033[1;34m";
     
     public static void character(){
+         
       Scanner sc  = new Scanner(System.in);
         System.out.println(" -------------------------------------------");
         System.out.println("|               Character                   |");
@@ -50,7 +52,7 @@ public class choosecharacter {
                // display ascii art
                ai.warriorAscii();
                // initial position and the number of monster
-               sav.write(20,20,7);
+               sav.write(20,20,7,1);
                // go to map
                Map.map(1,0);
                valid = true;
@@ -61,7 +63,7 @@ public class choosecharacter {
                // display ascii art
                ai.mageAscii();
                // initial position and the number of monster
-               sav.write(20,20,7);
+               sav.write(20,20,7,2);
                 // go to map
                Map.map(2,0);
                valid = true;
@@ -72,7 +74,7 @@ public class choosecharacter {
                // display ascii art
                ai.rogueAscii();
                // initial position and the number of monster
-               sav.write(20,20,7);
+               sav.write(20,20,7,3);
                 // go to map
                Map.map(3,0);
                valid = true;
@@ -83,7 +85,7 @@ public class choosecharacter {
                // display ascii art
                ai.paladinAscii();
                // initial position and the number of monster
-               sav.write(20,20,7);
+               sav.write(20,20,7,4);
                 // go to map
                Map.map(4,0);
                valid = true;
@@ -93,8 +95,8 @@ public class choosecharacter {
                System.out.println("Let start the adventure!!!");  
                // display ascii art
                ai.archerAscii();
-              // initial position and the number of monster
-              sav.write(20,20,7);
+              // initial position and the number of monster 
+              sav.write(20,20,7,5);
                // go to map
               Map.map(5,0);
                valid = true;
@@ -102,7 +104,9 @@ public class choosecharacter {
                System.out.println(RED_BOLD+"Invalid input"+RESET);
         }
         }
+        
 }
+   
     
 }
 

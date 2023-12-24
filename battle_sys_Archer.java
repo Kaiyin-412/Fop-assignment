@@ -128,11 +128,12 @@ public static void arc(){
                 // conditon for the main while loop
                 boolean main =true;
                 
+                //condition for the loop of hero att
+                  boolean hero = true;
                
             while(main){
          
-                  //condition for the loop of hero att
-                  boolean hero = true;
+                
                   
                     // loop for spell A cd
                     boolean CD=true;
@@ -301,6 +302,8 @@ public static void arc(){
                              GameMap map =new GameMap();
                              // if escape the monster num must remain same
                              map.map(5,1);
+                             mon=false;
+                             main=false;
                              break;  
                          
                            
@@ -374,7 +377,7 @@ public static void arc(){
                             break;
                     }
                         
-                  hero=false;
+                break;
                    
                 }
                 
@@ -460,7 +463,7 @@ public static void arc(){
                                     
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
                                 System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
-                                mP=mP+10;
+                                mP=mP+5;
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -495,6 +498,7 @@ public static void arc(){
                          break;
                         }else{
                            System.out.println("VICTORY !!!");
+                            System.out.println("You have defeat all the monster !!!");
                            System.out.println("You have save your country");
                            main=false;
                            break;

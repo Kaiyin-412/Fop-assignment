@@ -98,7 +98,7 @@ public class Rogue {
      public static void gainExp(int exp){
          try{
               // read the file to get the attributes of the character
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\mage.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\rogue.txt"));
             int hp=0;
             int mp=0;
             int pd=0;
@@ -137,8 +137,8 @@ public class Rogue {
          if(pl<=9){
              
              //algorithm of level up before level 10
-             while(pe>=required_exp*pl){
-                 pe=pe-required_exp*pl;
+             while(pe>=(required_exp*pl)){
+                 pe=pe-(required_exp*pl);
                  pl++;
                
                  // when reach level 10 proceed to the algorithm of the level up between level 10 and 35

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package text.adventure;
+import java.io.*;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static text.adventure.Mage.RED_BOLD;
 import static text.adventure.Mage.RESET;
+import static text.adventure.battle_sys_Archer.PURPLE_BOLD;
+import static text.adventure.choosecharacter.BLUE_BOLD;
 public class Login extends javax.swing.JFrame {
+    
+     public static final String CYAN = "\033[0;36m";    // CYAN
+     
     Connection con = null;
     ResultSet rs = null;
     PreparedStatement pst =null;
@@ -212,6 +218,15 @@ public class Login extends javax.swing.JFrame {
         else if(rs.next()){ // if it is true 
               JOptionPane.showMessageDialog(rootPane, " Login sucessful");
               dispose();
+              try{
+            BufferedReader br = new BufferedReader (new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\monster\\head.txt"));
+            String s ;
+            while((s=br.readLine())!=null){
+                System.out.println(PURPLE_BOLD+s+RESET);
+            }
+        }catch(IOException e){
+          e.printStackTrace();
+        }
         System.out.println(" -------------------------------------------------");
         System.out.println("|        Welcome to the Savior battle             |");
         System.out.println(" -------------------------------------------------");
@@ -223,15 +238,13 @@ public class Login extends javax.swing.JFrame {
         System.out.println("| relying on your prowess to  "+RED_BOLD+"vanquish these      |");
         System.out.println("| monsters "+RESET+"and  "+RED_BOLD+"restore the country's harmony"+RESET+".    |");
         System.out.println("--------------------------------------------------");
-        
-        
+       
         System.out.println("Are you ready to face these challenges ?");
         Scanner sc = new Scanner(System.in);
         System.out.println("<1>-I am ready !!!");
         System.out.println("<2>-I am not ready yet");
         
        // get user input 
-        int y =0;
         boolean valid = false;
         while(!valid){
           System.out.print("Please insert 1 or 2 :");
@@ -241,18 +254,65 @@ public class Login extends javax.swing.JFrame {
                valid = true;
         }else if(num==2){
               System.out.println("Nevermind come again when you are ready");
-              valid = true;
+              
         }else{
               System.out.println(RED_BOLD+"Invalid input!"+RESET);
         }
        
     }       
-        // choose character 
-        choosecharacter chs = new choosecharacter();
-        chs.character();
-                
-         }
-         else{
+        // ascii art
+        try{
+            BufferedReader br = new BufferedReader (new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\monster\\monster 2.txt"));
+            String s;
+            while((s=br.readLine())!=null)
+                System.out.println(BLUE_BOLD+s+RESET);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        // contnue game 
+            System.out.println("");
+            System.out.println("Would you want to continue your "+RED_BOLD+"previous game process"+RESET+" ??? ");
+            System.out.println("<1>-Yes");
+            System.out.println("<2>-no");
+
+            boolean check = true;
+            while(check){
+            System.out.print("Please enter 1 or 2 : ");
+            int n =sc.nextInt();
+            if(n==1){
+               try{
+            // read the file get the previuos info
+           BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\position.txt"));
+           String s ;
+           String [] info;
+            int x=0;
+            int m=0;
+            int num=0;
+             n=0;
+           while((s=br.readLine())!=null){
+               info=s.split(",");
+               x+=Integer.parseInt(info[0]);
+               m+=Integer.parseInt(info[1]);
+               num+=Integer.parseInt(info[2]);
+               n+=Integer.parseInt(info[3]);
+           }
+            br.close();
+            GameMap gm = new GameMap();
+            gm.map(n,0);
+            check=false;
+            }catch(IOException e){
+              e.printStackTrace();;
+            }}
+            else if (n==2){
+             // choose character 
+             choosecharacter chs = new choosecharacter();
+              chs.character();    
+              check=false;
+         }else{
+                System.out.println(RED_BOLD+"Invalid input !"+RESET);
+            }
+            }
+        }else{
              JOptionPane.showMessageDialog(rootPane, "Incorrect password or username , please try again"); 
          }
          

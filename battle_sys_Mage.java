@@ -129,12 +129,13 @@ public class battle_sys_Mage {
                 
                 // loop condition for the frost nova
                 boolean sw1  = true;
+                
+                //condition for the loop of hero att
+                   boolean hero = true;
                
             while(main){
          
-                  //condition for the loop of hero att
-                   boolean hero = true;
-                  
+                
                     // loop for Roaring cd
                     boolean CD=true;
                     
@@ -300,7 +301,9 @@ public class battle_sys_Mage {
                                 // back to map
                                 GameMap map =new GameMap();
                                 // if escape the num of monster remain same
-                                map.map(2,1);              
+                                map.map(2,1); 
+                                 mon=false;
+                                 main=false;
                                 break;  
                          
                             // Spell A  
@@ -377,7 +380,7 @@ public class battle_sys_Mage {
                             break;
                     }
                         
-                  hero=false;
+                  break;
                    
                 }
                 
@@ -424,13 +427,13 @@ public class battle_sys_Mage {
                               int chance = rd.nextInt(2);
                                 switch(chance){
                                   case 0:
-                                      System.out.println(namE+" has using magical attack which causing a damage of :"+RED_BOLD+damage5+RESET);
+                                      System.out.println(namE+" has using magical attack which causing a damage of "+RED_BOLD+damage5+RESET);
                                       Hp=Hp-damage5;
                                       mP=mP-20;
                                       break;
                                       
                                   case 1:
-                                      System.out.println(namE+"  conjured a "+RED_BOLD+"blazing fireball "+RESET+"which cause a high damage of :"+RED_BOLD+damage6+RESET);
+                                      System.out.println(namE+"  conjured a "+RED_BOLD+"blazing fireball "+RESET+"which cause a high damage of "+RED_BOLD+damage6+RESET);
                                       Hp=Hp-damage6;
                                       mP=mP-20;
                                       break;
@@ -440,7 +443,7 @@ public class battle_sys_Mage {
                                 // witch normal attack
                                 else{
                                     System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
-                                    System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                    System.out.println(namE +"has replenish "+RED_BOLD+"10 MP"+RESET+" !!!");
                                     mP=mP+10;
                                     Hp=Hp-damage2;
                                     break;      
@@ -474,7 +477,7 @@ public class battle_sys_Mage {
                                 }else{
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
                                 System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
-                                mP=mP+10;
+                                mP=mP+5;
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -509,6 +512,7 @@ public class battle_sys_Mage {
                          break;
                        }else{
                            System.out.println("VICTORY !!!");
+                            System.out.println("You have defeat all the monster !!!");
                            System.out.println("You have save your country");
                            main=false;
                            break;

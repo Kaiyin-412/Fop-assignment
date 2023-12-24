@@ -46,6 +46,7 @@ public static void rog(){
             // first round must run it to read the initial attributes of the character
             if(round==1){
               rog();
+                      
             }
             
             Scanner sc = new Scanner(System.in); 
@@ -295,7 +296,8 @@ public static void rog(){
                                  GameMap map =new GameMap();
                                   // if escape the num of monster remain same
                                  map.map(3,1);
-                            
+                                 mon=false;
+                                 main=false;
                             break;  
                          
                             // Spell Roaring
@@ -373,7 +375,7 @@ public static void rog(){
                             break;
                     }
                         
-                  hero=false;
+                  break;
                    
                 }
                 
@@ -423,7 +425,7 @@ public static void rog(){
                                 // witch normal attack
                                 else{
                                     System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
-                                    System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                    System.out.println(namE +"has replenish "+RED_BOLD+"10 MP"+RESET+" !!!");
                                     mP=mP+10;
                                     Hp=Hp-damage2;
                                     break;      
@@ -457,7 +459,7 @@ public static void rog(){
                                 }else{
                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
                                 System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
-                                mP=mP+10;
+                                mP=mP+5;
                                 hero=true;
                                 Hp=Hp-damage2;
                                 break;                        
@@ -482,7 +484,7 @@ public static void rog(){
                        if(round<=6){
                         // check level up
                        // put latest attributes into the file
-                         Rogue rog = new Rogue();
+                        Rogue rog = new Rogue();
                         rog.gainExp(exP);
                         // back to map
                         GameMap map =new GameMap();
@@ -492,6 +494,7 @@ public static void rog(){
                          break;
                        }else{
                            System.out.println("VICTORY !!!");
+                            System.out.println("You have defeat all the monster !!!");
                            System.out.println("You have save your country");
                            main=false;
                            break;
