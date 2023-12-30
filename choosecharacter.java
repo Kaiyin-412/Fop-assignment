@@ -57,9 +57,9 @@ public class choosecharacter {
         boolean valid = false;
         while(!valid){
              System.out.print("Please select one of the character(1-5) :");
-             int cha= sc.nextInt();
+             String cha= sc.nextLine();
              
-           if(cha==1){
+           if(cha.matches("[1]")){
                System.out.println("You have choosen Warrior!!!");
                System.out.println("Let start the adventure !!!");
                // display ascii art
@@ -70,7 +70,7 @@ public class choosecharacter {
                Map.map(1,0);
                valid = true;
                
-            }else if(cha==2){
+            }else if(cha.matches("[2]")){
                System.out.println("You have choosen Mage !!!");
                System.out.println("Let start the adventure !!!");
                // display ascii art
@@ -81,7 +81,7 @@ public class choosecharacter {
                Map.map(2,0);
                valid = true;
                
-            }else if(cha==3){
+            }else if(cha.matches("[3]")){
                System.out.println("You have choosen Rogue !!");
                System.out.println("Let start the adventure!!!");  
                // display ascii art
@@ -92,7 +92,7 @@ public class choosecharacter {
                Map.map(3,0);
                valid = true;
                
-            }else if(cha==4){
+            }else if(cha.matches("[4]")){
                System.out.println("You have choosen Paladin!!!");
                System.out.println("Let start the adventure!!!");  
                // display ascii art
@@ -103,7 +103,7 @@ public class choosecharacter {
                Map.map(4,0);
                valid = true;
                
-            }else if(cha==5){
+            }else if(cha.matches("[5]")){
                System.out.println("You have choosen Archer!!!");
                System.out.println("Let start the adventure!!!");  
                // display ascii art

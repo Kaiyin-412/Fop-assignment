@@ -188,11 +188,11 @@ public class GameMap{
                 boolean check=true;
                 while(check){
                     System.out.print("Please enter 1 or 2 :");
-                    int reply = scanner.nextInt();
-                if(reply==1){
+                    String reply = scanner.nextLine();
+                if(reply.matches("[1]")){
                      check=false;
                      break;
-                }else if (reply==2){
+                }else if(reply.matches("[2]")){
                     // save game 
                       save(playerY,playerX,num,n);
                       System.out.println("You have successfully save the current game process !!!");

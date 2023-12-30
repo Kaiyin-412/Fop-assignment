@@ -250,11 +250,11 @@ public class Login extends javax.swing.JFrame {
         boolean valid = false;
         while(!valid){
           System.out.print("Please insert 1 or 2 :");
-        int num = sc.nextInt();
-          if(num==1){
+        String num = sc.nextLine();
+          if(num.matches("[1]")){
               System.out.println("Let us begin our journey !!!");
                valid = true;
-        }else if(num==2){
+        }else if(num.matches("[2]")){
               System.out.println("Nevermind come again when you are ready");
               
         }else{
@@ -280,8 +280,8 @@ public class Login extends javax.swing.JFrame {
             boolean check = true;
             while(check){
             System.out.print("Please enter 1 or 2 : ");
-            int option =sc.nextInt();
-            if(option==1){
+            String option =sc.nextLine();
+            if(option.matches("[1]")){
             System.out.println("WELCOME BACK !!! ");
                try{
             // read the file get the previuos info
@@ -307,7 +307,7 @@ public class Login extends javax.swing.JFrame {
               e.printStackTrace();;
             }}
             
-            else if (option==2){
+            else if (option.matches("[2]")){
              // choose character 
              choosecharacter chs = new choosecharacter();
               chs.character();    
