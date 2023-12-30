@@ -8,6 +8,7 @@ import java.util.Scanner;
 import static text.adventure.Mage.RED_BOLD;
 import static text.adventure.Mage.RESET;
 import java.io.*;
+import static text.adventure.battle_sys_Warrior.RED;
 
 /**
  *
@@ -17,7 +18,19 @@ public class choosecharacter {
     public static final String BLUE_BOLD = "\033[1;34m";
     
     public static void character(){
-         
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\monster\\characeter.txt"));
+            String s;
+            while((s=br.readLine())!=null){
+                System.out.println(RED+s+RESET);
+            }
+
+        }catch(IOException e){
+          e.printStackTrace();
+        }
+        
+        
+        
       Scanner sc  = new Scanner(System.in);
         System.out.println(" -------------------------------------------");
         System.out.println("|               Character                   |");

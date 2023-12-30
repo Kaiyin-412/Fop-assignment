@@ -13,18 +13,18 @@ public class warrior  {
     public static final String RESET = "\033[0m";  // Text Reset
     public static final String RED_BOLD = "\033[1;31m";    // RED
      
-    // n - level
+    // n - current level
     // f - exp
-    // read file if levl up increase the attributes
+    // read file if level up increase the attributes
     public static void levelUp(int n, int f){
-          int hp=0;
-            int mp=0;
-            int pd=0;
-            int md=0;
-            int pa=0;
-            int pe=0;
-            int ma=0;
-            int pl=0;
+            int hp=0; // health points
+            int mp=0; // mana points
+            int pd=0; // physical defenses
+            int md=0; //magical defenses
+            int pa=0; // physical attack
+            int pe=0; // Exp earn when defeat monster
+            int ma=0; // magical attack
+            int pl=0; // level
                  
        try{
            BufferedReader br = new BufferedReader(new FileReader
@@ -47,12 +47,14 @@ public class warrior  {
                 pe+=Integer.parseInt(list[7]);
                 pl+=Integer.parseInt(list[8]);
                 
+                // Health Points and defenses will receive significant boosts
+                // (n-pl)=(latest level - current level) check whether got level up 
                 hp+=(10*(n-pl));
                 ma+=(2*(n-pl));
                 md+=(2*(n-pl));
                 mp+=(5*(n-pl));
-                pa+=(6*(n-pl));
-                pd+=(4*(n-pl));
+                pa+=(4*(n-pl));
+                pd+=(5*(n-pl));
                 pl=n;
                 pe=f;
                 
@@ -89,24 +91,26 @@ public class warrior  {
   
         
     // level up algorithm
+    // exp form defeat the monster
      public static void gainExp(int exp){
          try{
-              // read the file to get the attributes of the character
+             
+             // read the file to get the attributes of the character
             BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\warrior.txt"));
-             int hp=0;
-            int mp=0;
-            int pd=0;
-            int md=0;
-            int pa=0;
-            int pe=0;
-            int ma=0;
-            int pl=0;
-            String name1;
+            int hp=0; // health points
+            int mp=0; // mana points
+            int pd=0; // physical defenses
+            int md=0; //magical defenses
+            int pa=0; // physical attack
+            int pe=0; // Exp earn when defeat monster
+            int ma=0; // magical attack
+            int pl=0; // level
+           
              String [] list;
              String s ;
+             
              while((s=br.readLine())!=null){
               list=s.split(",");
-               name1=list[0];
                hp+=Integer.parseInt(list[1]);
                mp+=Integer.parseInt(list[2]);
                pd+=Integer.parseInt(list[3]);
@@ -163,8 +167,8 @@ public class warrior  {
             
         // level up algorithm when level>=10 && level <=35
         }else if(pl>=10&& pl<=35){
-                 while(pe>=(required_exp*pl)+50){
-                     pe=pe-(required_exp*pl)+50;
+                 while(pe>=((required_exp*pl)+50)){
+                     pe=pe-((required_exp*pl)+50);
                      pl++;
                         
                         // max level

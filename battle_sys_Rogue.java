@@ -43,6 +43,15 @@ public static void rog(){
         // round is to check whether is it the first fight , if first fight must run rog();         
         public static void rog1(String namE , int hP ,int mP,int pA,int mA,int pD,int mD,int exP,int round){
             
+            // namE=Monster name 
+            // hP=monster health point
+            // mP=Current mana points of the monster.
+            // pA= physical attack 
+            // mA= magical attack 
+            // pD= Physical defense 
+            // mD =magical defense
+            // exP =exp given to hero when defeat monster
+            
             // first round must run it to read the initial attributes of the character
             if(round==1){
               rog();
@@ -57,52 +66,41 @@ public static void rog(){
           try{
               // read the file to get the attributes of the character
             BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\rogue.txt"));
-            int hp=0;
-            int mp=0;
-            int pd=0;
-            int md=0;
-            int pa=0;
-            int pe=0;
-            int ma=0;
-            int pl=0;
-            String name1;
+            String Name="Rogue";
+             int Hp=0; // health points
+             int Mp=0; // mana points
+             int Pd=0; // physical defenses 
+             int Md=0; // magical defense
+             int Pa=0; // physical attack
+             int Pe=0; // player exp
+             int Ma=0; //magical attack
+             int Pl=0; // player level
+            
              String [] list;
              String s ;
              while((s=br.readLine())!=null){
               list=s.split(",");
-               name1=list[0];
-               hp+=Integer.parseInt(list[1]);
-               mp+=Integer.parseInt(list[2]);
-               pd+=Integer.parseInt(list[3]);
-               md+=Integer.parseInt(list[4]);
-               pa+=Integer.parseInt(list[5]);
-               ma+=Integer.parseInt(list[6]);
-               pe+=Integer.parseInt(list[7]);
-               pl+=Integer.parseInt(list[8]);
+               Hp+=Integer.parseInt(list[1]);
+               Mp+=Integer.parseInt(list[2]);
+               Pd+=Integer.parseInt(list[3]);
+               Md+=Integer.parseInt(list[4]);
+               Pa+=Integer.parseInt(list[5]);
+               Ma+=Integer.parseInt(list[6]);
+               Pe+=Integer.parseInt(list[7]);
+               Pl+=Integer.parseInt(list[8]);
              }
              br.close();
-               Archetype rogue = new Archetype("Rogue",hp,mp,pd,md,pa,ma,pe,pl);
-              Monster monster =new Monster(namE,hP,mP,pA,mA,pD,mD,exP);
-             
               
-           
-            // declare the initial value of hp and mp char
-            int initial_hp =hp;
-            int initial_mp=mp;
+            // declare the initial value of hp and mp character
+            int initial_hp =Hp;
+            int initial_mp=Mp;
+            
             
             // declare the initial value of hp and mp monster
-            int ini_hp = monster.healthPoints;
-            int ini_mp = monster.manaPoints;
+            int ini_hp = hP;
+            int ini_mp = mP;
             
-            String Name =rogue.name;
-             int Hp=rogue.healthPoints;
-             int Mp=rogue.manaPoints;
-             int Md=rogue.magicalDefense;
-             int Pa=rogue.physicalAttack;
-             int Pd=rogue.physicalDefense;
-             int Ma=rogue.magicalAttack;
-             int Pe=rogue.playerExp;
-             int Pl=rogue.playerlevel;
+          
              
              // ascii art
             Asciiart ai = new Asciiart();
@@ -150,13 +148,13 @@ public static void rog(){
                     boolean count = true;
                    
                     
-                     // warior attack phy 
+                     //rogue attack phy 
                      int damage1 = (Pa/pD)+8;  
                      
-                     // warrior att mag
+                     // rogue att mag
                      int damage3 =(Ma/mD)+10;
                      
-                     // warrior defend 
+                     // rogue defend 
                      int damage4 =pA-(Pd/10);
                     
                      // monster att
@@ -174,25 +172,33 @@ public static void rog(){
                      // harpy wind Gust
                      int damage8=(mA*3)-(Md/10);
                      
-                     // Roaring spell
+                     // spell a
                      int damage9 = (Pa*2)-pD-5;
                      
-                     // Furious Strike 
+                     // spell b 
                      int damage10= (Pa*2)-(pD*5);
                      
                      // heal 
-                     int heal=Hp/20;
+                     int heal=initial_hp/5;
                      
+                      // atomic breath
+                     int atomic=(pA*6)-(Pd/5);
+                     
+                     // critcal hit
+                    int crit=damage2+40;
+                   
+                     // medusa mystic snake
+                     int med=pA*3;
                   
                    
                     System.out.println(PURPLE_BOLD+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+RESET);
                     System.out.println(CYAN_BACKGROUND+Name+RESET); 
                     System.out.println("HP    : "+RED_BOLD+Hp+"/"+initial_hp+RESET);
                     System.out.println("MP    : "+RED_BOLD+Mp+"/"+initial_mp+RESET);
-                    if(pl<10){
-                    System.out.println("Exp   : "+RED_BOLD+pe+"/"+(10*pl)+RESET);
+                    if(Pl<10){
+                    System.out.println("Exp   : "+RED_BOLD+Pe+"/"+(10*Pl)+RESET);
                     }else{
-                    System.out.println("Exp   : "+RED_BOLD+pe+"/"+((10*pl)+50)+RESET);
+                    System.out.println("Exp   : "+RED_BOLD+Pe+"/"+((10*Pl)+50)+RESET);
                     }
                     System.out.println("Level : "+RED_BOLD+Pl+"/"+35+RESET);
                     System.out.println("----------------------------------------------------------------------------");
@@ -214,11 +220,11 @@ public static void rog(){
                          System.out.println("<A> Posion trap    "+RED_BOLD+"< -20Mp, "+cd1+"/3 CD, " +"posion the enemies >"+RESET);
                          System.out.println("<B> "+RED_BOLD+"Unlocked at level 10"+RESET);
                          System.out.println("<C> "+RED_BOLD+"Unlocked at level 30"+RESET);                           
-                    }else if(Pl>=10&& Pl<15){
+                    }else if(Pl>=10&& Pl<30){
                          System.out.println("<A> Posion trap      "+RED_BOLD+"< -20Mp, "+cd1+"/3 CD, " +"posion the enemy            >"+RESET);
                          System.out.println("<B> Backstab         "+RED_BOLD+"<-30Mp ,"+cd2+"/3 CD,"+" Damage and stun enemy 1 round >"+RESET);
                          System.out.println("<C> "+RED_BOLD+"Unlocked at level 30"+RESET);
-                    }else{
+                    }else if(Pl>=30){
                          System.out.println("<A> Posion trap    "+RED_BOLD+"< -20Mp, "+cd1+"/3 CD, " +"posion the enemies             >"+RESET);
                          System.out.println("<B> backstab       "+RED_BOLD+"< -30Mp ,"+cd2+"/3 CD, "+"Damage and stun enemy 1 round   >"+RESET);
                          System.out.println("<C> Shadowstep     "+RED_BOLD+"< -40Mp ,"+cd3+"/6 CD, "+"Evade attack ad spell of enemy  >"+RESET);       
@@ -236,6 +242,14 @@ public static void rog(){
                         case "1" :                                              
                             System.out.println("You have hit the "+namE+",causing a damage of "+RED+damage1+RESET+"!");
                             hP=hP-damage1;
+                             if(Mp<initial_mp){
+                                System.out.println(Name+" have replenish "+RED_BOLD+"5MP"+RESET);
+                                if(Mp+5>initial_mp){
+                                    Mp=initial_mp;
+                                }else{
+                                   Mp=Mp+5;
+                                }
+                            }
                             break;
                             
                         case "2" :
@@ -315,7 +329,7 @@ public static void rog(){
                             
                             }
                             else{
-                                System.out.println(namE+" have cast the spell "+RED_BOLD+"posion trap"+RESET+" and cause a damage of "+damage9+" towards"+namE);
+                                System.out.println(namE+" have cast the spell "+RED_BOLD+"posion trap"+RESET+" and cause a damage of "+damage9+" towards "+namE);
                                 hP=hP-damage9;
                                 Mp=Mp-20;
                                 cd1=3;
@@ -336,12 +350,12 @@ public static void rog(){
                               mon=false;
                               
                             }else{
-                                System.out.println(Name+" have use the "+RED_BOLD+"backstab"+RESET+" which result a high damage of "+damage10+" towards"+namE + "\nand stunning "+namE+"for 1 round !!!");
+                                System.out.println(Name+" have use the "+RED_BOLD+"backstab"+RESET+" which result a high damage of "+RED_BOLD+damage10+RESET+" towards"+namE + "\nand stunning "+namE+"for 1 round !!!");
                                 System.out.println(RED_BOLD+namE+" can't attack !!!"+RESET);
                                 hP=hP-damage10;
                                 Mp=Mp-30;
                                 // reset the cd
-                                cd2=4;
+                                cd2=3;
                                 CD1=false;
                                 
                                 // stop the loop of monster
@@ -378,9 +392,9 @@ public static void rog(){
                   break;
                    
                 }
-                
+                System.out.println("-------------------------------------------------------------------------------------------");
                
-                
+                double hit=rd.nextDouble();
                 // monster attack 
                  while(mon){   
                     if(hP>0){
@@ -434,7 +448,123 @@ public static void rog(){
                            
                            break;
                         }
-                        else if(namE=="Harpy"){
+                         else if(namE=="Godzilla"){
+                           
+                           // first skill Atomic breath
+                           if(mP>=25 && hit>=0.5){
+                               System.out.println(namE+" has use "+RED_BOLD+"Atomic breath "+RESET+" which result a high damage "+RED_BOLD+atomic+RESET);
+                               Hp=Hp-atomic;
+                               mP=mP-25;
+                               break;
+                               // second skill mana drain
+                           }else if(mP>=10 && hit>=0.3){
+                               System.out.println(namE+" has use the ability "+RED_BOLD+" Mana drain"+RESET+" , which siphon "+RED_BOLD+"30Mp"+RESET+" from "+Name+" and replenish it own mana point ");
+                               System.out.println(namE+" has replenish "+RED_BOLD+"30 MP");
+                               // prevent the mana point of monster exceed its initial manapoints
+                              if(mP+30>=ini_mp){
+                                  mP=ini_mp;
+                                  // excess mp convert to Hp
+                                  System.out.println("The excess Mp gain will convert to Hp");
+                                  hP=hP+(30-(ini_mp-mP));
+                              }else{
+                                  mP=mP+30;
+                           }
+                              // prevent the manapoints of character negatif
+                              if(Mp-30<0){
+                                Mp=0;
+                              }else{
+                                Mp=Mp-30;
+                              }
+                              break;
+                       }
+                           // critcal hit
+                           else if(hit>=0.2){
+                               System.out.println(namE+" hit"+Name+" whith a critical damage "+RED_BOLD+crit+RESET);
+                               System.out.println(namE+" has replenish"+RED_BOLD+" 10MP"+RESET);
+                               Hp=Hp-crit;
+                                // prevent the mana point of monster exceed its initial manapoints
+                              if(mP+10>=ini_mp){
+                                  mP=ini_mp;
+                                }else{
+                                  mP=mP+10;
+                                }  
+                              break;
+                            }
+                           // mormal attack
+                           else{
+                                 System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                 if(mP<ini_mp){
+                                 System.out.println(namE +"has replenish "+RED_BOLD+"5 MP"+RESET+" !!!");
+                                 // prevent the mana point of monster exceed its initial manapoints
+                                 if(mP+5>=ini_mp){
+                                  mP=ini_mp;
+                                }else{
+                                  mP=mP+5;
+                                }  
+                                 }
+                                 Hp=Hp-damage2;
+                            break;
+                           }
+                       }
+                           else if(namE=="Medusa"){
+                           
+                            // Stonze gaze
+                            if(mP>=30 && hit>=0.5 ){    
+                                System.out.println(namE+" use the ability "+RED_BOLD+"stone gaze"+RESET+" and cause a damage of "+RED_BOLD+damage2+RESET);
+                                System.out.println(Name+ " has turned to stone and cannot attack for 1 round");
+                                System.out.println("The attack of the medusa increase !!!");
+                                Hp=Hp-damage2;
+                                pA=pA+5;
+                                 mP=mP-30;
+                                // stop the hero attack
+                                hero=false;
+                                 break;
+                                //mystic snake
+                            }else if(mP>=15 && hit>=0.45){
+                                 System.out.println(namE+" use the ability "+RED_BOLD+" mystic snake"+RESET+" ,which dealt a damage "+RED_BOLD+med+RESET);
+                                 System.out.println("At the same time, Medusa replenish "+RED_BOLD+"15MP"+RESET);
+                                 Hp=Hp-med;
+                                 // prevent the mana point of monster exceed its initial manapoints
+                                 if(mP+15>=ini_mp){
+                                  mP=ini_mp;
+                                }else{
+                                  mP=mP+15;
+                                }
+                                 hero=true;
+                                 break;
+                             
+                            //critical attack
+                            }else if(hit>=0.3){
+                                System.out.println(namE+" hit"+Name+" whith a critical damage "+RED_BOLD+crit+RESET);
+                               System.out.println(namE+" has replenish"+RED_BOLD+" 15MP"+RESET);
+                               Hp=Hp-crit;
+                                // prevent the mana point of monster exceed its initial manapoints
+                              if(mP+15>=ini_mp){
+                                  mP=ini_mp;
+                                }else{
+                                  mP=mP+15;
+                                } 
+                              hero=true;
+                              break;
+                              
+                        }
+                            // normal attack
+                            else {
+                            System.out.println(namE+" has attacked you causing a damage of :"+RED_BOLD+damage2+RESET);
+                                 if(mP<ini_mp){
+                                 System.out.println(namE +"has replenish "+RED_BOLD+"10 MP"+RESET+" !!!");
+                                 // prevent the mana point of monster exceed its initial manapoints
+                                 if(mP+10>=ini_mp){
+                                  mP=ini_mp;
+                                }else{
+                                  mP=mP+10;
+                                }  
+                                 }
+                                 Hp=Hp-damage2;
+                                 hero=true;
+                                 break;
+                            }
+                           } else if(namE=="Harpy"){
                              // 1/2 to use talon strike or use wind gust
                             int chance1 = rd.nextInt(2);
                                 if(mP>=10){

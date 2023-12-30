@@ -12,8 +12,8 @@ public class Monster {
    String name; // Name of the monster.
     int healthPoints; // Current health points of the monster.
     int manaPoints; // Current mana points of the monster.
-    int physicalAttack; // Attack attribute for dealing damage.
-    int magicalAttack; // Attack attribute for dealing damage.
+    int physicalAttack; // Physical Attack attribute for dealing damage.
+    int magicalAttack; // Magical Attack attribute for dealing damage.
     int physicalDefense; // Defense attribute for mitigating damage.
     int magicalDefense;// Defense attribute for mitigating damage.
     int exP;          // exp given to hero when defeat monster
@@ -34,31 +34,29 @@ public class Monster {
 }
   class goblin extends Monster{
 
-    public goblin(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense) {
+    public goblin() {
         super("Goblin",40,0,10,0,5,2,50);
     }
+    
    
  }
     
    class skeleton extends Monster{
-
-    public skeleton(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense) {
+        public skeleton() {
         super("Skeleton",60,0,12,0,7,3,70);
-    }
-       
+    }  
    }
 
 
 // ability fireball
   class witch extends Monster{
-    public witch(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense) {
+    public witch() {
         super("Witch",50,80,8,20,6,12,100);
     }     
   }
 
 class orc extends Monster{
-
-    public orc(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense) {
+    public orc() {
         super("Orc",70,0,15,0,9,4,200);
     }
     
@@ -66,14 +64,14 @@ class orc extends Monster{
 
 // They possess two abilities: "Talon Strike," a physical attack, and "Wind Gust," a magical attack that can disrupt opponents.
 class harpy extends Monster{
-    public harpy(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense) {
+    public harpy() {
         super("Harpy",60,20,14,10,8,8,2000);
     }
-    
 }
- class Godzilla extends Monster{
 
-    public Godzilla(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense, int exP) {
+// atomic breath
+ class Godzilla extends Monster{
+    public Godzilla() {
         super("Godzilla",500,0,70,0,30,30,2000);
     }
      
@@ -81,7 +79,7 @@ class harpy extends Monster{
 
 // big boss
 class Medusa extends Monster{
-    public Medusa(String name, int healthPoints, int manaPoints, int physicalAttack, int magicalAttack, int physicalDefense, int magicalDefense, int exP) {
+    public Medusa() {
         super("Medusa",1000,0,150,0,100,100,0);
     }
     

@@ -48,7 +48,8 @@ public class GameMap{
             }                   
      }
     
-     // esc - when the player want to escape form a battle // n is for the character battle system
+     // esc - when the player want to escape from a battle, if player escape the number of monster remain unchanged
+     // n is for the character battle system
     public static void map(int n ,int esc){
         // store position and num of monster
          try{
@@ -96,6 +97,7 @@ public class GameMap{
              int w =rd.nextInt(39)+1;
              gameMap[q][w]=RED_BOLD+"M"+RESET;
          }
+         
         // Initial player position
         int  playerX = y;
         int  playerY = x;
@@ -209,7 +211,7 @@ public class GameMap{
                 System.out.println("You have successfully save the current game process !!!");
                 break;
             }else{
-                System.out.println("Invalid input");
+                System.out.println(RED_BOLD+"Invalid input"+RESET);
             }
             
             
@@ -224,7 +226,8 @@ public class GameMap{
         }
     }
     
-    // save the position ,and number of monster
+    // x,y is the position ,num - number of monster, n- identify which character 
+    // save the position ,and number of monster, the character that the player choose 
     public static void save(int x ,int y,int num,int n){
              saveposition sav = new saveposition();
               sav.write(x,y,num,n);

@@ -81,7 +81,7 @@ public class Signup extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel3.setText("PASSWORD");
+        jLabel3.setText("PASSWORD ");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 3, 10)); // NOI18N
         jButton1.setText("SIGN UP");
@@ -122,8 +122,6 @@ public class Signup extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jButton1)
@@ -131,8 +129,13 @@ public class Signup extends javax.swing.JFrame {
                                                 .addGap(4, 4, 4)
                                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(19, Short.MAX_VALUE))))
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,17 +147,17 @@ public class Signup extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
                         .addComponent(jButton1)
-                        .addGap(28, 28, 28)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel7))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -172,50 +175,49 @@ public class Signup extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userActionPerformed
-
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-       Login LoginFrame =new Login();
-          LoginFrame.setVisible(true);
-          LoginFrame.pack();
-          LoginFrame.setLocationRelativeTo(null);
-          this.dispose();
-      
+        Login LoginFrame =new Login();
+        LoginFrame.setVisible(true);
+        LoginFrame.pack();
+        LoginFrame.setLocationRelativeTo(null);
+        this.dispose();
+
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       // sign up
-       String us = user.getText();// username
-       String ps = pass.getText();// password
-      
-      
-       try{
-           if(us.length()==0|| ps.length()==0){
-                  JOptionPane.showMessageDialog(rootPane, "Please complete the information");
-                  // propt user enter the username and password
-           }else{
-               
-           Statement s =database.mycon().createStatement(); // connect to database
-           s.executeUpdate("INSERT INTO login (username, password)" //inserts to database
-                  + "VALUES('"+us+"','"+ps+"')");
-           JOptionPane.showMessageDialog(rootPane,"Sign up successful");
-           
-           dispose();
-           // return back login page
-          Login LoginFrame =new Login();
-          LoginFrame.setVisible(true);
-          LoginFrame.pack();
-          LoginFrame.setLocationRelativeTo(null);
-         
-           }
-       }catch(Exception e){
-           System.out.println(e);
-       }
-        
-        
+        // sign up
+        String us = user.getText();// username
+        String ps = pass.getText();// password
+
+        try{
+            if(us.length()==0|| ps.length()==0){
+                JOptionPane.showMessageDialog(rootPane, "Please complete the information");
+                // propt user enter the username and Strong password
+            }else if(ps.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\=*])(.{8,})") && us.length()>0){
+                Statement s =database.mycon().createStatement(); // connect to database
+                s.executeUpdate("INSERT INTO login (username, password)" //inserts to database
+                    + "VALUES('"+us+"','"+ps+"')");
+                JOptionPane.showMessageDialog(rootPane,"Sign up successful");
+
+                dispose();
+                // return back login page
+                Login LoginFrame =new Login();
+                LoginFrame.setVisible(true);
+                LoginFrame.pack();
+                LoginFrame.setLocationRelativeTo(null);
+
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Please set a Strong password (At least 8 characters include digits,special characeters,lower case letter and upper case letter) !!!");
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userActionPerformed
 
     /**
      * @param args the command line arguments

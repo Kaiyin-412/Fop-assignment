@@ -1,14 +1,17 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package text.adventure;
 
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.io.BufferedReader;
 
 /**
  *
@@ -23,14 +26,14 @@ public class Paladin {
     // f - exp
     // read file if levl up increase the attributes
     public static void levelUpPal(int n, int f){
-          int hp=0;
-            int mp=0;
-            int pd=0;
-            int md=0;
-            int pa=0;
-            int pe=0;
-            int ma=0;
-            int pl=0;
+            int hp=0; // health points
+            int mp=0; // mana points
+            int pd=0; // physical defenses
+            int md=0; //magical defenses
+            int pa=0; // physical attack
+            int pe=0; // Exp earn when defeat monster
+            int ma=0; // magical attack
+            int pl=0; // level
             
        // Read file to get the attributes           
        try{
@@ -102,20 +105,19 @@ public class Paladin {
              
             // read the file to get the attributes of the character
             BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\paladin.txt"));
-           int hp=0;
-            int mp=0;
-            int pd=0;
-            int md=0;
-            int pa=0;
-            int pe=0;
-            int ma=0;
-            int pl=0;
-            String name1;
+           int hp=0; // health points
+            int mp=0; // mana points
+            int pd=0; // physical defenses
+            int md=0; //magical defenses
+            int pa=0; // physical attack
+            int pe=0; // Exp earn when defeat monster
+            int ma=0; // magical attack
+            int pl=0; // level
+
              String [] list;
              String s ;
              while((s=br.readLine())!=null){
               list=s.split(",");
-               name1=list[0];
                hp+=Integer.parseInt(list[1]);
                mp+=Integer.parseInt(list[2]);
                pd+=Integer.parseInt(list[3]);

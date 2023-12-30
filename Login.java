@@ -218,8 +218,10 @@ public class Login extends javax.swing.JFrame {
         else if(rs.next()){ // if it is true 
               JOptionPane.showMessageDialog(rootPane, " Login sucessful");
               dispose();
+              
+              // after login 
               try{
-            BufferedReader br = new BufferedReader (new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\monster\\head.txt"));
+            BufferedReader br = new BufferedReader (new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\monster\\monster.txt"));
             String s ;
             while((s=br.readLine())!=null){
                 System.out.println(PURPLE_BOLD+s+RESET);
@@ -278,8 +280,9 @@ public class Login extends javax.swing.JFrame {
             boolean check = true;
             while(check){
             System.out.print("Please enter 1 or 2 : ");
-            int n =sc.nextInt();
-            if(n==1){
+            int option =sc.nextInt();
+            if(option==1){
+            System.out.println("WELCOME BACK !!! ");
                try{
             // read the file get the previuos info
            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\position.txt"));
@@ -288,7 +291,7 @@ public class Login extends javax.swing.JFrame {
             int x=0;
             int m=0;
             int num=0;
-             n=0;
+            int n=0;
            while((s=br.readLine())!=null){
                info=s.split(",");
                x+=Integer.parseInt(info[0]);
@@ -303,11 +306,13 @@ public class Login extends javax.swing.JFrame {
             }catch(IOException e){
               e.printStackTrace();;
             }}
-            else if (n==2){
+            
+            else if (option==2){
              // choose character 
              choosecharacter chs = new choosecharacter();
               chs.character();    
               check=false;
+              
          }else{
                 System.out.println(RED_BOLD+"Invalid input !"+RESET);
             }

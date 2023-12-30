@@ -23,14 +23,14 @@ public class Rogue {
     // f - exp
     // read file if levl up increase the attributes
     public static void levelUpRog(int n, int f){
-          int hp=0;
-            int mp=0;
-            int pd=0;
-            int md=0;
-            int pa=0;
-            int pe=0;
-            int ma=0;
-            int pl=0;
+           int hp=0; // health points
+            int mp=0; // mana points
+            int pd=0; // physical defenses
+            int md=0; //magical defenses
+            int pa=0; // physical attack
+            int pe=0; // Exp earn when defeat monster
+            int ma=0; // magical attack
+            int pl=0; // level
               
          // Read file to get the attributes     
         try{
@@ -55,7 +55,7 @@ public class Rogue {
                 pl+=Integer.parseInt(list[8]);
                 
          //Both Physical Attack and Physical Defense will be enhanced.
-         // (n-pl)-(latest level - current level) check whether got level up 
+         // (n-pl)=(latest level - current level) check whether got level up 
                 hp+=(5*(n-pl));
                 ma+=(1*(n-pl));
                 md+=(2*(n-pl));
@@ -99,20 +99,19 @@ public class Rogue {
          try{
               // read the file to get the attributes of the character
             BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\rogue.txt"));
-            int hp=0;
-            int mp=0;
-            int pd=0;
-            int md=0;
-            int pa=0;
-            int pe=0;
-            int ma=0;
-            int pl=0;
-            String name1;
+            int hp=0; // health points
+            int mp=0; // mana points
+            int pd=0; // physical defenses
+            int md=0; //magical defenses
+            int pa=0; // physical attack
+            int pe=0; // Exp earn when defeat monster
+            int ma=0; // magical attack
+            int pl=0; // level
+
              String [] list;
              String s ;
              while((s=br.readLine())!=null){
-              list=s.split(",");
-               name1=list[0];
+              list=s.split(","); 
                hp+=Integer.parseInt(list[1]);
                mp+=Integer.parseInt(list[2]);
                pd+=Integer.parseInt(list[3]);

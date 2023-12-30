@@ -11,11 +11,13 @@ package text.adventure;
 import java.io.*;
 
 public class saveposition {
-                            // x    y     number of monster  y = is for the character refer to class choosecgaracter
-    public static void write(int n ,int m ,int num,int y){
+    // x and y is the position of the player on the map
+    // num- number of monster  
+    // n - identify the player choose what cheracter 
+    public static void write(int x ,int y ,int num,int n){
          try{
              BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\ONG KAI YIN\\Desktop\\assignment fop\\position.txt"));
-             bw.write(n+","+m+","+num+","+y);
+             bw.write(x+","+y+","+num+","+n);
              bw.close();
          }catch(IOException e){
              e.printStackTrace();
